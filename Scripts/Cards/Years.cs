@@ -55,6 +55,9 @@ public class Years() : FBECardModel(-1, CardType.Curse, CardRarity.Curse, Target
 	{
 		TimeWarpTurnEndVfx.Play();
 		
+		AudioHelper.Play("res://FBE/audio/SOTE_SFX_EndTurn_v2.ogg");
+		AudioHelper.Play("res://FBE/audio/STS_SFX_TimeWarp_v2.ogg");
+		
 		if (!UseFakeExtraTurn)
 		{
 			await PowerCmd.Apply<ExtraTurnPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this);
@@ -65,10 +68,7 @@ public class Years() : FBECardModel(-1, CardType.Curse, CardRarity.Curse, Target
 			await Cmd.Wait(0.25f);
 			await MakeFakeExtraTurn(choiceContext);
 		}
-
-		AudioHelper.Play("res://FBE/audio/SOTE_SFX_EndTurn_v2.ogg");
-		AudioHelper.Play("res://FBE/audio/STS_SFX_TimeWarp_v2.ogg");
-
+		
 		await Cmd.Wait(0.25f);
 	}
 

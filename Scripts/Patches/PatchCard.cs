@@ -105,7 +105,7 @@ static class PatchRollingBoulder2
 [HarmonyPatch([])]
 static class PatchRollingBoulderPower
 {
-	static void Postfix(RollingBoulder __instance)
+	static void Postfix(RollingBoulderPower __instance)
 	{
 		__instance.DynamicVars.Damage.BaseValue =
 			ModelDb.Card<RollingBoulder>().DynamicVars["IncrementAmount"].BaseValue;

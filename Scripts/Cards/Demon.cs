@@ -19,7 +19,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace FBE.Scripts.Cards;
 
 [Pool(typeof(IroncladCardPool))]
-public class Demon() : FBECardModel(3, CardType.Power, CardRarity.Rare, TargetType.None)
+public class Demon() : FBECardModel(2, CardType.Power, CardRarity.Rare, TargetType.None)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
