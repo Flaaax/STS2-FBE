@@ -14,7 +14,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
-using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -158,6 +157,24 @@ class DarkBum : FBERelicModel
 		await PlayerCmd.AddPet<DarkBumMonster>(Owner);
 	}
 
+#if STS2_0_110_0
+	public override CardLocation ModifyCardPlayResultLocation(CardModel card, bool isAutoPlay, ResourceInfo resources,
+		CardLocation cardLocation)
+	{
+		if (card.Owner != Owner || UsedThisTurn)
+		{
+			cardLocation.pileType = PileType.Exhaust;
+		}
+
+		return cardLocation;
+	}
+	
+	public override Task AfterModifyingCardPlayResultLocation(CardModel card, CardLocation cardLocation)
+	{
+		Flash();
+		return Task.CompletedTask;
+	}
+#else
 	public override (PileType, CardPilePosition) ModifyCardPlayResultPileTypeAndPosition(CardModel card,
 		bool isAutoPlay,
 		ResourceInfo resources, PileType pileType, CardPilePosition position)
@@ -169,6 +186,8 @@ class DarkBum : FBERelicModel
 
 		return (PileType.Exhaust, position);
 	}
+#endif
+
 
 	public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{

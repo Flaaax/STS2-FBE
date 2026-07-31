@@ -3,13 +3,13 @@
 	"name": "FBE",
 	"author": "Flaaax",
 	"description": "Flaaax's Content Mod for SLS2",
-	"version": "1.4.0",
+	"version": "1.6.0",
 	"has_pck": true,
 	"has_dll": true,
 	"dependencies": [
 		{
 			"id": "STS2-RitsuLib",
-			"min_version": "0.4.26"
+			"min_version": "0.5.1"
 		}
 	],
 	"min_game_version": "0.107.1",

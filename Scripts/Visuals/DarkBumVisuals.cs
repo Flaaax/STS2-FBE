@@ -180,6 +180,13 @@ public partial class DarkBumVisuals : NCreatureVisuals
 			UniqueNameInOwner = true,
 			Position = new Vector2(0f, -88f)
 		});
+
+		AddOwnedChild(new Marker2D
+		{
+			Name = "CenterPos",
+			UniqueNameInOwner = true,
+			Position = BaseSpritePosition
+		});
 	}
 
 	private void AddOwnedChild(Node node)

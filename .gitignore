@@ -15,3 +15,5 @@ export_credentials.cfg
 *.tmp
 
 dist/
+/bin/
+/obj/

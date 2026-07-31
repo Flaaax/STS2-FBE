@@ -16,11 +16,11 @@
         <!-- 本机缓存的不同游戏版本 DLL 根目录 -->
         <Sts2BinaryRoot>E:\STS\STS2\STS2 binary</Sts2BinaryRoot>
 
-        <!-- 配置名形如 Release 0.108.0 时，自动解析出游戏版本。也可以用 -p:Sts2GameVersion=0.108.0 覆盖。 -->
+        <!-- 配置名形如 Release 0.110.0 时，自动解析出游戏版本。也可以用 -p:Sts2GameVersion=0.110.0 覆盖。 -->
         <Sts2GameVersion Condition="'$(Sts2GameVersion)' == '' and $([System.String]::Copy('$(Configuration)').StartsWith('Release '))">$([System.String]::Copy('$(Configuration)').Substring(8))</Sts2GameVersion>
 
         <!-- 默认按当前 beta 版编译。裸 dotnet build 只编译，不自动打包。 -->
-        <Sts2GameVersion Condition="'$(Sts2GameVersion)' == ''">0.108.0</Sts2GameVersion>
+        <Sts2GameVersion Condition="'$(Sts2GameVersion)' == ''">0.110.0</Sts2GameVersion>
 
         <!-- 编译引用目录 -->
         <Sts2DataDir>$(Sts2BinaryRoot)\$(Sts2GameVersion)\data_sts2_windows_x86_64</Sts2DataDir>
@@ -45,14 +45,14 @@
         <CollectModAssets Condition="'$(CollectModAssets)' == ''">false</CollectModAssets>
         <EnableJmcDispatch Condition="'$(EnableJmcDispatch)' == ''">false</EnableJmcDispatch>
 
-        <!-- 根据 Sts2GameVersion 自动生成条件编译宏，例如 0.108.0 -> STS2_0_108_0。 -->
+        <!-- 根据 Sts2GameVersion 自动生成条件编译宏，例如 0.110.0 -> STS2_0_110_0。 -->
         <Sts2GameVersionDefine>STS2_$([System.String]::Copy('$(Sts2GameVersion)').Replace('.', '_'))</Sts2GameVersionDefine>
         <DefineConstants>$(DefineConstants);$(Sts2GameVersionDefine)</DefineConstants>
 
         <Optimize Condition="$([System.String]::Copy('$(Configuration)').StartsWith('Release '))">true</Optimize>
         <DebugType Condition="$([System.String]::Copy('$(Configuration)').StartsWith('Release '))">portable</DebugType>
 
-        <Configurations>Release 0.107.1;Release 0.108.0;ExportDebug;ExportRelease</Configurations>
+        <Configurations>Release 0.107.1;Release 0.110.0;ExportDebug;ExportRelease</Configurations>
         <Platforms>AnyCPU</Platforms>
 
         <!-- JML Dispatch 只作为构建期工具使用，不代表运行时依赖 JML。 -->
@@ -81,9 +81,9 @@
             <MaxGameVersionExclusive>0.108.0</MaxGameVersionExclusive>
         </Sts2SupportedVersion>
 
-        <Sts2SupportedVersion Include="0.108.0">
-            <Configuration>Release 0.108.0</Configuration>
-            <MaxGameVersionExclusive>0.109.0</MaxGameVersionExclusive>
+        <Sts2SupportedVersion Include="0.110.0">
+            <Configuration>Release 0.110.0</Configuration>
+            <MaxGameVersionExclusive>0.111.0</MaxGameVersionExclusive>
         </Sts2SupportedVersion>
     </ItemGroup>
 
@@ -98,7 +98,13 @@
             <Private>false</Private>
         </Reference>
 
-        <PackageReference Include="STS2.RitsuLib" Version="*"/>
+        <!-- RitsuLib 的主包只跟随最高游戏 API；旧游戏版本使用对应的 Compat 包。 -->
+        <PackageReference Include="STS2.RitsuLib"
+                          Version="0.5.1"
+                          Condition="'$(Sts2GameVersion)' == '0.110.0'"/>
+        <PackageReference Include="STS2.RitsuLib.Compat.0.107.1"
+                          Version="0.4.66"
+                          Condition="'$(Sts2GameVersion)' == '0.107.1'"/>
 
         <!--
         <Reference Include="BaseLib">
@@ -115,10 +121,6 @@
     <ItemGroup Condition="'$(EnableJmcDispatch)' == 'true'">
         <JmcDispatchRuntime Include="__placeholder__"/>
     </ItemGroup>
-    <ItemGroup>
-      <Content Include="fbe_eng_localization.patch" />
-    </ItemGroup>
-
     <!--
     <ItemGroup>
         <Content Include="FBE\images\cards\BloodFeud.png"/>
@@ -138,6 +140,14 @@
         <Error
                 Condition="'$(_ProcessCheckExitCode)' != '0'"
                 Text="检测到进程 $(BlockBuildIfProcessRunning).exe 正在运行，已中止构建。请先关闭游戏后再重新 build。"/>
+    </Target>
+
+    <Target Name="PrintSts2BuildContext"
+            BeforeTargets="CoreCompile"
+            Condition="'$(DesignTimeBuild)' != 'true'">
+        <Message
+                Importance="high"
+                Text="Compiling FBE for STS2 $(Sts2GameVersion) [$(Configuration)] — define: $(Sts2GameVersionDefine)"/>
     </Target>
 
 

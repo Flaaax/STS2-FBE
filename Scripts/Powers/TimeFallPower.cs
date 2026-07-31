@@ -24,10 +24,10 @@ public class TimeFallPower : FBEPowerModel
     {
         if (power is not DoomPower || giver != Owner || target is not { IsEnemy: true })
         {
-            return amount;
+            return 0m;
         }
 
-        return amount + Amount;
+        return Amount;
     }
 
     public override Task AfterModifyingPowerAmountGiven(PowerModel power)

@@ -174,7 +174,7 @@ static class Patch_PlayerCmd_EndTurn
 }
 
 // 战斗结束后清除缓存
-[HarmonyPatch(typeof(CombatManager), nameof(CombatManager.EndCombatInternal))]
+[HarmonyPatch(typeof(CombatManager), nameof(CombatManager.EndCombatInternal), new Type[] { })]
 static class Patch_CombatManager_EndCombatInternal
 {
     public static void Postfix()

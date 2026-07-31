@@ -322,3 +322,16 @@ static class PatchBouncingFlaskOnUpgrade
 //         return false;
 //     }
 // }
+
+[HarmonyPatch(typeof(Bloodletting), MethodType.Constructor)]
+[HarmonyPatch([])]
+static class PatchBloodLetting1 //放血变白卡
+{
+	private static readonly FieldInfo? RarityBackingField =
+		AccessTools.Field(typeof(CardModel), "<Rarity>k__BackingField");
+
+	static void Postfix(Acrobatics __instance)
+	{
+		RarityBackingField?.SetValue(__instance, CardRarity.Common);
+	}
+}

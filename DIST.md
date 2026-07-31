@@ -8,9 +8,9 @@
 当前目标版本：
 
 - `0.107.1`：稳定版
-- `0.108.0`：beta 版 / 当前主要开发版
+- `0.110.0`：beta 版 / 当前主要开发版
 
-版本号在项目中应始终写完整，例如 `0.107.1`、`0.108.0`。不要使用 `107`、`108` 这种简称。
+版本号在项目中应始终写完整，例如 `0.107.1`、`0.110.0`。不要使用 `107`、`110` 这种简称。
 
 ---
 
@@ -29,7 +29,7 @@ FBE/
   runtimes/
     0.107.1/
       FBE.Runtime.dll
-    0.108.0/
+    0.110.0/
       FBE.Runtime.dll
 ```
 
@@ -45,7 +45,7 @@ Dispatch Bootstrap 会读取当前游戏版本，然后根据 `FBE.dispatch.json
 
 ```text
 游戏版本 0.107.1 -> runtimes/0.107.1/FBE.Runtime.dll
-游戏版本 0.108.0 -> runtimes/0.108.0/FBE.Runtime.dll
+游戏版本 0.110.0 -> runtimes/0.110.0/FBE.Runtime.dll
 ```
 
 这个方案的核心收益是：
@@ -67,7 +67,7 @@ Dispatch Bootstrap 会读取当前游戏版本，然后根据 `FBE.dispatch.json
 
 ```text
 E:\STS\STS2\STS2 binary\0.107.1\data_sts2_windows_x86_64\
-E:\STS\STS2\STS2 binary\0.108.0\data_sts2_windows_x86_64\
+E:\STS\STS2\STS2 binary\0.110.0\data_sts2_windows_x86_64\
 ```
 
 至少需要包含：
@@ -104,14 +104,14 @@ E:\STS\STS2\BuildTools\JmcModLib\JmcModLib.Dispatch.targets
 示例：
 
 ```powershell
-dotnet build -t:CurrentVersion -c "Release 0.108.0"
+dotnet build -t:CurrentVersion -c "Release 0.110.0"
 ```
 
 行为：
 
-1. 根据 `Release 0.108.0` 解析出 `Sts2GameVersion=0.108.0`。
-2. 使用 `0.108.0` 的游戏 DLL 编译 Runtime。
-3. 输出 `runtimes/0.108.0/FBE.Runtime.dll`。
+1. 根据 `Release 0.110.0` 解析出 `Sts2GameVersion=0.110.0`。
+2. 使用 `0.110.0` 的游戏 DLL 编译 Runtime。
+3. 输出 `runtimes/0.110.0/FBE.Runtime.dll`。
 4. 生成 Dispatch Bootstrap：`FBE.dll`。
 5. 生成单版本 `FBE.dispatch.json`。
 6. 导出 `FBE.pck`。
@@ -126,7 +126,7 @@ dotnet build -t:CurrentVersion -c "Release 0.108.0"
 示例：
 
 ```powershell
-dotnet build -t:AllVersion -c "Release 0.108.0"
+dotnet build -t:AllVersion -c "Release 0.110.0"
 ```
 
 行为：
@@ -155,9 +155,9 @@ dotnet build -t:AllVersion -c "Release 0.108.0"
         <MaxGameVersionExclusive>0.108.0</MaxGameVersionExclusive>
     </Sts2SupportedVersion>
 
-    <Sts2SupportedVersion Include="0.108.0">
-        <Configuration>Release 0.108.0</Configuration>
-        <MaxGameVersionExclusive>0.109.0</MaxGameVersionExclusive>
+    <Sts2SupportedVersion Include="0.110.0">
+        <Configuration>Release 0.110.0</Configuration>
+        <MaxGameVersionExclusive>0.111.0</MaxGameVersionExclusive>
     </Sts2SupportedVersion>
 </ItemGroup>
 ```
@@ -205,8 +205,7 @@ Runtime 路径：runtimes/0.107.1/FBE.Runtime.dll
 
 ```text
 0.107.1 -> STS2_0_107_1
-0.108.0 -> STS2_0_108_0
-0.109.0 -> STS2_0_109_0
+0.110.0 -> STS2_0_110_0
 ```
 
 代码中应这样写：
@@ -214,8 +213,8 @@ Runtime 路径：runtimes/0.107.1/FBE.Runtime.dll
 ```csharp
 #if STS2_0_107_1
 // 0.107.1 ABI
-#elif STS2_0_108_0
-// 0.108.0 ABI
+#elif STS2_0_110_0
+// 0.110.0 ABI
 #else
 #error Unsupported STS2 game version.
 #endif
@@ -383,7 +382,7 @@ set "LATEST_VERSION=0.109.0"
 .\build
 ```
 
-如果功能只改了 `0.108.0` 分支，不需要立刻修 `0.107.1`。
+如果功能只改了 `0.110.0` 分支，不需要立刻修 `0.107.1`。
 
 ### 14.2 修稳定版兼容时
 
@@ -409,5 +408,5 @@ mods/FBE/FBE.dispatch.json
 mods/FBE/FBE.json
 mods/FBE/FBE.pck
 mods/FBE/runtimes/0.107.1/FBE.Runtime.dll
-mods/FBE/runtimes/0.108.0/FBE.Runtime.dll
+mods/FBE/runtimes/0.110.0/FBE.Runtime.dll
 ```

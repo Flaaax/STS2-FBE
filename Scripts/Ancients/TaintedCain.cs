@@ -2,14 +2,14 @@ using FBE.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Acts;
 using MegaCrit.Sts2.Core.Models.Relics;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace FBE.Scripts.Ancients;
 
-//[RegisterActAncient(typeof(Glory))] // 指定只有荣耀这章生成
-[RegisterSharedAncient] // 如果需要自定义生成条件，可以注册成通用再重载isAllowed
+[RegisterActAncient(typeof(Hive))]
 public class TaintedCain : ModAncientEventTemplate
 {
 	// 选项按钮颜色

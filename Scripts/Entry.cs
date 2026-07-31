@@ -21,6 +21,7 @@ public class Entry
 
 	public static Logger Log { get; } = RitsuLibFramework.CreateLogger(ModId);
 	public static bool EnableSyncDebugTracePatches { get; private set; }
+	public static bool EnableInvestmentPromotionDynamicPreview { get; private set; }
 
 	private static Harmony? _harmony;
 
@@ -34,6 +35,8 @@ public class Entry
 
 		//允许Debug日志（会造成日志膨胀）
 		EnableSyncDebugTracePatches = false;
+		// 动态刷新“投资推广”的卡牌预览。关闭时对应 Harmony 补丁不会安装。
+		EnableInvestmentPromotionDynamicPreview = true;
 
 		// 打patch（即修改游戏代码的功能）用
 		// 传入参数随意，只要不和其他人撞车即可
@@ -50,7 +53,9 @@ public class Entry
 		// 自动注册内容
 		ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
 
+#if STS2_0_107_1
 		RegisterSavedPropertyModels();
+#endif
 		// 使得tscn可以加载自定义脚本
 		//ScriptManagerBridge.LookupScriptsInAssembly(typeof(Entry).Assembly);
 		Log.Info("Mod initialized!");
@@ -78,11 +83,12 @@ public class Entry
 			Log.Info($"Associated runtime assembly {assembly} with mod {ModId} after detection (0.107.1 compatibility path).");
 		};
 		ModManager.OnModDetected += onModDetected;
-#elif STS2_0_108_0
+#else
 		ModManager.AssociateAssemblyWithMod(ModId, assembly);
 #endif
 	}
 
+#if STS2_0_107_1
 	private static void RegisterSavedPropertyModels()
 	{
 		const BindingFlags flags =
@@ -109,6 +115,7 @@ public class Entry
 			Log.Info($"Registered SavedProperty model: {type.FullName}");
 		}
 	}
+#endif
 }
 
 // [HarmonyPatch(typeof(NPlayerHand), "SelectCardInSimpleMode")]

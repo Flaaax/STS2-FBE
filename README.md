@@ -1,4 +1,4 @@
-Suppoorted game version: **0.108.0**, **0.107.1**
+Suppoorted game version: **0.110.0**, **0.107.1**
 
 Find the mod here: [FBE](https://steamcommunity.com/sharedfiles/filedetails/?id=3758477067)
 

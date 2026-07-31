@@ -14,12 +14,12 @@
 			"probeAllDlls": false
 		},
 		{
-			"id": "0.108.0",
-			"minGameVersion": "0.108.0",
-			"maxGameVersionExclusive": "0.109.0",
-			"runtimeAssembly": "runtimes/0.108.0/FBE.Runtime.dll",
+			"id": "0.110.0",
+			"minGameVersion": "0.110.0",
+			"maxGameVersionExclusive": "0.111.0",
+			"runtimeAssembly": "runtimes/0.110.0/FBE.Runtime.dll",
 			"probeDirectories": [
-				"runtimes/0.108.0"
+				"runtimes/0.110.0"
 			],
 			"dependencies": [],
 			"probeAllDlls": false
