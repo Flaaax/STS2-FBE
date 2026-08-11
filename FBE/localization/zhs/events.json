@@ -31,13 +31,14 @@
 	  "FBE-STRANGE_ROAD_SIGN.pages.INITIAL.options.GO_ATTACK.title": "攻哈",
 	  "FBE-STRANGE_ROAD_SIGN.pages.INITIAL.options.GO_ATTACK.description": "移除[blue]2[/blue]张[gold]格挡[/gold]牌。并从[blue]3[/blue]张“打击”选择一张添加至你的[gold]牌组[/gold]。",
 	  "FBE-STRANGE_ROAD_SIGN.pages.INITIAL.options.GO_DEFEND.title": "防哈",
-	  "FBE-STRANGE_ROAD_SIGN.pages.INITIAL.options.GO_DEFEND.description": "获得[gold]壁垒[/gold]，[gold]巩固[/gold]，[gold]全身撞击[/gold]。",
+	  "FBE-STRANGE_ROAD_SIGN.pages.INITIAL.options.GO_DEFEND.description": "移除[blue]2[/blue]张[gold]攻击[/gold]牌。并从[blue]3[/blue]张“格挡”牌中选择一张添加至你的[gold]牌组[/gold]。",
 	  "FBE-STRANGE_ROAD_SIGN.pages.INITIAL.options.REMOVE_SIGN.title": "拆除路标",
-	  "FBE-STRANGE_ROAD_SIGN.pages.INITIAL.options.REMOVE_SIGN.description": "获得[blue]{Gold}[/blue][gold]金币[/gold]。在接下来的[blue]2[/blue]场战斗开始时，你获得[blue]1[/blue]层[gold]易伤[/gold]。",
+	  "FBE-STRANGE_ROAD_SIGN.pages.INITIAL.options.REMOVE_SIGN.description": "获得[blue]{Gold}[/blue][gold]金币[/gold]。被随机[purple]诅咒[/purple][blue]{Curses}[/blue]次。",
 	  "FBE-STRANGE_ROAD_SIGN.pages.GO_ATTACK_CHOSEN.description": "你决定沿着“攻哈”前进。\n\n你现在充满了[red][sine]开腔的欲望[/sine][/red]。",
 	  "FBE-STRANGE_ROAD_SIGN.pages.GO_DEFEND_CHOSEN.description": "你沿着“防哈”前进。\n\n你感觉很有[sine][blue]基米精神[/blue][/sine]！",
 	  "FBE-STRANGE_ROAD_SIGN.pages.REMOVE_SIGN_CHOSEN.description": "你拔出了[purple]路标[/purple]。有人在这里埋了[gold]钱[/gold]！\n\n但是，你觉得自己可能办了件[red]坏事[/red]。",
 	  "FBE-STRANGE_ROAD_SIGN.pages.GO_ATTACK.selectionScreenPrompt": "选择一张牌加入你的卡组。",
+	  "FBE-STRANGE_ROAD_SIGN.pages.GO_DEFEND.selectionScreenPrompt": "选择一张牌加入你的卡组。",
 	//
 	//
 	"FBE-DEVIL_ROOM.title": "恶魔房",

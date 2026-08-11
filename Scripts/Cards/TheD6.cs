@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 namespace FBE.Scripts.Cards;
 
 [Pool(typeof(TokenCardPool))]
-public class TheD6ChoiceCard() : FBECardModel(-1, CardType.Skill, CardRarity.Token, TargetType.None)
+public class TheD6ChoiceCard() : FBECardModel(-1, CardType.Skill, CardRarity.Token, TargetType.None, false)
 {
 	private string? _runtimeTitle;
 	public override int MaxUpgradeLevel => 0;

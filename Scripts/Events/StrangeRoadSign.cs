@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using FBE.Scripts.Relics;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -17,100 +16,183 @@ namespace FBE.Scripts.Events;
 
 public sealed class StrangeRoadSign : FBEEventModel
 {
-    // 背景图位置
-    public override string CustomInitialPortraitPath => "res://FBE/images/events/WierdGuidepost.png";
+	private const int CardsToRemove = 2;
+	private const int RewardChoices = 3;
+	private const string CursesVar = "Curses";
+	private const int CursesToAdd = 2;
+	private const string FbeCurseEntryPrefix = "FBE-";
+	private const string TiebaDiyCurseEntryPrefix = "TIEBA_DIY_CARD_";
+	private static readonly string BlockHoverTipId = HoverTipFactory.Static(StaticHoverTip.Block).Id;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new GoldVar(0)
-    ];
+	// 背景图位置
+	public override string CustomInitialPortraitPath => "res://FBE/images/events/WierdGuidepost.png";
 
-    public override void CalculateVars()
-    {
-        DynamicVars.Gold.BaseValue = Rng.NextInt(235, 265);
-    }
+	protected override IEnumerable<DynamicVar> CanonicalVars =>
+	[
+		new GoldVar(0),
+		new IntVar(CursesVar, CursesToAdd)
+	];
 
-    public override bool IsAllowed(IRunState runState)
-    {
-        return runState.Players.All(p => p.Deck.Cards.Count(IsValid) >= 2);
-    }
+	public override void CalculateVars()
+	{
+		DynamicVars.Gold.BaseValue = Rng.NextInt(370, 431);
+	}
 
-    protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>
-    [
-        Option(GoAttack),
-        Option(GoDefend, GetCardHoverTips()),
-        Option(RemoveSign)
-    ];
+	public override bool IsAllowed(IRunState runState)
+	{
+		return runState.Players.All(player =>
+			player.Deck.Cards.Count(card => card.IsRemovable && IsBlockCard(card)) >= CardsToRemove &&
+			player.Deck.Cards.Count(card => card.IsRemovable && card.Type == CardType.Attack) >= CardsToRemove);
+	}
 
-    private static IEnumerable<IHoverTip> GetCardHoverTips()
-    {
-        var h1 = HoverTipFactory.FromCardWithCardHoverTips<Barricade>();
-        var h2 = HoverTipFactory.FromCardWithCardHoverTips<Entrench>();
-        var h3 = HoverTipFactory.FromCardWithCardHoverTips<BodySlam>();
-        return h1.Concat(h2).Concat(h3);
-    }
+	protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>
+	[
+		Option(GoAttack),
+		Option(GoDefend),
+		Option(RemoveSign)
+	];
 
-    private async Task GoAttack()
-    {
-        Debug.Assert(Owner != null, nameof(Owner) + " != null");
-        var cardsToRemove = (await CardSelectCmd.FromDeckForRemoval(
-            prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, 2), player: Owner,
-            filter: IsValid)).ToList();
+	private async Task GoAttack()
+	{
+		Debug.Assert(Owner != null, nameof(Owner) + " != null");
+		var cardsToRemove = (await CardSelectCmd.FromDeckForRemoval(
+			prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, CardsToRemove), player: Owner,
+			filter: IsBlockCard)).ToList();
 
-        var pools = ModelDb.AllCharacterCardPools.ToList();
-        pools.Add(ModelDb.CardPool<ColorlessCardPool>());
+		var pools = ModelDb.AllCharacterCardPools.ToList();
+		pools.Add(ModelDb.CardPool<ColorlessCardPool>());
 
-        var options = CardCreationOptions.ForNonCombatWithUniformOdds(pools, c => c.Tags.Contains(CardTag.Strike));
-        var cards = CardFactory.CreateForReward(Owner, 3, options).ToList();
-        foreach (var item in await CardSelectCmd.FromSimpleGridForRewards(
-                     prefs: new CardSelectorPrefs(L10NLookup("FBE-STRANGE_ROAD_SIGN.pages.GO_ATTACK.selectionScreenPrompt"),
-                         1), context: new BlockingPlayerChoiceContext(), cards: cards, player: Owner))
-        {
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
-        }
-        
-        await CardPileCmd.RemoveFromDeck(cardsToRemove);
+		var options = CardCreationOptions.ForNonCombatWithUniformOdds(pools, c => c.Tags.Contains(CardTag.Strike));
+		var cards = CardFactory.CreateForReward(Owner, RewardChoices, options).ToList();
+		foreach (var item in await CardSelectCmd.FromSimpleGridForRewards(
+			         prefs: new CardSelectorPrefs(
+				         L10NLookup("FBE-STRANGE_ROAD_SIGN.pages.GO_ATTACK.selectionScreenPrompt"),
+				         1), context: new BlockingPlayerChoiceContext(), cards: cards, player: Owner))
+		{
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
+		}
 
-        // var options =
-        //     CardCreationOptions.ForNonCombatWithDefaultOdds(pools, c => c.Type == CardType.Attack);
-        // var cardModel = CardFactory.CreateForReward(Owner, 1, options).FirstOrDefault()?.Card;
-        // if (cardModel != null)
-        // {
-        //     CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(cardModel, PileType.Deck), 1.2f,
-        //         CardPreviewStyle.EventLayout);
-        // }
+		await CardPileCmd.RemoveFromDeck(cardsToRemove);
 
-        SetEventFinished(PageDescription("GO_ATTACK_CHOSEN"));
-    }
+		// var options =
+		//     CardCreationOptions.ForNonCombatWithDefaultOdds(pools, c => c.Type == CardType.Attack);
+		// var cardModel = CardFactory.CreateForReward(Owner, 1, options).FirstOrDefault()?.Card;
+		// if (cardModel != null)
+		// {
+		//     CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(cardModel, PileType.Deck), 1.2f,
+		//         CardPreviewStyle.EventLayout);
+		// }
 
-    private async Task GoDefend()
-    {
-        CardModel[] cards =
-        [
-            Owner!.RunState.CreateCard<Barricade>(Owner),
-            Owner.RunState.CreateCard<Entrench>(Owner),
-            Owner.RunState.CreateCard<BodySlam>(Owner)
-        ];
+		SetEventFinished(PageDescription("GO_ATTACK_CHOSEN"));
+	}
 
-        foreach (var card in cards)
-        {
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(card, PileType.Deck));
-        }
+	private async Task GoDefend()
+	{
+		Debug.Assert(Owner != null, nameof(Owner) + " != null");
+		var cardsToRemove = (await CardSelectCmd.FromDeckForRemoval(
+			prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, CardsToRemove), player: Owner,
+			filter: static card => card.Type == CardType.Attack)).ToList();
 
-        SetEventFinished(PageDescription("GO_DEFEND_CHOSEN"));
-    }
+		var cards = CreateBlockRewardChoices();
+		foreach (var item in await CardSelectCmd.FromSimpleGridForRewards(
+			         prefs: new CardSelectorPrefs(
+				         L10NLookup("FBE-STRANGE_ROAD_SIGN.pages.GO_DEFEND.selectionScreenPrompt"),
+				         1), context: new BlockingPlayerChoiceContext(), cards: cards, player: Owner))
+		{
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
+		}
 
-    private async Task RemoveSign()
-    {
-        await PlayerCmd.GainGold(DynamicVars.Gold.IntValue, Owner!);
-        await RelicCmd.Obtain<RemovedRoadSign>(Owner!);
+		await CardPileCmd.RemoveFromDeck(cardsToRemove);
 
-        SetEventFinished(PageDescription("DESTROY_SIGN_CHOSEN"));
-    }
+		SetEventFinished(PageDescription("GO_DEFEND_CHOSEN"));
+	}
 
-    private static bool IsValid(CardModel card)
-    {
-        if (!card.GainsBlock) return false;
-        return card is { Rarity: CardRarity.Basic, IsRemovable: true };
-    }
+	private async Task RemoveSign()
+	{
+		await PlayerCmd.GainGold(DynamicVars.Gold.IntValue, Owner!);
+		await CardPileCmd.AddCursesToDeck(SelectCurses(), Owner!);
+
+		SetEventFinished(PageDescription("REMOVE_SIGN_CHOSEN"));
+	}
+
+	private List<CardModel> SelectCurses()
+	{
+		var remainingCurses = ModelDb.CardPool<CurseCardPool>()
+			.GetUnlockedCards(Owner!.UnlockState, Owner.RunState.CardMultiplayerConstraint)
+			.Where(static card => card.CanBeGeneratedByModifiers)
+			.OrderBy(static card => card.Id)
+			.ToList();
+		var remainingSpecialCurses = remainingCurses
+			.Where(IsFbeOrTiebaDiyCurse)
+			.ToList();
+
+		List<CardModel> selectedCurses = [];
+		for (var i = 0; i < DynamicVars[CursesVar].IntValue && remainingCurses.Count > 0; i++)
+		{
+			var choseSpecialPool = Rng.NextInt(2) == 0;
+			var candidates = choseSpecialPool && remainingSpecialCurses.Count > 0
+				? remainingSpecialCurses
+				: remainingCurses;
+			var curse = Rng.NextItem(candidates);
+			if (curse is null)
+				break;
+
+			selectedCurses.Add(curse);
+			remainingCurses.Remove(curse);
+			remainingSpecialCurses.Remove(curse);
+		}
+
+		return selectedCurses;
+	}
+
+	private static bool IsFbeOrTiebaDiyCurse(CardModel card)
+	{
+		var entry = card.Id.Entry;
+		return entry.StartsWith(FbeCurseEntryPrefix, StringComparison.Ordinal) ||
+		       entry.StartsWith(TiebaDiyCurseEntryPrefix, StringComparison.Ordinal);
+	}
+
+	private List<CardCreationResult> CreateBlockRewardChoices()
+	{
+		var owner = Owner!;
+		var pools = ModelDb.AllCharacterCardPools.ToList();
+		pools.Add(ModelDb.CardPool<ColorlessCardPool>());
+
+		CardModel[] manuallyIncludedCards =
+		[
+			ModelDb.Card<BodySlam>(),
+			ModelDb.Card<Entrench>(),
+			ModelDb.Card<Barricade>()
+		];
+
+		var remainingCandidates = pools
+			.SelectMany(pool => pool.GetUnlockedCards(owner.UnlockState, owner.RunState.CardMultiplayerConstraint))
+			.Where(IsBlockCard)
+			.Concat(manuallyIncludedCards)
+			.DistinctBy(card => card.Id)
+			.OrderBy(card => card.Id)
+			.ToList();
+
+		List<CardCreationResult> choices = [];
+		for (var i = 0; i < RewardChoices && remainingCandidates.Count > 0; i++)
+		{
+			var canonicalCard = Rng.NextItem(remainingCandidates);
+			if (canonicalCard is null)
+			{
+				return choices;
+			}
+
+			remainingCandidates.Remove(canonicalCard);
+			choices.Add(new CardCreationResult(owner.RunState.CreateCard(canonicalCard, owner)));
+		}
+
+		return choices;
+	}
+
+	private static bool IsBlockCard(CardModel card)
+	{
+		return card.Tags.Contains(CardTag.Defend) ||
+		       card.HoverTips.Any(tip => tip.Id == BlockHoverTipId) ||
+		       card.DynamicVars.Values.Any(variable => variable is BlockVar);
+	}
 }
