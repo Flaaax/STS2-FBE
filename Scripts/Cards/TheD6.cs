@@ -65,12 +65,12 @@ public class TheD6Base
 		_propertySelectionPrompt ??=
 			new LocString("cards", Id + ".propertySelectionPrompt");
 
-	private static List<(string Name, int value, Action<int> Modifier)> GetModifiers(CardModel card)
+	private static List<(string SortKey, string Name, int value, Action<int> Modifier)> GetModifiers(CardModel card)
 	{
-		List<(string, int, Action<int>)> ret = [];
+		List<(string, string, int, Action<int>)> ret = [];
 		if (!card.EnergyCost.CostsX)
 		{
-			ret.Add((new LocString("cards", Id + ".modifier.energy").GetFormattedText(),
+			ret.Add(("energy", new LocString("cards", Id + ".modifier.energy").GetFormattedText(),
 				card.EnergyCost.GetResolved(), // Could this work well?
 				i => card.EnergyCost.SetThisCombat(i)));
 		}
@@ -88,7 +88,7 @@ public class TheD6Base
 				name = name1.GetFormattedText();
 			}
 
-			ret.Add((name, dynVar.IntValue, i => dynVar.BaseValue = i));
+			ret.Add((dynVar.Name, name, dynVar.IntValue, i => dynVar.BaseValue = i));
 		}
 
 		return ret;
@@ -109,11 +109,13 @@ public class TheD6Base
 
 		var modifiers = GetModifiers(card);
 
-		self.Owner.RunState.Rng.CombatCardSelection.Shuffle(modifiers);
-
 		// var selectionCount = self.IsUpgraded ? 999 : self.DynamicVars["Selections"].IntValue;
 		// modifiers = modifiers.Take(selectionCount).ToList();
 		var selectionCount = modifiers.Count;
+		modifiers = modifiers
+			.OrderBy(modifier => modifier.Name, StringComparer.Ordinal)
+			.ThenBy(modifier => modifier.SortKey, StringComparer.Ordinal)
+			.ToList();
 
 		var minRange = self.DynamicVars["MinRange"].IntValue;
 		var maxRange = self.DynamicVars["MaxRange"].IntValue;
@@ -121,7 +123,7 @@ public class TheD6Base
 		List<CardModel> selections = [];
 		for (var i = 0; i < modifiers.Count; i++)
 		{
-			var (name, value, _) = modifiers[i];
+			var (_, name, value, _) = modifiers[i];
 			var card1 = self.CombatState!.CreateCard<TheD6ChoiceCard>(self.Owner);
 			card1.Init(name, value, i, minRange, maxRange);
 			selections.Add(card1);
@@ -146,7 +148,7 @@ public class TheD6Base
 			return;
 		}
 
-		var action = modifiers[selected.Index].Item3;
+		var action = modifiers[selected.Index].Item4;
 		var rollValue = self.Owner.RunState.Rng.CombatCardSelection.NextInt(minRange, maxRange + 1);
 		action(rollValue);
 	}

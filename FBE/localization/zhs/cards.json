@@ -39,6 +39,8 @@
 	"FBE-CRUSADE.description": "所有玩家随机打出他们[gold]手牌[/gold]中的一张攻击牌。",
 	"FBE-GENESIS2.title": "创世纪",
 	"FBE-GENESIS2.description": "回合开始时，获得{StarsPerTurn:diff()}{singleStarIcon}。\n回合结束时，失去所有{singleStarIcon}。",
+	"FBE-LOOP_AT_TURN_END.title": "循环",
+	"FBE-LOOP_AT_TURN_END.description": "在你的回合结束时，额外触发最右侧充能球的被动能力{Loop:diff()}次。",
 	"FBE-STATIC_DISCHARGE.title": "静电释放",
 	"FBE-STATIC_DISCHARGE.description": "每当你被攻击时，[gold]生成[/gold]{StaticDischargePower:diff()}个[gold]闪电[/gold]充能球。",
 	"FBE-SERUM.title": "血清",

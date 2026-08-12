@@ -25,6 +25,8 @@
   "FBE-UNREAL_ENGINE_POWER.smartDescription": "你的所有牌获得[gold]虚无[/gold]。每回合开始时获得{Amount:energyIcons()}。",
   "FBE-GENESIS_POWER2.title": "创世纪",
   "FBE-GENESIS_POWER2.smartDescription": "在你的回合开始时，获得{Amount}{singleStarIcon}。\n在你的回合结束时，失去所有{singleStarIcon}。",
+  "FBE-LOOP_AT_TURN_END_POWER.title": "循环",
+  "FBE-LOOP_AT_TURN_END_POWER.smartDescription": "在你的回合结束时，额外触发最右侧充能球的被动能力[blue]{Amount}[/blue]次。",
   "FBE-STATIC_DISCHARGE_POWER.title": "静电释放",
   "FBE-STATIC_DISCHARGE_POWER.smartDescription": "每当你被攻击时，[gold]生成[/gold]{Amount}个[gold]闪电[/gold]充能球。"
 }

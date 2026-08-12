@@ -24,6 +24,8 @@
   "FBE-UNREAL_ENGINE_POWER.smartDescription": "All your cards gain [gold]Ethereal[/gold].\nGain {Amount:energyIcons()} at the start of each turn.",
   "FBE-GENESIS_POWER2.title": "Genesis",
   "FBE-GENESIS_POWER2.smartDescription": "At the start of your turn, gain {Amount}{singleStarIcon}.\nAt the end of your turn, lose all {singleStarIcon}.",
+  "FBE-LOOP_AT_TURN_END_POWER.title": "Loop",
+  "FBE-LOOP_AT_TURN_END_POWER.smartDescription": "At the end of your turn, trigger the passive ability of your rightmost Orb [blue]{Amount}[/blue] additional {Amount:plural:time|times}.",
   "FBE-STATIC_DISCHARGE_POWER.title": "Static Discharge",
   "FBE-STATIC_DISCHARGE_POWER.smartDescription": "Whenever you are attacked, [gold]Channel[/gold] {Amount} [gold]Lightning[/gold]."
 }
