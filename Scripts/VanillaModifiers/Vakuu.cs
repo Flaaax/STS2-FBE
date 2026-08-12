@@ -6,45 +6,40 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Events;
 using MegaCrit.Sts2.Core.Models.Relics;
 
-namespace FBE.Scripts.Patches;
+namespace FBE.Scripts.VanillaModifiers;
 
+/// <summary>Adds Diplopia to Vakuu's first relic pool and removes Lord's Parasol from the third.</summary>
 [HarmonyPatch(typeof(Vakuu))]
-static class PatchVakuuPool1
+internal static class PatchVakuuPoolOne
 {
-    static MethodBase TargetMethod()
-    {
-        return AccessTools.PropertyGetter(typeof(Vakuu), "Pool1");
-    }
+    private static MethodBase TargetMethod() => AccessTools.PropertyGetter(typeof(Vakuu), "Pool1");
 
-    static void Postfix(Vakuu __instance, ref IEnumerable<EventOption> __result)
+    private static void Postfix(Vakuu __instance, ref IEnumerable<EventOption> __result)
     {
-        __result = __result.Append(PatchVakuuRelicOptions.Create<Diplopia>(__instance));
+        __result = __result.Append(VakuuRelicOption.Create<Diplopia>(__instance));
     }
 }
 
 [HarmonyPatch(typeof(Vakuu))]
-static class PatchVakuuPool3
+internal static class PatchVakuuPoolThree
 {
-    static MethodBase TargetMethod()
-    {
-        return AccessTools.PropertyGetter(typeof(Vakuu), "Pool3");
-    }
+    private static MethodBase TargetMethod() => AccessTools.PropertyGetter(typeof(Vakuu), "Pool3");
 
-    static void Postfix(ref IEnumerable<EventOption> __result)
+    private static void Postfix(ref IEnumerable<EventOption> __result)
     {
         var lordsParasolId = ModelDb.Relic<LordsParasol>().Id;
         __result = __result.Where(option => option.Relic?.Id != lordsParasolId);
     }
 }
 
-static class PatchVakuuRelicOptions
+internal static class VakuuRelicOption
 {
     private static readonly MethodInfo RelicOptionMethod =
         AccessTools.Method(typeof(AncientEventModel), "RelicOption",
             [typeof(RelicModel), typeof(string), typeof(string)])
         ?? throw new MissingMethodException(typeof(AncientEventModel).FullName, "RelicOption");
 
-    public static EventOption Create<T>(AncientEventModel ancient) where T : RelicModel
+    internal static EventOption Create<T>(AncientEventModel ancient) where T : RelicModel
     {
         var relic = ModelDb.Relic<T>().ToMutable();
         var option = RelicOptionMethod.Invoke(ancient, [relic, "INITIAL", null]);
