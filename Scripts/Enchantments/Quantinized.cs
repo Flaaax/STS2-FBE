@@ -55,6 +55,14 @@ public class Quantinized : FBEEnchantmentModel
 
     public async Task TransformSelf()
     {
+        // A Thieving Hopper can restore the deck card only as a pending reward.
+        // Such a card is back in the run state, but has no pile until the reward is claimed.
+        // Do not consume combat RNG or create a replacement for an invalid transform target.
+        if (Card.HasBeenRemovedFromState || Card.Pile is null)
+        {
+            return;
+        }
+
         var targetCard = GetTransformTarget();
 
         var result = await CardCmd.Transform(Card, targetCard, CardPreviewStyle.None);

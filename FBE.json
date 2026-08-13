@@ -3,7 +3,7 @@
 	"name": "FBE",
 	"author": "Flaaax",
 	"description": "Flaaax's Content Mod for SLS2",
-	"version": "1.8.0",
+	"version": "1.9.0",
 	"has_pck": true,
 	"has_dll": true,
 	"dependencies": [
