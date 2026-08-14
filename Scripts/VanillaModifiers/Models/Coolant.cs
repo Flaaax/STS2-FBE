@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Orbs;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Reworks vanilla Coolant into a Power that channels Frost every turn.</summary>
 [HarmonyPatch(typeof(Coolant), "OnPlay")]

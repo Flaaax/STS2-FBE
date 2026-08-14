@@ -3,7 +3,7 @@
 
 
 
-FBE 是一个支持联机的扩展 Mod。支持版本 0.110.0（Beta）和 0.107.1。
+FBE 是一个支持联机的扩展 Mod。支持版本 0.111.0（Beta）和 0.107.1。
 
 包含对原版内容的改动和新增内容。
 
@@ -55,7 +55,7 @@ FBE 是一个支持联机的扩展 Mod。支持版本 0.110.0（Beta）和 0.107
 
 # Flaaax's Better Experience
 
-FBE is a multiplayer-compatible expansion mod. It supports versions 0.110.0 (Beta) and 0.107.1.
+FBE is a multiplayer-compatible expansion mod. It supports versions 0.111.0 (Beta) and 0.107.1.
 
 It includes changes to vanilla content as well as new content.
 

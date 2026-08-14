@@ -4,7 +4,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Reduces Rolling Boulder's cost and increases its scaling values.</summary>
 [HarmonyPatch(typeof(RollingBoulder), MethodType.Constructor)]

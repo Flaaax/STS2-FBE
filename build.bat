@@ -2,7 +2,7 @@
 setlocal
 
 rem ===== Configure latest supported STS2 version here =====
-set "LATEST_VERSION=0.110.0"
+set "LATEST_VERSION=0.111.0"
 
 rem Go to the directory where this .bat file is located.
 pushd "%~dp0"
@@ -48,7 +48,7 @@ echo.
 echo   build all
 echo     Build all supported versions.
 echo.
-echo   build 0.110.0
+echo   build 0.111.0
 echo     Build specified STS2 version.
 echo.
 echo   build latest

@@ -1,7 +1,7 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models.Cards;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Adds one more card option to Seeker Strike when upgraded.</summary>
 [HarmonyPatch(typeof(SeekerStrike), "OnUpgrade")]

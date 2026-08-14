@@ -40,7 +40,7 @@ public class DeadTissue() : FBECardModel(1, CardType.Attack, CardRarity.Common, 
 		if (!Osty.CheckMissingWithAnim(Owner))
 		{
 			await DamageCmd.Attack(DynamicVars.OstyDamage.BaseValue)
-#if STS2_0_107_1
+#if STS2_Stable
 				.FromOsty(Owner.Osty!, this)
 #else
 				.FromOsty(Owner.Osty!, this, cardPlay)

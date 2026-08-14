@@ -3,7 +3,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Reduces vanilla Mayhem's cost by 1.</summary>
 [HarmonyPatch(typeof(Mayhem), MethodType.Constructor)]

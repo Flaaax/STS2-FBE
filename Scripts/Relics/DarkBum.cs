@@ -157,7 +157,7 @@ class DarkBum : FBERelicModel
 		await PlayerCmd.AddPet<DarkBumMonster>(Owner);
 	}
 
-#if STS2_0_110_0
+#if STS2_Beta
 	public override CardLocation ModifyCardPlayResultLocation(CardModel card, bool isAutoPlay, ResourceInfo resources,
 		CardLocation cardLocation)
 	{

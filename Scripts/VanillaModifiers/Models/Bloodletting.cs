@@ -4,7 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Changes vanilla Bloodletting from Uncommon to Common.</summary>
 [HarmonyPatch(typeof(Bloodletting), MethodType.Constructor)]

@@ -34,7 +34,7 @@ public class InvestmentPromotion() : FBECardModel(0, CardType.Skill, CardRarity.
 	{
 		var card = GetCard();
 		if (card is null) return;
-#if STS2_0_110_0
+#if STS2_Beta
 		var card2 = card.CreateCloneForPlayer(Owner);
 #else
         var card2 = card.CreateClone();

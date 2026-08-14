@@ -30,7 +30,7 @@ public class HaDouKen() : FBECardModel(2, CardType.Attack, CardRarity.Uncommon, 
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target);
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-#if STS2_0_107_1
+#if STS2_Stable
 			.FromCard(this)
 #else
 			.FromCard(this, cardPlay)

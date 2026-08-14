@@ -42,7 +42,7 @@ public class BloodFeud() : FBECardModel(1, CardType.Attack, CardRarity.Common, T
 		{
 			var hitCount = !cardPlay.Target.HasPower<DoomPower>() ? 1 : (DynamicVars.Repeat.IntValue + 1);
 			await DamageCmd.Attack(DynamicVars.OstyDamage.BaseValue)
-#if STS2_0_107_1
+#if STS2_Stable
 				.FromOsty(Owner.Osty!, this)
 #else
 				.FromOsty(Owner.Osty!, this, cardPlay)

@@ -8,9 +8,9 @@
 当前目标版本：
 
 - `0.107.1`：稳定版
-- `0.110.0`：beta 版 / 当前主要开发版
+- `0.111.0`：beta 版 / 当前主要开发版
 
-版本号在项目中应始终写完整，例如 `0.107.1`、`0.110.0`。不要使用 `107`、`110` 这种简称。
+版本号在项目中应始终写完整，例如 `0.107.1`、`0.111.0`。不要使用 `107`、`111` 这种简称。
 
 ---
 
@@ -29,7 +29,7 @@ FBE/
   runtimes/
     0.107.1/
       FBE.Runtime.dll
-    0.110.0/
+    0.111.0/
       FBE.Runtime.dll
 ```
 
@@ -45,7 +45,7 @@ Dispatch Bootstrap 会读取当前游戏版本，然后根据 `FBE.dispatch.json
 
 ```text
 游戏版本 0.107.1 -> runtimes/0.107.1/FBE.Runtime.dll
-游戏版本 0.110.0 -> runtimes/0.110.0/FBE.Runtime.dll
+游戏版本 0.111.0 -> runtimes/0.111.0/FBE.Runtime.dll
 ```
 
 这个方案的核心收益是：
@@ -67,7 +67,7 @@ Dispatch Bootstrap 会读取当前游戏版本，然后根据 `FBE.dispatch.json
 
 ```text
 E:\STS\STS2\STS2 binary\0.107.1\data_sts2_windows_x86_64\
-E:\STS\STS2\STS2 binary\0.110.0\data_sts2_windows_x86_64\
+E:\STS\STS2\STS2 binary\0.111.0\data_sts2_windows_x86_64\
 ```
 
 至少需要包含：
@@ -104,14 +104,14 @@ E:\STS\STS2\BuildTools\JmcModLib\JmcModLib.Dispatch.targets
 示例：
 
 ```powershell
-dotnet build -t:CurrentVersion -c "Release 0.110.0"
+dotnet build -t:CurrentVersion -c "Release 0.111.0"
 ```
 
 行为：
 
-1. 根据 `Release 0.110.0` 解析出 `Sts2GameVersion=0.110.0`。
-2. 使用 `0.110.0` 的游戏 DLL 编译 Runtime。
-3. 输出 `runtimes/0.110.0/FBE.Runtime.dll`。
+1. 根据 `Release 0.111.0` 解析出 `Sts2GameVersion=0.111.0`。
+2. 使用 `0.111.0` 的游戏 DLL 编译 Runtime。
+3. 输出 `runtimes/0.111.0/FBE.Runtime.dll`。
 4. 生成 Dispatch Bootstrap：`FBE.dll`。
 5. 生成单版本 `FBE.dispatch.json`。
 6. 导出 `FBE.pck`。
@@ -126,7 +126,7 @@ dotnet build -t:CurrentVersion -c "Release 0.110.0"
 示例：
 
 ```powershell
-dotnet build -t:AllVersion -c "Release 0.110.0"
+dotnet build -t:AllVersion -c "Release 0.111.0"
 ```
 
 行为：
@@ -155,9 +155,9 @@ dotnet build -t:AllVersion -c "Release 0.110.0"
         <MaxGameVersionExclusive>0.108.0</MaxGameVersionExclusive>
     </Sts2SupportedVersion>
 
-    <Sts2SupportedVersion Include="0.110.0">
-        <Configuration>Release 0.110.0</Configuration>
-        <MaxGameVersionExclusive>0.111.0</MaxGameVersionExclusive>
+    <Sts2SupportedVersion Include="0.111.0">
+        <Configuration>Release 0.111.0</Configuration>
+        <MaxGameVersionExclusive>0.112.0</MaxGameVersionExclusive>
     </Sts2SupportedVersion>
 </ItemGroup>
 ```
@@ -199,22 +199,22 @@ Runtime 路径：runtimes/0.107.1/FBE.Runtime.dll
 
 这些差异通过 C# 条件编译处理。
 
-`FBE.csproj` 会根据 `Sts2GameVersion` 自动生成条件编译符号。
+`FBE.csproj` 会根据 `Sts2GameVersion` 所属的支持通道生成条件编译符号，而不是把完整版本号编码进宏名。
 
 规则：
 
 ```text
-0.107.1 -> STS2_0_107_1
-0.110.0 -> STS2_0_110_0
+0.107.1（稳定版） -> STS2_Stable
+0.111.0（Beta 版） -> STS2_Beta
 ```
 
 代码中应这样写：
 
 ```csharp
-#if STS2_0_107_1
-// 0.107.1 ABI
-#elif STS2_0_110_0
-// 0.110.0 ABI
+#if STS2_Stable
+// 稳定版 ABI
+#elif STS2_Beta
+// Beta 版 ABI
 #else
 #error Unsupported STS2 game version.
 #endif
@@ -230,9 +230,9 @@ Runtime 路径：runtimes/0.107.1/FBE.Runtime.dll
 例如方法名不同：
 
 ```csharp
-#if STS2_0_107_1
+#if STS2_Stable
 OldApiName(arg);
-#elif STS2_0_108_0
+#elif STS2_Beta
 NewApiName(arg);
 #else
 #error Unsupported STS2 game version.
@@ -242,15 +242,15 @@ NewApiName(arg);
 例如 override 签名不同：
 
 ```csharp
-#if STS2_0_107_1
+#if STS2_Stable
 protected override void SomeMethod()
 {
     // 0.107.1 implementation
 }
-#elif STS2_0_108_0
+#elif STS2_Beta
 protected override void SomeMethod(SomeArg arg)
 {
-    // 0.108.0 implementation
+    // Beta implementation
 }
 #else
 #error Unsupported STS2 game version.
@@ -290,55 +290,38 @@ sts2.dll
 0Harmony.dll
 ```
 
-### 13.2 修改版本矩阵
+### 13.2 更新 Beta 通道版本与分发范围
 
-例如改成：
+更新 `FBE.csproj` 顶部的 `Sts2BetaVersion`，并同步更新 Beta Runtime 的 `MaxGameVersionExclusive`。例如：
 
 ```xml
-<ItemGroup>
-    <Sts2SupportedVersion Include="0.108.0">
-        <Configuration>Release 0.108.0</Configuration>
-        <MaxGameVersionExclusive>0.109.0</MaxGameVersionExclusive>
-    </Sts2SupportedVersion>
+<Sts2BetaVersion>0.109.0</Sts2BetaVersion>
 
-    <Sts2SupportedVersion Include="0.109.0">
-        <Configuration>Release 0.109.0</Configuration>
-        <MaxGameVersionExclusive>0.110.0</MaxGameVersionExclusive>
-    </Sts2SupportedVersion>
-</ItemGroup>
+<Sts2SupportedVersion Include="$(Sts2BetaVersion)">
+    <Configuration>Release $(Sts2BetaVersion)</Configuration>
+    <MaxGameVersionExclusive>0.110.0</MaxGameVersionExclusive>
+</Sts2SupportedVersion>
 ```
 
-### 13.3 添加构建配置
+稳定版仍由 `Sts2LatestVersion` 表示，除非稳定版也发生切换，否则不需要修改它。
 
-需要确保项目存在对应配置：
+### 13.3 构建配置自动跟随通道版本
 
-```text
-Release 0.109.0
-```
+`Configurations` 和版本矩阵中的 `Release <完整版本号>` 配置由 `Sts2LatestVersion` 与 `Sts2BetaVersion` 自动生成；只需确认 `build.bat` 的 `LATEST_VERSION` 已同步为新的 Beta 版本。
 
-如果配置名遵循 `Release <完整版本号>`，`Sts2GameVersion` 会自动解析为：
-
-```text
-0.109.0
-```
+`Sts2GameVersion` 仍会从 `Release <完整版本号>` 解析，或可由 `-p:Sts2GameVersion=完整版本号` 显式覆盖。
 
 ### 13.4 修改代码中的 ABI 条件编译
 
-如果新版本没有 ABI 差异，可能只需要让旧分支继续兼容。
+如果新 Beta 版本与此前 Beta ABI 兼容，不需要修改任何条件编译宏；只更新 `Sts2BetaVersion`、`build.bat`、依赖和 Beta 上界即可。
 
-如果有 ABI 差异，添加：
+如果 ABI 有差异，在既有的 `#if STS2_Beta` 分支内适配新 ABI，或在确有必要时为该 Beta 版本拆出独立实现。不要重新引入版本号宏。
 
-```csharp
-#if STS2_0_109_0
-// 0.109.0 ABI
-#endif
-```
+如果稳定版不再支持，可以删除对应的 `#if STS2_Stable` 分支。
 
-如果旧版本不再支持，可以删除对应的 `#if STS2_0_107_1` 分支。
+### 13.5 版本保护文件无需随 Beta 升级改名
 
-### 13.5 更新版本保护文件
-
-如果项目中有 `Sts2VersionGuards.cs`，同步添加新版本宏。
+`VersionGuard.cs` 只校验 `STS2_Stable` 与 `STS2_Beta` 两个通道宏。只要 Beta 继续沿用同一 ABI 分支，就不需要修改它。
 
 ### 13.6 更新 build.bat 最新版本
 
@@ -382,7 +365,7 @@ set "LATEST_VERSION=0.109.0"
 .\build
 ```
 
-如果功能只改了 `0.110.0` 分支，不需要立刻修 `0.107.1`。
+如果功能只改了 `0.111.0` 分支，不需要立刻修 `0.107.1`。
 
 ### 14.2 修稳定版兼容时
 
@@ -408,5 +391,5 @@ mods/FBE/FBE.dispatch.json
 mods/FBE/FBE.json
 mods/FBE/FBE.pck
 mods/FBE/runtimes/0.107.1/FBE.Runtime.dll
-mods/FBE/runtimes/0.110.0/FBE.Runtime.dll
+mods/FBE/runtimes/0.111.0/FBE.Runtime.dll
 ```

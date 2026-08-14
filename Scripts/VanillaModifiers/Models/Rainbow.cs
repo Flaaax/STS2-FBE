@@ -11,9 +11,8 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
-using MegaCrit.Sts2.Core.Models.Orbs;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Reworks vanilla Rainbow into a Power that creates Orb slots and random Orbs.</summary>
 [HarmonyPatch(typeof(Rainbow), "get_ExtraHoverTips")]

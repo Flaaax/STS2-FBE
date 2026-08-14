@@ -29,7 +29,7 @@ public class Industry() : FBECardModel(1, CardType.Attack, CardRarity.Rare, Targ
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target);
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-#if STS2_0_107_1
+#if STS2_Stable
 			.FromCard(this)
 #else
 			.FromCard(this, cardPlay)

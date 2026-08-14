@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models.Powers;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Plays FBE's explosion sound when a Top Hat-generated The Bomb detonates.</summary>
 [HarmonyPatch(typeof(TheBombPower), nameof(TheBombPower.BeforeSideTurnEnd))]

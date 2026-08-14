@@ -4,7 +4,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Rebalances vanilla Bouncing Flask to lower Poison and more hits.</summary>
 [HarmonyPatch(typeof(BouncingFlask))]

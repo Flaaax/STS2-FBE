@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://d060pfs382dl8"
-path="res://.godot/imported/isaac dies new0.wav-ee74d4ac43ce599334c8a49c73a1caee.sample"
+path="res://.godot/imported/isaac dies new0.wav-503359032abb6c847b980cd580fe3233.sample"
 
 [deps]
 
-source_file="res://FBE/audio/isaac dies new0.wav"
-dest_files=["res://.godot/imported/isaac dies new0.wav-ee74d4ac43ce599334c8a49c73a1caee.sample"]
+source_file="res://FBE/audio/death/isaac dies new0.wav"
+dest_files=["res://.godot/imported/isaac dies new0.wav-503359032abb6c847b980cd580fe3233.sample"]
 
 [params]
 

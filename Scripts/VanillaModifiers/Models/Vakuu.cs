@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Events;
 using MegaCrit.Sts2.Core.Models.Relics;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Adds Diplopia to Vakuu's first relic pool and removes Lord's Parasol from the third.</summary>
 [HarmonyPatch(typeof(Vakuu))]

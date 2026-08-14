@@ -22,15 +22,3 @@ public static class CustomSfxPatch1
         return false;
     }
 }
-[HarmonyPatch(typeof(Hook), nameof(Hook.AfterDeath))]
-public static class CustomSfxPatch2
-{
-    public static void Postfix(IRunState runState, ICombatState? combatState, Creature creature,
-        bool wasRemovalPrevented, float deathAnimLength)
-    {
-        if (creature.IsPlayer)
-        {
-            AudioHelper.PlayRandom("res://FBE/audio/isaac dies new0.wav");
-        }
-    }
-}

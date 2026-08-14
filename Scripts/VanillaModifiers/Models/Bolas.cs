@@ -1,7 +1,7 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models.Cards;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Sets vanilla Bolas to 7 damage and 10 damage when upgraded.</summary>
 [HarmonyPatch(typeof(Bolas), MethodType.Constructor)]

@@ -20,7 +20,7 @@ using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Replaces the Sword of Stone reward from Sunken Statue with FBE's reworked relic.</summary>
 [Pool(typeof(EventRelicPool))]

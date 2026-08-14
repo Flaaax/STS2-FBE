@@ -45,7 +45,7 @@ public class GiantKiller() : FBECardModel(2, CardType.Attack, CardRarity.Uncommo
 			? "res://FBE/audio/hit_crit.ogg"
 			: null;
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-#if STS2_0_107_1
+#if STS2_Stable
 	        .FromCard(this)
 #else
 			.FromCard(this, cardPlay)
@@ -55,7 +55,7 @@ public class GiantKiller() : FBECardModel(2, CardType.Attack, CardRarity.Uncommo
 			.Execute(choiceContext);
 	}
 
-#if STS2_0_107_1
+#if STS2_Stable
 	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
 		Creature? dealer, CardModel? cardSource)
 #else

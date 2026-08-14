@@ -5,7 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.Powers;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Reduces Test Subject's Enrage trigger rate in multiplayer.</summary>
 [HarmonyPatch(typeof(EnragePower), nameof(EnragePower.AfterCardPlayed))]

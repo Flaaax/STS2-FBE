@@ -2,7 +2,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Events;
 
-namespace FBE.Scripts.VanillaModifiers;
+namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Disables the vanilla Lost Wisp event.</summary>
 [HarmonyPatch(typeof(EventModel), nameof(EventModel.IsAllowed))]

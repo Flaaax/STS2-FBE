@@ -1,6 +1,6 @@
 {
   "FBE-RAINBOW_POWER.title": "彩虹",
-  "FBE-RAINBOW_POWER.description": "回合开始时，失去一个充能球栏位",
+  "FBE-RAINBOW_POWER.smartDescription": "下[blue]{Amount}[/blue]回合开始时，失去一个充能球栏位",
   "FBE-COOLANT_POWER.title": "冷却剂",
   "FBE-COOLANT_POWER.description": "回合开始时，[gold]生成[/gold]1个[gold]冰霜[/gold]充能球。",
   "FBE-KEEPING_A_HAND_POWER.title": "留了一手",

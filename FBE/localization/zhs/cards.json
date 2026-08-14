@@ -2,7 +2,7 @@
 	"FBE-YEARS.title": "岁月",
 	"FBE-YEARS.description": "回合开始时，如果这张牌在你[gold]手牌[/gold]，则立刻结束你的回合，并获得一个额外回合。",
 	"RAINBOW.title": "彩虹",
-	"RAINBOW.description": "获得{Repeat:diff()}个临时充能球栏位，然后随机[gold]生成[/gold]{Repeat:diff()}个充能球。\n回合开始时，失去一个临时充能球栏位。",
+	"RAINBOW.description": "获得{Repeat:diff()}个被随机填满的充能球栏位。\n在下{Repeat:diff()}回合开始时，失去一个充能球栏位。",
 	"COOLANT.title": "冷却剂",
 	"COOLANT.description": "回合开始时，[gold]生成[/gold]1个[gold]冰霜[/gold]充能球。",
 	"FBE-INDUSTRY.title": "工业！！！",

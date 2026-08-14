@@ -53,7 +53,7 @@ public class Entry
 		// 自动注册内容
 		ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
 
-#if STS2_0_107_1
+#if STS2_Stable
 		RegisterSavedPropertyModels();
 #endif
 		// 使得tscn可以加载自定义脚本
@@ -68,7 +68,7 @@ public class Entry
 		if (assembly.GetName().Name == ModId)
 			return;
 
-#if STS2_0_107_1
+#if STS2_Stable
 		// 0.107.1 会在初始化函数返回后，将 Bootstrap 主程序集重新写入 Mod.assembly。
 		// 等 OnModDetected 触发后再替换为 Runtime，避免这次写回覆盖兼容处理。
 		Action<Mod>? onModDetected = null;
@@ -88,7 +88,7 @@ public class Entry
 #endif
 	}
 
-#if STS2_0_107_1
+#if STS2_Stable
 	private static void RegisterSavedPropertyModels()
 	{
 		const BindingFlags flags =
