@@ -33,6 +33,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace FBE.Scripts.Events;
 
+[STS2RitsuLib.Interop.AutoRegistration.RegisterSharedEvent]
 public sealed class QuantumTower : FBEEventModel
 {
     private bool _gameBgmSuppressed;
@@ -102,7 +103,7 @@ public sealed class QuantumTower : FBEEventModel
 
     private async Task EnterTower()
     {
-        var prompt = L10NLookup("FBE-QUANTUM_TOWER.selectionScreenPrompt");
+        var prompt = L10NLookup("FBE_EVENT_QUANTUM_TOWER.selectionScreenPrompt");
         prompt.Add(DynamicVars["Count"]);
         prompt.Add(DynamicVars["Enchantment"]);
         var count = DynamicVars["Count"].IntValue;

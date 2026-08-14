@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Rooms;
 
-[Pool(typeof(EventRelicPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(EventRelicPool))]
 class Redemption : FBERelicModel
 {
     public override RelicRarity Rarity => RelicRarity.Event;

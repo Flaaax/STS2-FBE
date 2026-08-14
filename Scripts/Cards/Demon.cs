@@ -18,7 +18,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(IroncladCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(IroncladCardPool))]
 public class Demon() : FBECardModel(3, CardType.Power, CardRarity.Rare, TargetType.None)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -26,7 +26,7 @@ public class Demon() : FBECardModel(3, CardType.Power, CardRarity.Rare, TargetTy
         //new CardsVar(2)
     ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     [
         //HoverTipFactory.FromKeyword(CardKeyword.Ethereal), HoverTipFactory.FromCard<DemonForm>()
         HoverTipFactory.FromPower<StrengthPower>(), HoverTipFactory.FromPower<DemonFormPower>()

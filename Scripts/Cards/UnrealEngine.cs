@@ -9,14 +9,14 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(NecrobinderCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(NecrobinderCardPool))]
 public class UnrealEngine() : FBECardModel(1, CardType.Power, CardRarity.Uncommon, TargetType.None)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [EnergyHoverTip];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [EnergyHoverTip];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

@@ -14,7 +14,7 @@ using MegaCrit.Sts2.Core.Rooms;
 
 namespace FBE.Scripts.Relics;
 
-[Pool(typeof(EventRelicPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(EventRelicPool))]
 class AnarchistCookbook : FBERelicModel
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;
@@ -24,7 +24,7 @@ class AnarchistCookbook : FBERelicModel
 		new PowerVar<MayhemPower>(1m),
 	];
 
-	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
 	[
 		HoverTipFactory.FromPower<MayhemPower>(),
 		HoverTipFactory.FromCard<Mayhem>()

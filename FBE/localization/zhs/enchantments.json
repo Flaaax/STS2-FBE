@@ -1,6 +1,6 @@
 {
-  "FBE-UBW_ENCHANTMENT.description": "这张牌造成的伤害变为[red]1/{Amount}[/red]",
-  "FBE-UBW_ENCHANTMENT.title": "无限剑制",
-  "FBE-QUANTINIZED.description": "抽到这张牌时，[gold]变化[/gold]这张牌。",
-  "FBE-QUANTINIZED.title": "量子态"
+  "FBE_ENCHANTMENT_UBW_ENCHANTMENT.description": "这张牌造成的伤害变为[red]1/{Amount}[/red]",
+  "FBE_ENCHANTMENT_UBW_ENCHANTMENT.title": "无限剑制",
+  "FBE_ENCHANTMENT_QUANTINIZED.description": "抽到这张牌时，[gold]变化[/gold]这张牌。",
+  "FBE_ENCHANTMENT_QUANTINIZED.title": "量子态"
 }

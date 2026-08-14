@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace FBE.Scripts.Relics;
 
-[Pool(typeof(SharedRelicPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(SharedRelicPool))]
 class StarterDeck : FBERelicModel
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;

@@ -15,7 +15,7 @@ using FileAccess = Godot.FileAccess;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(SilentCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(SilentCardPool))]
 public class Industry() : FBECardModel(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars =>

@@ -12,11 +12,12 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace FBE.Scripts.Powers;
 
+[STS2RitsuLib.Interop.AutoRegistration.RegisterPower]
 public class SwordSagePower2 : FBEPowerModel
 {
     public override PowerType Type => PowerType.Buff;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => HoverTipFactory
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory
         .FromCardWithCardHoverTips<SovereignBlade>().Concat([HoverTipFactory.Static(StaticHoverTip.ReplayStatic)]);
 
     public override PowerStackType StackType => PowerStackType.Counter;

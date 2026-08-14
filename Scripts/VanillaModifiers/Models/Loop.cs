@@ -20,7 +20,7 @@ namespace FBE.Scripts.VanillaModifiers.Models;
 /// FBE's replacement for the vanilla Loop card.  It keeps the original card's
 /// cost, rarity, art, and upgrade value, but triggers at the end of the owner's turn.
 /// </summary>
-[Pool(typeof(DefectCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(DefectCardPool))]
 public sealed class LoopAtTurnEnd : FBECardModel
 {
     public LoopAtTurnEnd() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
@@ -56,6 +56,7 @@ public sealed class LoopAtTurnEnd : FBECardModel
 /// Performs Loop's extra passive triggers immediately before the orb queue's
 /// normal end-of-turn triggers. This mirrors vanilla Loop's ordering at turn start.
 /// </summary>
+[STS2RitsuLib.Interop.AutoRegistration.RegisterPower]
 public sealed class LoopAtTurnEndPower : FBEPowerModel
 {
     public override PowerType Type => PowerType.Buff;

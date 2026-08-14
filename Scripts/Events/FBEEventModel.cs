@@ -12,15 +12,12 @@ using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 
+using STS2RitsuLib.Scaffolding.Content;
+
 namespace FBE.Scripts.Events;
 
-public abstract class FBEEventModel : EventModel, IFBEModel
+public abstract class FBEEventModel : ModEventTemplate
 {
-    protected FBEEventModel()
-    {
-        IFBEModel.AddEvent(this);
-    }
-    
     protected bool IsLocalOwner()
     {
         return LocalContext.IsMe(Owner);
@@ -36,9 +33,10 @@ public abstract class FBEEventModel : EventModel, IFBEModel
         NEventRoom.Instance?.SetPortrait(PreloadManager.Cache.GetTexture2D(portraitPath));
     }
     
-    public virtual string? CustomInitialPortraitPath => null;
-    public virtual string? CustomBackgroundScenePath => null;
+    public override string? CustomInitialPortraitPath => null;
+    public override string? CustomBackgroundScenePath => null;
     public virtual string? CustomVfxPath => null;
+    public override string? CustomVfxScenePath => CustomVfxPath;
 
     protected EventOption Option(Func<Task> onChosen, IEnumerable<IHoverTip>? tips = null, string pageKey = "INITIAL")
     {
@@ -52,8 +50,4 @@ public abstract class FBEEventModel : EventModel, IFBEModel
             $"{Id.Entry}.pages.{pageKey}.options.{StringHelper.Slugify(txt)}", tips ?? []);
     }
     
-    protected LocString PageDescription(string pageKey)
-    {
-        return L10NLookup($"{Id.Entry}.pages.{pageKey}.description");
-    }
 }

@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace FBE.Scripts.Events;
 
+[STS2RitsuLib.Interop.AutoRegistration.RegisterSharedEvent]
 public sealed class EchoesOfTime : FBEEventModel
 {
     // 背景图位置

@@ -14,13 +14,14 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace FBE.Scripts.Events;
 
+[STS2RitsuLib.Interop.AutoRegistration.RegisterSharedEvent]
 public sealed class StrangeRoadSign : FBEEventModel
 {
 	private const int CardsToRemove = 2;
 	private const int RewardChoices = 3;
 	private const string CursesVar = "Curses";
 	private const int CursesToAdd = 2;
-	private const string FbeCurseEntryPrefix = "FBE-";
+	private const string FbeCurseEntryPrefix = "FBE_CARD_";
 	private const string TiebaDiyCurseEntryPrefix = "TIEBA_DIY_CARD_";
 	private static readonly string BlockHoverTipId = HoverTipFactory.Static(StaticHoverTip.Block).Id;
 
@@ -66,7 +67,7 @@ public sealed class StrangeRoadSign : FBEEventModel
 		var cards = CardFactory.CreateForReward(Owner, RewardChoices, options).ToList();
 		foreach (var item in await CardSelectCmd.FromSimpleGridForRewards(
 			         prefs: new CardSelectorPrefs(
-				         L10NLookup("FBE-STRANGE_ROAD_SIGN.pages.GO_ATTACK.selectionScreenPrompt"),
+				         L10NLookup("FBE_EVENT_STRANGE_ROAD_SIGN.pages.GO_ATTACK.selectionScreenPrompt"),
 				         1), context: new BlockingPlayerChoiceContext(), cards: cards, player: Owner))
 		{
 			CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
@@ -96,7 +97,7 @@ public sealed class StrangeRoadSign : FBEEventModel
 		var cards = CreateBlockRewardChoices();
 		foreach (var item in await CardSelectCmd.FromSimpleGridForRewards(
 			         prefs: new CardSelectorPrefs(
-				         L10NLookup("FBE-STRANGE_ROAD_SIGN.pages.GO_DEFEND.selectionScreenPrompt"),
+				         L10NLookup("FBE_EVENT_STRANGE_ROAD_SIGN.pages.GO_DEFEND.selectionScreenPrompt"),
 				         1), context: new BlockingPlayerChoiceContext(), cards: cards, player: Owner))
 		{
 			CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));

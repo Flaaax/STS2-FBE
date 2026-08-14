@@ -16,13 +16,14 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace FBE.Scripts.Powers;
 
+[STS2RitsuLib.Interop.AutoRegistration.RegisterPower]
 public class DemonPower : FBEPowerModel
 {
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     [
         //HoverTipFactory.FromKeyword(CardKeyword.Ethereal), HoverTipFactory.FromCard<DemonForm>()
         HoverTipFactory.FromPower<StrengthPower>(), HoverTipFactory.FromPower<DemonFormPower>()

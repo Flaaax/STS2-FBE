@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace FBE.Scripts.Enchantments;
 
 //Should not be enchanted to a curse
+[STS2RitsuLib.Interop.AutoRegistration.RegisterEnchantment]
 public class Quantinized : FBEEnchantmentModel
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Transform)];

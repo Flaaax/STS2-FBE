@@ -21,11 +21,11 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace FBE.Scripts.Relics;
 
-[Pool(typeof(SharedRelicPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(SharedRelicPool))]
 class TopHat : FBERelicModel
 {
     public override RelicRarity Rarity => RelicRarity.Uncommon;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<TheBomb>()];
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<TheBomb>()];
 
     public override bool IsAllowed(IRunState runState) => IsBeforeAct3TreasureChest(runState);
 

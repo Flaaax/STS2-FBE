@@ -23,11 +23,11 @@ using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 
-[Pool(typeof(EventRelicPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(EventRelicPool))]
 class Insight : FBERelicModel
 {
     public override RelicRarity Rarity => RelicRarity.Event;
-    protected override string CustomIconPath => "res://FBE/images/relics/Insight.png";
+    public override string? CustomIconPath => "res://FBE/images/relics/Insight.png";
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -53,7 +53,7 @@ class Insight : FBERelicModel
         var rewards = GetCardReward();
 
         var perfs =
-            new CardSelectorPrefs(L10NLookup("FBE-INSIGHT.selectionScreenPrompt"), 0,
+            new CardSelectorPrefs(L10NLookup("FBE_RELIC_INSIGHT.selectionScreenPrompt"), 0,
                 rewards.Count);
         var selected =
             (await CardSelectCmd.FromSimpleGridForRewards(new BlockingPlayerChoiceContext(), rewards, Owner, perfs))

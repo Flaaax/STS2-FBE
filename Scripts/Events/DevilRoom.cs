@@ -30,6 +30,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace FBE.Scripts.Events;
 
+[STS2RitsuLib.Interop.AutoRegistration.RegisterSharedEvent]
 public sealed class DevilRoom : FBEEventModel
 {
 	private const string DevilRoomMusicPath = "res://FBE/audio/deal with the devil.ogg";

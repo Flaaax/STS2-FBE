@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.Random;
 
 namespace FBE.Scripts.Powers;
 
+[STS2RitsuLib.Interop.AutoRegistration.RegisterPower]
 public sealed class KeepingAHandPower : FBEPowerModel
 {
     public override PowerType Type => PowerType.Buff;

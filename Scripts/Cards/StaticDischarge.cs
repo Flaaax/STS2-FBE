@@ -17,7 +17,7 @@ using FileAccess = Godot.FileAccess;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(DefectCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(DefectCardPool))]
 public class StaticDischarge() : FBECardModel(1, CardType.Power, CardRarity.Uncommon, TargetType.None)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -25,7 +25,7 @@ public class StaticDischarge() : FBECardModel(1, CardType.Power, CardRarity.Unco
         new PowerVar<StaticDischargePower>(1m),
     ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     [
         HoverTipFactory.Static(StaticHoverTip.Channeling),
         HoverTipFactory.FromOrb<LightningOrb>()

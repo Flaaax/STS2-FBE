@@ -19,7 +19,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.ValueProps;
 using FileAccess = Godot.FileAccess;
 
-[Pool(typeof(NecrobinderCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(NecrobinderCardPool))]
 public class BloodFeud() : FBECardModel(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
 	protected override bool ShouldGlowRedInternal => Owner.IsOstyMissing;
@@ -30,7 +30,7 @@ public class BloodFeud() : FBECardModel(1, CardType.Attack, CardRarity.Common, T
 		new RepeatVar(2)
 	];
 
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<DoomPower>()];
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<DoomPower>()];
 
 	protected override HashSet<CardTag> CanonicalTags => [CardTag.OstyAttack];
 

@@ -13,11 +13,12 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace FBE.Scripts.Powers;
 
+[STS2RitsuLib.Interop.AutoRegistration.RegisterPower]
 public class StaticDischargePower : FBEPowerModel
 {
     public override PowerType Type => PowerType.Buff;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     [
         HoverTipFactory.Static(StaticHoverTip.Channeling),
         HoverTipFactory.FromOrb<LightningOrb>()

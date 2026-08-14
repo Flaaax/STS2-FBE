@@ -19,7 +19,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace FBE.Scripts.Relics;
 
-[Pool(typeof(EventRelicPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(EventRelicPool))]
 class DarkBum : FBERelicModel
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;
@@ -42,7 +42,7 @@ class DarkBum : FBERelicModel
 		new SummonVar(8m),
 	];
 
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
 	private bool _usedThisTurn;
 

@@ -23,14 +23,14 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Replaces the Sword of Stone reward from Sunken Statue with FBE's reworked relic.</summary>
-[Pool(typeof(EventRelicPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(EventRelicPool))]
 internal sealed class SwordOfStoneMk2 : FBERelicModel
 {
     public override RelicRarity Rarity => RelicRarity.Event;
 
     public override bool ShowCounter => true;
 
-    protected override string CustomIconPath => "res://FBE/images/relics/sword_of_stone.png";
+    public override string? CustomIconPath => "res://FBE/images/relics/sword_of_stone.png";
 
     public override int DisplayAmount => Math.Max(DynamicVars["HealthToLose"].IntValue - HealthLost, 0);
 

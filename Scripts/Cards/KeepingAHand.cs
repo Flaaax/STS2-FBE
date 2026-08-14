@@ -19,7 +19,7 @@ using FileAccess = Godot.FileAccess;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(NecrobinderCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(NecrobinderCardPool))]
 public class KeepingAHand() : FBECardModel(0, CardType.Power, CardRarity.Uncommon, TargetType.None)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [

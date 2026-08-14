@@ -101,7 +101,7 @@ public class Entry
 			if (!type.IsClass || type.IsAbstract)
 				continue;
 
-			if (!typeof(IFBEModel).IsAssignableFrom(type))
+			if (!typeof(MegaCrit.Sts2.Core.Models.AbstractModel).IsAssignableFrom(type))
 				continue;
 
 			var hasSavedProperty = type

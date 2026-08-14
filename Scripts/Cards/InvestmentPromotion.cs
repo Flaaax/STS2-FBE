@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(ColorlessCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(ColorlessCardPool))]
 public class InvestmentPromotion() : FBECardModel(0, CardType.Skill, CardRarity.Uncommon, TargetType.None)
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => [];
@@ -20,7 +20,7 @@ public class InvestmentPromotion() : FBECardModel(0, CardType.Skill, CardRarity.
 
 	public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
 
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => GetHoverTip();
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => GetHoverTip();
 
 	private IEnumerable<IHoverTip> GetHoverTip()
 	{

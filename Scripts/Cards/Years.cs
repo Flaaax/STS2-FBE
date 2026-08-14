@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(CurseCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(CurseCardPool))]
 public class Years() : FBECardModel(-1, CardType.Curse, CardRarity.Curse, TargetType.Self)
 {
 	private const bool UseFakeExtraTurnInSingleplayer = true;

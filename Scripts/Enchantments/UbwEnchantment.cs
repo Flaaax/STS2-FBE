@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace FBE.Scripts.Enchantments;
 
 // ReSharper disable once InconsistentNaming
+[STS2RitsuLib.Interop.AutoRegistration.RegisterEnchantment]
 public sealed class UbwEnchantment : FBEEnchantmentModel
 {
     public override string CustomIconPath => "res://FBE/images/powers/UnlimitedBladeWorksPower.png";

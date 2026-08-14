@@ -18,7 +18,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 namespace FBE.Scripts.VanillaModifiers.Models;
 
 /// <summary>Replaces vanilla Genesis with FBE's star-generating Genesis2.</summary>
-[Pool(typeof(RegentCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(RegentCardPool))]
 public sealed class Genesis2 : FBECardModel
 {
     public Genesis2() : base(2, CardType.Power, CardRarity.Rare, TargetType.None)
@@ -44,6 +44,7 @@ public sealed class Genesis2 : FBECardModel
 }
 
 /// <summary>Maintains Genesis2's stars for the current turn.</summary>
+[STS2RitsuLib.Interop.AutoRegistration.RegisterPower]
 public sealed class GenesisPower2 : FBEPowerModel
 {
     public override PowerType Type => PowerType.Buff;

@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Nodes.CommonUi;
 
 namespace FBE.Scripts.Relics;
 
-[Pool(typeof(EventRelicPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(EventRelicPool))]
 class Diplopia : FBERelicModel
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;

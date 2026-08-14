@@ -19,7 +19,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.ValueProps;
 using FileAccess = Godot.FileAccess;
 
-[Pool(typeof(NecrobinderCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(NecrobinderCardPool))]
 public class DeadTissue() : FBECardModel(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -28,7 +28,7 @@ public class DeadTissue() : FBECardModel(1, CardType.Attack, CardRarity.Common, 
 		new SummonVar(5m)
 	];
 
-	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
 		[HoverTipFactory.Static(StaticHoverTip.SummonDynamic, base.DynamicVars.Summon)];
 
 	protected override HashSet<CardTag> CanonicalTags => [CardTag.OstyAttack];

@@ -1,6 +1,6 @@
 {
-	"FBE-UBW_ENCHANTMENT.description": "Damage dealt by this card becomes [red]1/{Amount}[/red].",
-	"FBE-UBW_ENCHANTMENT.title": "Unlimited Blade Works",
-	"FBE-QUANTINIZED.description": "When this card is drawn, [gold]Transform[/gold] it.",
-	"FBE-QUANTINIZED.title": "Quantinized"
+	"FBE_ENCHANTMENT_UBW_ENCHANTMENT.description": "Damage dealt by this card becomes [red]1/{Amount}[/red].",
+	"FBE_ENCHANTMENT_UBW_ENCHANTMENT.title": "Unlimited Blade Works",
+	"FBE_ENCHANTMENT_QUANTINIZED.description": "When this card is drawn, [gold]Transform[/gold] it.",
+	"FBE_ENCHANTMENT_QUANTINIZED.title": "Quantinized"
 }

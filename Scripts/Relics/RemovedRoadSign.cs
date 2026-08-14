@@ -13,13 +13,13 @@ using MegaCrit.Sts2.Core.Saves.Runs;
 namespace FBE.Scripts.Relics;
 
 // 加入哪个遗物池，此处为通用
-[Pool(typeof(EventRelicPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(EventRelicPool))]
 public class RemovedRoadSign : FBERelicModel
 {
     // 稀有度
     public override RelicRarity Rarity => RelicRarity.Event;
 
-    protected override string CustomIconPath => "res://FBE/images/relics/RemovedRoadSign.png";
+    public override string? CustomIconPath => "res://FBE/images/relics/RemovedRoadSign.png";
 
 
     private int _combatsLeft = 2;

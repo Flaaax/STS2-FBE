@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(ColorlessCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(ColorlessCardPool))]
 public class Aggregate() : FBECardModel(1, CardType.Skill, CardRarity.Uncommon, TargetType.None)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>

@@ -314,7 +314,7 @@ public partial class NChooseBundlesSelectionScreen : Control, IOverlayScreen
 
 	private static string GetText(string key)
 	{
-		return new LocString("relics", $"FBE-STARTER_DECK.{key}").GetRawText();
+		return new LocString("relics", $"FBE_RELIC_STARTER_DECK.{key}").GetRawText();
 	}
 
 	public async Task<IReadOnlyList<int>> BundlesSelected()

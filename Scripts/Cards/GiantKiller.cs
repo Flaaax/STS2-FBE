@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(ColorlessCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(ColorlessCardPool))]
 public class GiantKiller() : FBECardModel(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars =>

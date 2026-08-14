@@ -10,14 +10,14 @@ using MegaCrit.Sts2.Core.Models.RelicPools;
 
 namespace FBE.Scripts.Relics;
 
-[Pool(typeof(SharedRelicPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(SharedRelicPool))]
 class PHD : FBERelicModel
 {
 	public override RelicRarity Rarity => RelicRarity.Common;
 	
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(2)];
 
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.ForEnergy(this)];
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.ForEnergy(this)];
 
 
 	public override async Task AfterPotionUsed(PotionModel potion, Creature? target)

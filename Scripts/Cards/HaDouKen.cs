@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(IroncladCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(IroncladCardPool))]
 public class HaDouKen() : FBECardModel(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -18,7 +18,7 @@ public class HaDouKen() : FBECardModel(2, CardType.Attack, CardRarity.Uncommon, 
 		new DamageVar(13m, ValueProp.Move),
 	];
 
-	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
 	[
 		HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
 		HoverTipFactory.FromKeyword(CardKeyword.Ethereal)

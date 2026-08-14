@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(RegentCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(RegentCardPool))]
 public class UnlimitedBladeWorks() : FBECardModel(1, CardType.Power, CardRarity.Uncommon, TargetType.None)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -20,7 +20,7 @@ public class UnlimitedBladeWorks() : FBECardModel(1, CardType.Power, CardRarity.
         new ForgeVar(8)
     ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => HoverTipFactory.FromForge()
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromForge()
         .Concat(HoverTipFactory.FromCardWithCardHoverTips<SovereignBlade>());
 
 

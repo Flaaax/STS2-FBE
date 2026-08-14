@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace FBE.Scripts.Powers;
 
+[STS2RitsuLib.Interop.AutoRegistration.RegisterPower]
 public class MasterRealityPower : FBEPowerModel
 {
     // 类型，Buff或Debuff

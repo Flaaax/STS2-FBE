@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(TokenCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(TokenCardPool))]
 public class TheD6ChoiceCard() : FBECardModel(-1, CardType.Skill, CardRarity.Token, TargetType.None, false)
 {
 	private string? _runtimeTitle;
@@ -154,7 +154,7 @@ public class TheD6Base
 	}
 }
 
-[Pool(typeof(ColorlessCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(ColorlessCardPool))]
 public class TheD6() : FBECardModel(1, CardType.Skill, CardRarity.Uncommon, TargetType.None)
 {
 	private readonly TheD6Base _myBase = new();

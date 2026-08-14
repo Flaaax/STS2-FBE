@@ -10,11 +10,12 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace FBE.Scripts.Powers;
 
+[STS2RitsuLib.Interop.AutoRegistration.RegisterPower]
 public class TimeFallPower : FBEPowerModel
 {
     public override PowerType Type => PowerType.Buff;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<DoomPower>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<DoomPower>()];
     public override PowerStackType StackType => PowerStackType.Counter;
 
     public override string CustomIconPath => "res://FBE/images/powers/TimeFallPower.png";

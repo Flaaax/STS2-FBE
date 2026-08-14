@@ -8,11 +8,12 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace FBE.Scripts.Powers;
 
+[STS2RitsuLib.Interop.AutoRegistration.RegisterPower]
 public class UnrealEnginePower : FBEPowerModel
 {
     public override PowerType Type => PowerType.Buff;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Ethereal), HoverTipFactory.ForEnergy(this)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Ethereal), HoverTipFactory.ForEnergy(this)];
     public override PowerStackType StackType => PowerStackType.Counter;
     
     public override Task AfterCardEnteredCombat(CardModel card)

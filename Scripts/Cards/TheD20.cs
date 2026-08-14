@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace FBE.Scripts.Cards;
 
-[Pool(typeof(ColorlessCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(ColorlessCardPool))]
 public class TheD20() : FBECardModel(1, CardType.Skill, CardRarity.Rare, TargetType.None)
 {
 	private readonly TheD6Base _myBase = new();

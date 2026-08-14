@@ -64,6 +64,7 @@ internal static class PatchCoolantUpgrade
 }
 
 /// <summary>Power applied by the Coolant rework.</summary>
+[STS2RitsuLib.Interop.AutoRegistration.RegisterPower]
 public sealed class CoolantPower : FBEPowerModel
 {
     public override PowerType Type => PowerType.Buff;

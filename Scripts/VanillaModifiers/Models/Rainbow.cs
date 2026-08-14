@@ -96,6 +96,7 @@ internal static class PatchRainbowUpgrade
 }
 
 /// <summary>Tracks the temporary Orb slots granted by the Rainbow rework.</summary>
+[STS2RitsuLib.Interop.AutoRegistration.RegisterPower]
 public sealed class RainbowPower : FBEPowerModel
 {
     public override PowerType Type => PowerType.Debuff;

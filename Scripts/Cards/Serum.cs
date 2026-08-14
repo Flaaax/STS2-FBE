@@ -9,10 +9,10 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 
-[Pool(typeof(SilentCardPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(SilentCardPool))]
 public class Serum() : FBECardModel(0, CardType.Skill, CardRarity.Uncommon, TargetType.None)
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     [
         HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
         EnergyHoverTip
