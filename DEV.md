@@ -27,6 +27,15 @@
 
 D:\Steam\steamapps\workshop\content\2868840
 
+## 模组遭遇 ID 与调试战斗
+
+RitsuLib 自动注册模型时，默认条目 ID 格式为：`MODID_CATEGORY_TYPENAME`。
+三部分均会转换为大写下划线格式；完整 `ModelId` 再以 `CATEGORY.ENTRY` 表示。
+
+- `DoorMonsterEncounter` 的遭遇条目 ID：`FBE_ENCOUNTER_DOOR_MONSTER_ENCOUNTER`
+
+使用fight命令来进入一场遭遇战
+
 ## TODO
 
 为DarkBum添加帧动画   OK

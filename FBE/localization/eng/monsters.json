@@ -1,4 +1,7 @@
 {
   "FBE_MONSTER_DARK_BUM_MONSTER.name": "Dark Bum",
-  "FBE_MONSTER_DARK_BUM_MONSTER.moves.NOTHING.title": "Nothing"
+  "FBE_MONSTER_DARK_BUM_MONSTER.moves.NOTHING.title": "Nothing",
+  "FBE_MONSTER_DOOR_MONSTER.name": "Door",
+  "FBE_MONSTER_DOOR_MONSTER.moves.PLACEHOLDER_STRIKE.title": "Placeholder Strike",
+  "FBE_MONSTER_DOOR_MONSTER.moves.PLACEHOLDER_STRIKE.banter": "I am hungry."
 }
