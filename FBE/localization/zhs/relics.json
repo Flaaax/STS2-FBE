@@ -13,7 +13,7 @@
 	"FBE_RELIC_REDEMPTION.description": "击败Boss敌人后，回复[blue]{Heal}[/blue]生命。",
 	"FBE_RELIC_REDEMPTION.flavor": "[blue][i]救我们脱离凶恶[/i][/blue]",
 	"FBE_RELIC_TOP_HAT.title": "高礼帽",
-	"FBE_RELIC_TOP_HAT.description": "你的卡牌奖励会额外包含一张[gold]炸弹[/gold]。[gold]炸弹[/gold]的费用变为[blue]0[/blue]。",
+	"FBE_RELIC_TOP_HAT.description": "你的卡牌奖励会额外包含一张[gold]炸弹[/gold]。[gold]炸弹[/gold]可以免费打出。",
 	"FBE_RELIC_TOP_HAT.flavor": "[blue]史诗胎儿戴的帽子[/blue]",
 	"FBE_RELIC_DIPLOPIA.title": "复眼",
 	"FBE_RELIC_DIPLOPIA.description": "拾起时，复制你的整个[gold]牌组[/gold]。",

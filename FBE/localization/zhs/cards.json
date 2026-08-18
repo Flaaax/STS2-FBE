@@ -45,6 +45,12 @@
 	"FBE_CARD_STATIC_DISCHARGE.description": "每当你被攻击时，[gold]生成[/gold]{StaticDischargePower:diff()}个[gold]闪电[/gold]充能球。",
 	"FBE_CARD_SERUM.title": "血清",
 	"FBE_CARD_SERUM.description": "[gold]消耗[/gold][gold]手牌[/gold]中所有状态和诅咒牌，每张获得{Energy:energyIcons()}。",
+	"FBE_CARD_HUNGER.title": "饥饿",
+	"FBE_CARD_HUNGER.description": "当此牌在你的[gold]手牌[/gold]中时，你的所有牌获得[gold]消耗[/gold]。",
+	"FBE_CARD_SCRUTINY.title": "细看",
+	"FBE_CARD_SCRUTINY.description": "当此牌在你的[gold]手牌[/gold]中时，每当你抽牌，就将一张[gold]细看[/gold]加入你的[gold]抽牌堆[/gold]。",
+	"FBE_CARD_GRASP.title": "紧握",
+	"FBE_CARD_GRASP.description": "当此牌在你的[gold]手牌[/gold]中时，你每打出一张牌就失去{energyPrefix:energyIcons(1)}。",
 	//
 	"FBE_CARD_THE_D6_CHOICE_CARD.title": "变化",
 	"FBE_CARD_THE_D6_CHOICE_CARD.description": "将[gold]{property}[/gold]变为{MinRange}~{MaxRange}。\n当前：[blue]{value}[/blue]",
