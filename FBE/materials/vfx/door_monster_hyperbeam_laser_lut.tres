@@ -1,0 +1,9 @@
+[gd_resource type="GradientTexture1D" load_steps=2 format=3]
+
+[sub_resource type="Gradient" id="Gradient_door_monster_hyperbeam"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.32492998, 0.63585436, 0.77310926)
+colors = PackedColorArray(0.18, 0.02, 0.62, 1, 0.42, 0.05, 0.95, 1, 0.78, 0.38, 1, 1, 1, 0.82, 1, 1)
+
+[resource]
+gradient = SubResource("Gradient_door_monster_hyperbeam")

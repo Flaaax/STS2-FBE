@@ -1,12 +1,15 @@
 using FBE.Scripts.Visuals;
+using FBE.Scripts.VFX;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -66,6 +69,34 @@ public class DoorMonster : ModMonsterTemplate
 	private async Task PerformPlaceholderStrike(IReadOnlyList<Creature> targets)
 	{
 		TalkCmd.Play(PlaceholderStrikeBanter, Creature, VfxColor.Purple, VfxDuration.Standard);
-		await DamageCmd.Attack(AttackDamage).FromMonster(this).Execute(null);
+		await DamageCmd.Attack(AttackDamage).FromMonster(this)
+			.BeforeDamage(async () =>
+			{
+				if (targets.Count == 0)
+					return;
+
+				var beam = DoorMonsterHyperbeamVfx.CreateBeam(Creature, targets[0]);
+				if (beam != null)
+				{
+					NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(beam);
+					TaskHelper.RunSafely(RestartIdleAfterHyperbeam());
+					await Cmd.Wait(NHyperbeamVfx.hyperbeamAnticipationDuration);
+				}
+
+				foreach (Creature target in targets)
+				{
+					var impact = DoorMonsterHyperbeamVfx.CreateImpact(Creature, target);
+					if (impact != null)
+						NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(impact);
+				}
+			})
+			.Execute(null);
+	}
+
+	private async Task RestartIdleAfterHyperbeam()
+	{
+		await Cmd.Wait(DoorMonsterHyperbeamVfx.Duration);
+		if (NCombatRoom.Instance?.GetCreatureNode(Creature)?.Visuals is DoorMonsterVisuals visuals)
+			visuals.RestartIdleAnimation();
 	}
 }

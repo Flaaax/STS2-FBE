@@ -60,6 +60,17 @@ public partial class DoorMonsterVisuals : NCreatureVisuals
 		Sprite.Play(IdleAnimationName);
 	}
 
+	/// <summary>
+	/// Restarts the idle sequence from its first frame without rebuilding its visual nodes.
+	/// </summary>
+	public void RestartIdleAnimation()
+	{
+		Sprite.Stop();
+		Sprite.Frame = 0;
+		Sprite.FrameProgress = 0f;
+		Sprite.Play(IdleAnimationName);
+	}
+
 	private void EnsureCreatureVisualNodes()
 	{
 		var visuals = new Node2D
