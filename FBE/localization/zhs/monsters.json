@@ -2,6 +2,10 @@
 	"FBE_MONSTER_DARK_BUM_MONSTER.name": "黑暗乞丐",
 	"FBE_MONSTER_DARK_BUM_MONSTER.moves.NOTHING.title": "无",
 	"FBE_MONSTER_DOOR_MONSTER.name": "门",
-	"FBE_MONSTER_DOOR_MONSTER.moves.PLACEHOLDER_STRIKE.title": "占位打击",
-	"FBE_MONSTER_DOOR_MONSTER.moves.PLACEHOLDER_STRIKE.banter": "我饥饿。"
+	"FBE_MONSTER_DOOR_MONSTER.moves.OPEN_DOOR.title": "开门见山",
+	"FBE_MONSTER_DOOR_MONSTER.moves.OPEN_DOOR.banter": "我饥饿，我细看，我紧握。",
+	"FBE_MONSTER_DOOR_MONSTER.moves.EMPOWER.title": "强化",
+	"FBE_MONSTER_DOOR_MONSTER.moves.WHISPER.title": "低语",
+	"FBE_MONSTER_DOOR_MONSTER.moves.WHISPER.banter": "门都没有",
+	"FBE_MONSTER_DOOR_MONSTER.moves.EYES_OPEN.title": "睁眼"
 }

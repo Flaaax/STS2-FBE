@@ -163,8 +163,10 @@ class DarkBum : FBERelicModel
 	{
 		if (card.Owner != Owner || UsedThisTurn)
 		{
-			cardLocation.pileType = PileType.Exhaust;
+			return cardLocation;
 		}
+
+		cardLocation.pileType = PileType.Exhaust;
 
 		return cardLocation;
 	}
