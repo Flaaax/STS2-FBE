@@ -39,6 +39,7 @@ public class TaintedCain : ModAncientEventTemplate
 	[
 		CreateModRelicOption<DarkBum>(),
 		CreateModRelicOption<AnarchistCookbook>(),
+		CreateModRelicOption<Clicker>(),
 	];
 
 	private IReadOnlyList<EventOption> Pool2 =>
@@ -49,7 +50,8 @@ public class TaintedCain : ModAncientEventTemplate
 	// 带权重池三。权重越大越有机会生成。当然你也可以写自定义的列表生成函数
 	private IReadOnlyList<EventOption> Pool3 =>
 	[
-		CreateModRelicOption<LordsParasol>()
+		CreateModRelicOption<LordsParasol>(),
+		CreateModRelicOption<PackagingBox>(),
 	];
 
 	// 所有可能的选项

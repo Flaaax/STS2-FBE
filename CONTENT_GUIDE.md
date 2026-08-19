@@ -15,6 +15,7 @@
 - FBE 自带音效优先使用现有的 `FBE.Scripts.Utils.AudioHelper`：短音效调用 `AudioHelper.Play("res://FBE/audio/example.ogg")`，循环音效调用 `AudioHelper.PlayLoop(...)`，结束循环时调用 `AudioHelper.StopLoop(...)`。
 - 所有内容必须支持联机。涉及随机数、玩家选择、状态修改和异步命令时，应使用游戏提供的同步上下文、RNG 与命令系统，谨慎处理联机同步。
 - 对于 `CanonicalVars`，一般整数变量优先使用 `IntVar`，不要无理由使用基础 `DynamicVar`。
+- 尽量将数值放到CanonicalVars，例如造成`4`点伤害，抽`2`张牌
 - 在继承原版、RitsuLib 或 FBE 类型时，不要无意间声明与基类成员同名的字段、常量、属性或方法。优先换成不会冲突的名称；确实需要隐藏基类成员时，必须显式添加 `new`，避免产生 CS0108 警告。
 
 ## 遗物

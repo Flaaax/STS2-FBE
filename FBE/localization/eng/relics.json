@@ -32,5 +32,12 @@
   "FBE_RELIC_STARTER_DECK.flavor": "[blue]Everything you need is right here.[/blue]",
   "FBE_RELIC_STARTER_DECK.selectionScreenPrompt": "Choose {Required} card bundles",
   "FBE_RELIC_STARTER_DECK.previewAddPrompt": "Confirm to select this card bundle",
-  "FBE_RELIC_STARTER_DECK.previewRemovePrompt": "Confirm to deselect this card bundle"
+  "FBE_RELIC_STARTER_DECK.previewRemovePrompt": "Confirm to deselect this card bundle",
+  "FBE_RELIC_PACKAGING_BOX.title": "Packaging Box",
+  "FBE_RELIC_PACKAGING_BOX.description": "Upon pickup, choose up to [blue]{Cards}[/blue] cards from your [gold]Deck[/gold] to pack into a [gold]Packaging Box[/gold], then add it to your Deck.",
+  "FBE_RELIC_PACKAGING_BOX.flavor": "[blue]Nothing is too large to pack.[/blue]",
+  "FBE_RELIC_PACKAGING_BOX.selectionScreenPrompt": "Choose up to {MaxCount} cards to pack into the Packaging Box",
+  "FBE_RELIC_CLICKER.title": "Clicker",
+  "FBE_RELIC_CLICKER.description": "At the start of combat, add [blue]{Cards}[/blue] random [gold]Form[/gold] cards to your [gold]Hand[/gold]. They cost [blue]1[/blue] less and gain [gold]Ethereal[/gold].",
+  "FBE_RELIC_CLICKER.flavor": "[blue]Click.[/blue]"
 }
