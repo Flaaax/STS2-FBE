@@ -1,3 +1,4 @@
+using FBECore.Scripts.Keywords;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -17,7 +18,11 @@ public sealed class Scrutiny() : FBECardModel(1, CardType.Status, CardRarity.Sta
     public override bool CanBeGeneratedInCombat => false;
     public override bool CanBeGeneratedByModifiers => false;
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+    [
+        CardKeyword.Ethereal,
+        FBECoreKeywords.WhileInHand,
+    ];
 
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
@@ -27,7 +32,7 @@ public sealed class Scrutiny() : FBECardModel(1, CardType.Status, CardRarity.Sta
             return;
         }
 
-        var scrutiny = CombatState!.CreateCard<Scrutiny>(Owner);
+        var scrutiny = CreateClone();
         var result = await CardPileCmd.AddGeneratedCardToCombat(scrutiny, PileType.Draw, Owner,
             CardPilePosition.Random);
         CardCmd.PreviewCardPileAdd(result);

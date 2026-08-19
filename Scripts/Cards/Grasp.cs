@@ -1,3 +1,4 @@
+using FBECore.Scripts.Keywords;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,20 +12,24 @@ namespace FBE.Scripts.Cards;
 [STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(StatusCardPool))]
 public sealed class Grasp() : FBECardModel(1, CardType.Status, CardRarity.Status, TargetType.None)
 {
-    public override int MaxUpgradeLevel => 0;
+	public override int MaxUpgradeLevel => 0;
 
-    public override bool CanBeGeneratedInCombat => false;
-    public override bool CanBeGeneratedByModifiers => false;
+	public override bool CanBeGeneratedInCombat => false;
+	public override bool CanBeGeneratedByModifiers => false;
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
+	public override IEnumerable<CardKeyword> CanonicalKeywords =>
+	[
+		CardKeyword.Ethereal,
+		FBECoreKeywords.WhileInHand
+	];
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        if (Pile?.Type != PileType.Hand || cardPlay.Card.Owner != Owner)
-        {
-            return;
-        }
+	public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	{
+		if (Pile?.Type != PileType.Hand || cardPlay.Card.Owner != Owner)
+		{
+			return;
+		}
 
-        await PlayerCmd.LoseEnergy(1, Owner);
-    }
+		await PlayerCmd.LoseEnergy(1, Owner);
+	}
 }

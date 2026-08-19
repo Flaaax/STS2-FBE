@@ -15,6 +15,7 @@
 
         <!-- 本机缓存的不同游戏版本 DLL 根目录 -->
         <Sts2BinaryRoot>E:\STS\STS2\STS2 binary</Sts2BinaryRoot>
+        <FBECoreDependencyRoot Condition="'$(FBECoreDependencyRoot)' == ''">E:\STS\STS2\Dependencies\FBECore</FBECoreDependencyRoot>
 
         <!-- FBE 支持的两个版本通道。条件编译只区分通道，而非具体版本号。 -->
         <Sts2LatestVersion>0.107.1</Sts2LatestVersion>
@@ -28,6 +29,7 @@
 
         <!-- 编译引用目录 -->
         <Sts2DataDir>$(Sts2BinaryRoot)\$(Sts2GameVersion)\data_sts2_windows_x86_64</Sts2DataDir>
+        <FBECoreRuntimePath>$(FBECoreDependencyRoot)\runtimes\$(Sts2GameVersion)\FBECore.Runtime.dll</FBECoreRuntimePath>
 
         <!-- 游戏 mods 目录。新的打包流程会直接输出到这里。 -->
         <ModDeployDir>$(Sts2Dir)\mods\$(MSBuildProjectName)</ModDeployDir>
@@ -103,6 +105,11 @@
             <Private>false</Private>
         </Reference>
 
+        <Reference Include="FBECore.Runtime">
+            <HintPath>$(FBECoreRuntimePath)</HintPath>
+            <Private>false</Private>
+        </Reference>
+
         <!-- RitsuLib 的主包只跟随最高游戏 API；旧游戏版本使用对应的 Compat 包。 -->
         <PackageReference Include="STS2.RitsuLib"
                           Version="0.5.12"
@@ -132,6 +139,13 @@
         <Content Include="FBE\scenes\TaintedCain.tscn"/>
     </ItemGroup>
     -->
+
+    <Target Name="CheckFBECoreRuntimeReference"
+            BeforeTargets="ResolveAssemblyReferences"
+            Condition="'$(DesignTimeBuild)' != 'true'">
+        <Error Condition="!Exists('$(FBECoreRuntimePath)')"
+               Text="找不到 FBECore Runtime：$(FBECoreRuntimePath)。请先构建对应 STS2 版本的 FBECore，使其发布到 E:\STS\STS2\Dependencies\FBECore。"/>
+    </Target>
 
     <Target Name="CheckProcessBeforeBuild"
             BeforeTargets="PrepareForBuild"

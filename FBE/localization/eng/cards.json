@@ -47,7 +47,7 @@
   "FBE_CARD_HUNGER.title": "Hunger",
   "FBE_CARD_HUNGER.description": "While this is in your [gold]Hand[/gold], all your cards gain [gold]Exhaust[/gold].",
   "FBE_CARD_SCRUTINY.title": "Scrutiny",
-  "FBE_CARD_SCRUTINY.description": "While this is in your [gold]Hand[/gold], whenever you draw a card during your turn, add a [gold]Scrutiny[/gold] to your [gold]Draw Pile[/gold].",
+  "FBE_CARD_SCRUTINY.description": "[gold]While in Hand[/gold], whenever you draw a card during your turn, copy this card into your [gold]Draw Pile[/gold].",
   "FBE_CARD_GRASP.title": "Grasp",
   "FBE_CARD_GRASP.description": "While this is in your [gold]Hand[/gold], whenever you play a card, lose 1 Energy.",
   "FBE_CARD_THE_D6_CHOICE_CARD.description": "Change [gold]{property}[/gold] to a value from {MinRange} to {MaxRange}.\nCurrent: [blue]{value}[/blue]",
