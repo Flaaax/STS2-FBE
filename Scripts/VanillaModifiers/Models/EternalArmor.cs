@@ -16,7 +16,7 @@ internal static class PatchEternalArmor
 
     private static void Postfix(EternalArmor __instance)
     {
-        __instance.DynamicVars["PlatingPower"].BaseValue = 10m;
+        //__instance.DynamicVars["PlatingPower"].BaseValue = 10m;
         TypeBackingField?.SetValue(__instance, CardType.Skill);
     }
 }

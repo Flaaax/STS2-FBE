@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace FBE.Scripts.Cards;
 
 [STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(IroncladCardPool))]
-public class HaDouKen() : FBECardModel(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+public class HaDouKen() : FBECardModel(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars =>
 	[

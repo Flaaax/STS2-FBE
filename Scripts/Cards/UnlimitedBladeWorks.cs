@@ -1,3 +1,4 @@
+using FBE.Scripts.Enchantments;
 using FBE.Scripts.Powers;
 using FBE.Scripts.Utils;
 using MegaCrit.Sts2.Core.Commands;
@@ -5,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Cards;
 
@@ -21,7 +23,18 @@ public class UnlimitedBladeWorks() : FBECardModel(1, CardType.Power, CardRarity.
     ];
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromForge()
-        .Concat(HoverTipFactory.FromCardWithCardHoverTips<SovereignBlade>());
+        .Concat(GetAffectedSovereignBladeHoverTips());
+
+    private IEnumerable<IHoverTip> GetAffectedSovereignBladeHoverTips()
+    {
+        var sovereignBlade = (SovereignBlade)ModelDb.Card<SovereignBlade>().ToMutable();
+        var amount = DynamicVars["power"].BaseValue;
+
+        sovereignBlade.SetRepeats(amount);
+        CardCmd.Enchant<UbwEnchantment>(sovereignBlade, amount);
+
+        return [HoverTipFactory.FromCard(sovereignBlade), .. sovereignBlade.HoverTips];
+    }
 
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

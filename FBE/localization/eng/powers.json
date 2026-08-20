@@ -1,6 +1,6 @@
 {
   "FBE_POWER_RAINBOW_POWER.title": "Rainbow",
-  "FBE_POWER_RAINBOW_POWER.description": "At the start of your turn, lose 1 Orb Slot.",
+  "FBE_POWER_RAINBOW_POWER.smartDescription": "At the start of each of your next [blue]{Amount}[/blue] turns, lose 1 Orb Slot.",
   "FBE_POWER_COOLANT_POWER.title": "Coolant",
   "FBE_POWER_COOLANT_POWER.description": "At the start of your turn, [gold]Channel[/gold] 1 [gold]Frost[/gold].",
   "FBE_POWER_KEEPING_A_HAND_POWER.title": "Ace Up the Sleeve",
@@ -11,7 +11,7 @@
   "ENRAGE_POWER.smartDescription": "Whenever you play a Skill, there is a [blue]1/{PlayerCount}[/blue] chance to gain [blue]{Amount}[/blue] [gold]Strength[/gold].",
   "ENRAGE_POWER.title": "Enrage",
   "FBE_POWER_UNLIMITED_BLADE_WORKS_POWER.title": "Unlimited Blade Works",
-  "FBE_POWER_UNLIMITED_BLADE_WORKS_POWER.smartDescription": "[gold]Sovereign Blade[/gold] hits [blue]{Amount}[/blue] times. Its total damage is unchanged.",
+  "FBE_POWER_UNLIMITED_BLADE_WORKS_POWER.smartDescription": "[gold]Sovereign Blade[/gold] deals [red]1/{Amount}[/red] of its normal damage, but hits [blue]{Amount}[/blue] times.",
   "FBE_POWER_SWORD_SAGE_POWER2.title": "Sword Sage",
   "FBE_POWER_SWORD_SAGE_POWER2.smartDescription": "[gold]Sovereign Blade[/gold] gains [gold]Replay[/gold] [blue]{Amount}[/blue].",
   "FBE_POWER_REPATRIATE_POWER.title": "Repatriator",
