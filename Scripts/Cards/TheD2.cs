@@ -6,16 +6,21 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace FBE.Scripts.Cards;
 
-[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(EventCardPool))]
-public class TheD20() : FBECardModel(1, CardType.Skill, CardRarity.Ancient, TargetType.None)
+[STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(ColorlessCardPool))]
+public class TheD2() : FBECardModel(1, CardType.Skill, CardRarity.Uncommon, TargetType.None)
 {
 	private readonly TheD6Base _myBase = new();
+
+	public override IEnumerable<CardKeyword> CanonicalKeywords =>
+	[
+		CardKeyword.Exhaust
+	];
 
 	protected override IEnumerable<DynamicVar> CanonicalVars =>
 	[
 		//new IntVar("Selections", 2),
-		new IntVar("MinRange", 1),
-		new IntVar("MaxRange", 20)
+		new IntVar("MinRange", 0),
+		new IntVar("MaxRange", 1)
 	];
 
 	// name, value, modifier

@@ -1,12 +1,12 @@
 using System.Reflection;
+using FBE.Scripts.Cards;
 using FBE.Scripts.Config;
+using FBE.Scripts.Relics;
+using FBECore.Scripts.HoverTips;
 using HarmonyLib;
-using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
-using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
-using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using STS2RitsuLib;
 using STS2RitsuLib.Interop;
@@ -48,6 +48,7 @@ public class Entry
 		// RitsuLib 注册器
 		var assembly = Assembly.GetExecutingAssembly();
 		AssociateRuntimeAssemblyWithMod(assembly);
+		RegisterCardCarouselPreviews();
 
 		RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Log);
 		// 自动注册内容
@@ -59,6 +60,23 @@ public class Entry
 		// 使得tscn可以加载自定义脚本
 		//ScriptManagerBridge.LookupScriptsInAssembly(typeof(Entry).Assembly);
 		Log.Info("Mod initialized!");
+	}
+
+	private static void RegisterCardCarouselPreviews()
+	{
+		CardCarouselPreview.RegisterForModel<PackagingBoxCard>(
+			box => box.StoredCards,
+			new CardCarouselPreviewOptions
+			{
+				ShowInCompendium = false
+			});
+
+		CardCarouselPreview.RegisterForModel<Clicker>(
+			clicker => clicker.GetFormCardPreviews(),
+			new CardCarouselPreviewOptions
+			{
+				ShowInCompendium = true
+			});
 	}
 
 	private static void AssociateRuntimeAssemblyWithMod(Assembly assembly)

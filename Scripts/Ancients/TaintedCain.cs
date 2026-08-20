@@ -39,12 +39,12 @@ public class TaintedCain : ModAncientEventTemplate
 	[
 		CreateModRelicOption<DarkBum>(),
 		CreateModRelicOption<AnarchistCookbook>(),
-		CreateModRelicOption<Clicker>(),
 	];
 
 	private IReadOnlyList<EventOption> Pool2 =>
 	[
 		CreateModRelicOption<StarterDeck>(),
+		CreateModRelicOption<Clicker>(),
 	];
 
 	// 带权重池三。权重越大越有机会生成。当然你也可以写自定义的列表生成函数
@@ -52,6 +52,7 @@ public class TaintedCain : ModAncientEventTemplate
 	[
 		CreateModRelicOption<LordsParasol>(),
 		CreateModRelicOption<PackagingBox>(),
+		CreateModRelicOption<DiceBag>(),
 	];
 
 	// 所有可能的选项
@@ -70,5 +71,9 @@ public class TaintedCain : ModAncientEventTemplate
 	}
 
 	// 出现条件
-	public override bool IsValidForAct(ActModel act) => act.Index == 1;
+	public override bool IsValidForAct(ActModel act)
+	{
+		// return act.Index == 1;
+		return true;
+	}
 }

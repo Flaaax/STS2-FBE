@@ -74,6 +74,7 @@ class DarkBum : FBERelicModel
 		return Task.CompletedTask;
 	}
 
+	// 保留随机奖励池，方便以后恢复 Dark Bum 的随机奖励效果。
 	private List<(Func<PlayerChoiceContext, Task> Effect, decimal Weight)> Effects =>
 	[
 		(_ => PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner), 15m),
@@ -200,15 +201,13 @@ class DarkBum : FBERelicModel
 
 		UsedThisTurn = true;
 
-		var effect = Effects.NextItem(Owner.RunState.Rng.CombatOrbGeneration);
-
 		Flash();
 
 		await Cmd.Wait(0.25f);
 
 		PlayPetRelicTriggerFx();
 
-		await effect(choiceContext);
+		await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
 	}
 
 	private void PlayPetRelicTriggerFx()

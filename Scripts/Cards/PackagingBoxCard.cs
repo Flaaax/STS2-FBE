@@ -89,7 +89,7 @@ public sealed class PackagingBoxCard() : FBECardModel(1, CardType.Skill, CardRar
 	protected override void AddExtraArgsToDescription(LocString description)
 	{
 		var cardTitleSeparator = new LocString("cards", "FBE_CARD_PACKAGING_BOX_CARD.separator")
-			.GetFormattedText() ?? ",";
+			.GetFormattedText();
 		var storedCardTitles = _storedCards
 			.Select(card => card.Id is { } id ? "[gold]" + SaveUtil.CardOrDeprecated(id).Title + "[/gold]" : null)
 			.OfType<string>();

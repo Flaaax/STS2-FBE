@@ -148,7 +148,7 @@
     </Target>
 
     <Target Name="CheckProcessBeforeBuild"
-            BeforeTargets="PrepareForBuild"
+            BeforeTargets="PrepareForBuild;CurrentVersion;AllVersion"
             Condition="'$(DesignTimeBuild)' != 'true' and '$(IsInnerGodotExport)' != 'true'">
         <Exec
                 Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;if (Get-Process -Name '$(BlockBuildIfProcessRunning)' -ErrorAction SilentlyContinue) { exit 1 } else { exit 0 }&quot;"

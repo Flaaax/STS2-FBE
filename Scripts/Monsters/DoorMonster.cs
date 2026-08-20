@@ -38,13 +38,13 @@ public class DoorMonster : ModMonsterTemplate
 		new("monsters", "FBE_MONSTER_DOOR_MONSTER.moves.WHISPER.banter");
 
 	public override int MinInitialHp =>
-		AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 200, 190);
+		AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 240, 210);
 
 	public override int MaxInitialHp =>
 		AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 200, 190);
 
 	private int OpenDoorDamage =>
-		AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 17, 15);
+		AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 21, 17);
 
 	private int EmpowerStrength =>
 		AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 4);

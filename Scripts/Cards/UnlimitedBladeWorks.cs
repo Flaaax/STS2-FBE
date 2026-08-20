@@ -34,8 +34,8 @@ public class UnlimitedBladeWorks() : FBECardModel(1, CardType.Power, CardRarity.
 
     protected override void OnUpgrade()
     {
-        DynamicVars["power"].UpgradeValueBy(4m);
-        DynamicVars["power2"].UpgradeValueBy(4m);
+        DynamicVars["power"].UpgradeValueBy(2m);
+        DynamicVars["power2"].UpgradeValueBy(2m);
         DynamicVars.Forge.UpgradeValueBy(3m);
     }
 }

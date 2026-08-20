@@ -1,8 +1,10 @@
+using FBECore.Scripts.Multiplayer;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
@@ -10,6 +12,9 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
+using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace FBE.Scripts.Relics;
 
@@ -48,9 +53,10 @@ public sealed class Clicker : FBERelicModel
 			return;
 		}
 
+		var candidates = await GetAuthoritativeFormCards();
 		var cards = CardFactory.GetDistinctForCombat(
 			Owner,
-			CachedFormCards,
+			candidates.Select(GetCanonicalCandidate),
 			DynamicVars.Cards.IntValue,
 			Owner.RunState.Rng.CombatCardGeneration).ToList();
 
@@ -67,6 +73,16 @@ public sealed class Clicker : FBERelicModel
 
 		Flash();
 		await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Hand, Owner);
+	}
+
+	private static CardModel GetCanonicalCandidate(SerializableCard candidate)
+	{
+		if (candidate.Id is not { } id)
+		{
+			throw new InvalidOperationException("Clicker received a card candidate without an id.");
+		}
+
+		return ModelDb.GetById<CardModel>(id);
 	}
 
 	private static IReadOnlyList<CardModel> CachedFormCards
@@ -87,6 +103,45 @@ public sealed class Clicker : FBERelicModel
 				return cards;
 			}
 		}
+	}
+
+	/// <summary>
+	/// Returns snapshots of every card that this relic can generate in the current language.
+	/// The underlying candidate list is shared with combat generation and cached per language.
+	/// </summary>
+	internal IEnumerable<SerializableCard> GetFormCardPreviews()
+	{
+		return CachedFormCards.Select(card => card.ToMutable().ToSerializable());
+	}
+
+	private async Task<IReadOnlyList<SerializableCard>> GetAuthoritativeFormCards()
+	{
+		var runManager = RunManager.Instance;
+		var actionId = runManager.ActionExecutor.CurrentlyRunningAction?.Id;
+		if (runManager.NetService.Type is not NetGameType.Singleplayer and not NetGameType.Replay &&
+		    actionId is null)
+		{
+			throw new InvalidOperationException(
+				"Clicker requires a synchronized game action id in multiplayer.");
+		}
+
+		var relicIndex = Owner.Relics.IndexOf(this);
+		if (relicIndex < 0)
+			throw new InvalidOperationException("Clicker must be in its owner's relic inventory before it generates cards.");
+
+		var key = new CardCandidateSyncKey(
+			"FBE.Clicker.v1",
+			Owner.NetId,
+			actionId ?? 0,
+			(uint)relicIndex,
+			0,
+			Owner.RunState.RunLocation);
+		return await AuthoritativeCardCandidateSync.GetCandidates(
+			CardCandidateAuthority.Host,
+			key,
+			() => CachedFormCards
+				.Select(card => card.ToMutable().ToSerializable())
+				.ToList());
 	}
 
 	private static IReadOnlyList<CardModel> FindFormCards(string language)

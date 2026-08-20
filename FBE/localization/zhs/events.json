@@ -2,7 +2,7 @@
 	"FBE_EVENT_ECHOES_OF_TIME.title": "时间的回响",
 	"FBE_EVENT_ECHOES_OF_TIME.pages.INITIAL.description": "你盘腿坐在石板上。\n火光在地面和墙壁上跳动，映出[purple]斑驳的石纹[/purple]和[green]幽光闪烁的符文[/green]。\n\n在这样的静谧中，你意识到自己的记忆开始模糊————\n自踏入这座塔以来，你已经攀爬了多久？\n[sine]在涅奥的轮回下，你又[red]复活[/red]了多少次？[/sine]\n\n也许，这是唯一一次机会，让你[gold]思考[/gold]这一切。",
 	"FBE_EVENT_ECHOES_OF_TIME.pages.INITIAL.options.TRY_TO_RECALL.title": "努力回想",
-	"FBE_EVENT_ECHOES_OF_TIME.pages.INITIAL.options.TRY_TO_RECALL.description": "被诅咒——[red]岁月[/red]。获得[blue]{RelicTitle}[/blue]。",
+	"FBE_EVENT_ECHOES_OF_TIME.pages.INITIAL.options.TRY_TO_RECALL.description": "被诅咒：[purple]岁月[/purple]。获得[gold]{RelicTitle}[/gold]。",
 	"FBE_EVENT_ECHOES_OF_TIME.pages.INITIAL.options.STOP_THINKING.title": "放弃思考",
 	"FBE_EVENT_ECHOES_OF_TIME.pages.INITIAL.options.STOP_THINKING.description": "从你的[gold]牌组[/gold]中移除[blue]{CardDeleteCount}[/blue]张牌。",
 	"FBE_EVENT_ECHOES_OF_TIME.pages.TRY_TO_RECALL_CHOSEN.description": "你闭紧眼睛，任由意识下沉。\n记忆的浪潮汹涌地[purple]摧残[/purple]你的心智，像某种[red][sine]古老的诅咒[/sine][/red]在蔓延。\n\n同时，一股[sine][gold]神秘的力量[/gold][/sine]流过你的意识，你感到塔中沉眠已久的[blue]灵魂[/blue]正在涌入。",

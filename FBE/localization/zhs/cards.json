@@ -14,7 +14,8 @@
 	"FBE_CARD_DEAD_TISSUE.title": "死体组织",
 	"FBE_CARD_DEAD_TISSUE.description": "[gold]奥斯提[/gold]造成{OstyDamage:diff()}点伤害。\n[gold]召唤[/gold]{Summon:diff()}。",
 	"FBE_CARD_UNLIMITED_BLADE_WORKS.title": "无限剑制",
-	"FBE_CARD_UNLIMITED_BLADE_WORKS.description": "[gold]君王之剑[/gold]能命中{power:diff()}次，总伤害不变。\n[gold]铸造[/gold]{Forge:diff()}。",
+	//"FBE_CARD_UNLIMITED_BLADE_WORKS.description": "[gold]君王之剑[/gold]能命中{power:diff()}次，总伤害不变。\n[gold]铸造[/gold]{Forge:diff()}。",
+	"FBE_CARD_UNLIMITED_BLADE_WORKS.description": "[gold]君王之剑[/gold]的伤害变为原来的[blue]1/{power:diff()}[/blue]，但造成[blue]{power:diff()}[/blue]次伤害。\n[gold]铸造[/gold]{Forge:diff()}。",
 	"SWORD_SAGE.description": "[gold]君王之剑[/gold]获得[gold]重放[/gold]1。",
 	"FBE_CARD_BLOOD_FEUD.title": "血债",
 	"FBE_CARD_BLOOD_FEUD.description": "[gold]奥斯提[/gold]造成{OstyDamage:diff()}点伤害。\n如果该敌人有[gold]灾厄[/gold]，则再攻击{Repeat:diff()}次。",
@@ -49,11 +50,11 @@
 	"FBE_CARD_SERUM.title": "血清",
 	"FBE_CARD_SERUM.description": "[gold]消耗[/gold][gold]手牌[/gold]中所有状态和诅咒牌，每张获得{Energy:energyIcons()}。",
 	"FBE_CARD_HUNGER.title": "饥饿",
-	"FBE_CARD_HUNGER.description": "[gold]在手[/gold]时，你的所有牌获得[gold]消耗[/gold]。",
+	"FBE_CARD_HUNGER.description": "[gold]在手时[/gold]，你的所有牌获得[gold]消耗[/gold]。",
 	"FBE_CARD_SCRUTINY.title": "细看",
-	"FBE_CARD_SCRUTINY.description": "[gold]在手[/gold]时，每当你抽牌，就将这张牌复制到你的[gold]抽牌堆[/gold]。",
+	"FBE_CARD_SCRUTINY.description": "[gold]在手时[/gold]，每当你抽牌，就将这张牌复制到你的[gold]抽牌堆[/gold]。",
 	"FBE_CARD_GRASP.title": "紧握",
-	"FBE_CARD_GRASP.description": "[gold]在手[/gold]时，你每打出一张牌就失去{energyPrefix:energyIcons(1)}。",
+	"FBE_CARD_GRASP.description": "[gold]在手时[/gold]，你每打出一张牌就失去{energyPrefix:energyIcons(1)}。",
 	//
 	"FBE_CARD_THE_D6_CHOICE_CARD.title": "变化",
 	"FBE_CARD_THE_D6_CHOICE_CARD.description": "将[gold]{property}[/gold]变为{MinRange}~{MaxRange}。\n当前：[blue]{value}[/blue]",
@@ -78,10 +79,11 @@
 	"FBE_CARD_THE_D6_CHOICE_CARD.modifier.named.Heal": "治疗",
 	"FBE_CARD_THE_D6_CHOICE_CARD.modifier.named.Gold": "金币",
 	"FBE_CARD_THE_D6_CHOICE_CARD.modifier.named.MaxHp": "最大生命",
-
 	//
 	"FBE_CARD_THE_D6.title": "六面骰",
-	"FBE_CARD_THE_D6.description": "选择一张手牌，[gold]修改[/gold]它的数值之一。",
+	"FBE_CARD_THE_D6.description": "选择一张手牌，并选择一项[gold]数值[/gold]，将它随机修改为{MinRange}到{MaxRange}。",
 	"FBE_CARD_THE_D20.title": "二十面骰",
-	"FBE_CARD_THE_D20.description": "选择一张手牌，[gold]修改[/gold]它的数值之一。"
+	"FBE_CARD_THE_D20.description": "选择一张手牌，并选择一项[gold]数值[/gold]，将它随机修改为{MinRange}到{MaxRange}。",
+	"FBE_CARD_THE_D2.title": "二面骰",
+	"FBE_CARD_THE_D2.description": "选择一张手牌，并选择一项[gold]数值[/gold]，将它随机修改为{MinRange}或{MaxRange}。"
 }
