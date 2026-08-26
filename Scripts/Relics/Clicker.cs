@@ -12,8 +12,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.RelicPools;
-using MegaCrit.Sts2.Core.Multiplayer.Game;
-using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace FBE.Scripts.Relics;
@@ -21,6 +19,8 @@ namespace FBE.Scripts.Relics;
 [STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(EventRelicPool))]
 public sealed class Clicker : FBERelicModel
 {
+	private const uint TurnStartSyncContextId = 0;
+
 	private static readonly object FormCardsLock = new();
 	private static readonly Dictionary<string, IReadOnlyList<CardModel>> FormCardsByLanguage =
 		new(StringComparer.Ordinal);
@@ -54,11 +54,11 @@ public sealed class Clicker : FBERelicModel
 		}
 
 		var candidates = await GetAuthoritativeFormCards();
-		var cards = CardFactory.GetDistinctForCombat(
-			Owner,
-			candidates.Select(GetCanonicalCandidate),
-			DynamicVars.Cards.IntValue,
-			Owner.RunState.Rng.CombatCardGeneration).ToList();
+		var cards = candidates
+			.TakeRandom(DynamicVars.Cards.IntValue, Owner.RunState.Rng.CombatCardGeneration)
+			.Select(GetCanonicalCandidate)
+			.Select(card => combatState.CreateCard(card, Owner))
+			.ToList();
 
 		if (cards.Count == 0)
 		{
@@ -116,31 +116,36 @@ public sealed class Clicker : FBERelicModel
 
 	private async Task<IReadOnlyList<SerializableCard>> GetAuthoritativeFormCards()
 	{
-		var runManager = RunManager.Instance;
-		var actionId = runManager.ActionExecutor.CurrentlyRunningAction?.Id;
-		if (runManager.NetService.Type is not NetGameType.Singleplayer and not NetGameType.Replay &&
-		    actionId is null)
-		{
-			throw new InvalidOperationException(
-				"Clicker requires a synchronized game action id in multiplayer.");
-		}
+		// AfterSideTurnStart runs from the combat turn loop rather than from an action-queue
+		// action. Always use the callback's protocol-level context id so ambient action-queue
+		// timing cannot make different peers construct different synchronization keys.
 
 		var relicIndex = Owner.Relics.IndexOf(this);
 		if (relicIndex < 0)
-			throw new InvalidOperationException("Clicker must be in its owner's relic inventory before it generates cards.");
+		{
+			// The hook listener list is snapshotted. Another earlier listener may have
+			// removed this relic before its turn without making the combat invalid.
+			return [];
+		}
 
 		var key = new CardCandidateSyncKey(
 			"FBE.Clicker.v1",
 			Owner.NetId,
-			actionId ?? 0,
+			TurnStartSyncContextId,
 			(uint)relicIndex,
 			0,
 			Owner.RunState.RunLocation);
 		return await AuthoritativeCardCandidateSync.GetCandidates(
 			CardCandidateAuthority.Host,
 			key,
-			() => CachedFormCards
-				.Select(card => card.ToMutable().ToSerializable())
+			() => CardFactory.FilterForCombat(CachedFormCards)
+				.Where(card => card.MultiplayerConstraint switch
+				{
+					CardMultiplayerConstraint.MultiplayerOnly => Owner.RunState.Players.Count > 1,
+					CardMultiplayerConstraint.SingleplayerOnly => Owner.RunState.Players.Count == 1,
+					_ => true,
+				})
+				.Select(static card => new SerializableCard { Id = card.Id })
 				.ToList());
 	}
 
