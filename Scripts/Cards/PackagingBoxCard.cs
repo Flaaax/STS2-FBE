@@ -12,7 +12,7 @@ namespace FBE.Scripts.Cards;
 [STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(EventCardPool))]
 public sealed class PackagingBoxCard() : FBECardModel(1, CardType.Skill, CardRarity.Ancient, TargetType.None)
 {
-	private List<SerializableCard> _storedCards = [];
+	private List<SerializableCard> _storedCards = [];	// 用于动态卡牌预览
 	private List<CardModel> _combatStoredCards = [];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
@@ -20,7 +20,6 @@ public sealed class PackagingBoxCard() : FBECardModel(1, CardType.Skill, CardRar
 		CardKeyword.Retain
 	];
 
-	[SavedProperty]
 	public List<SerializableCard> StoredCards
 	{
 		get => _storedCards;
@@ -82,7 +81,10 @@ public sealed class PackagingBoxCard() : FBECardModel(1, CardType.Skill, CardRar
 	{
 		var result = base.GetResultLocationForCardPlay();
 		if (result.pileType == PileType.Discard)
+		{
 			result.pileType = PileType.Hand;
+			result.position = CardPilePosition.Top;
+		}
 
 		return result;
 	}

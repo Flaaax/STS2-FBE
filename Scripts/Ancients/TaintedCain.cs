@@ -51,7 +51,6 @@ public class TaintedCain : ModAncientEventTemplate
 	// 带权重池三。权重越大越有机会生成。当然你也可以写自定义的列表生成函数
 	private IReadOnlyList<EventOption> Pool3 =>
 	[
-		CreateModRelicOption<LordsParasol>(),
 		CreateModRelicOption<PackagingBox>(),
 		CreateModRelicOption<DiceBag>(),
 	];
