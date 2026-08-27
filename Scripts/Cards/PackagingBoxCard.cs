@@ -1,11 +1,10 @@
-using FBECore.Scripts.Keywords;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
-using MegaCrit.Sts2.Core.Saves;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace FBE.Scripts.Cards;
@@ -13,17 +12,12 @@ namespace FBE.Scripts.Cards;
 [STS2RitsuLib.Interop.AutoRegistration.RegisterCard(typeof(EventCardPool))]
 public sealed class PackagingBoxCard() : FBECardModel(1, CardType.Skill, CardRarity.Ancient, TargetType.None)
 {
-	private const bool RetainContentsOnEtherealExhaust = true;
-
 	private List<SerializableCard> _storedCards = [];
+	private List<CardModel> _combatStoredCards = [];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 	[
-		FBECoreKeywords.Afterlife,
-		FBECoreKeywords.Fleeting,
-		CardKeyword.Exhaust,
-		CardKeyword.Ethereal,
-		CardKeyword.Eternal
+		CardKeyword.Retain
 	];
 
 	[SavedProperty]
@@ -38,63 +32,73 @@ public sealed class PackagingBoxCard() : FBECardModel(1, CardType.Skill, CardRar
 		}
 	}
 
-	/// <summary>
-	/// Stores a card snapshot. The caller owns selecting and removing the source card from the deck.
-	/// </summary>
-	public void AddStoredCard(CardModel card)
+	public override Task BeforeCombatStart()
 	{
-		AssertMutable();
-		_storedCards.Add(card.ToSerializable());
+		// Contents are combat-only. This also discards any contents left by an older save.
+		_combatStoredCards.Clear();
+		StoredCards = [];
+		return Task.CompletedTask;
 	}
 
-	public override async Task AfterCardExhausted(
-		PlayerChoiceContext choiceContext,
-		CardModel card,
-		bool causedByEthereal)
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		if (card != this)
-			return;
+		var handCards = PileType.Hand.GetPile(Owner).Cards.ToList();
+		var cardsToUnpack = _combatStoredCards.ToList();
 
-		var storedCards = _storedCards.Where(card => card.Id is not null).ToList();
-		_storedCards.Clear();
-
-		var generatedCards = storedCards.Select(CardModel.FromSerializable).ToList();
-		foreach (var generatedCard in generatedCards)
+		// Stored cards deliberately have no game pile. Remove their hand nodes as well as
+		// their models from the Hand pile; RemoveFromCurrentPile alone leaves orphaned
+		// NHandCardHolder nodes and creates visible gaps in the local hand.
+		var localHand = NCombatRoom.Instance?.Ui.Hand;
+		foreach (var card in handCards)
 		{
-			CombatState!.AddCard(generatedCard, Owner);
-		}
-
-		if (RetainContentsOnEtherealExhaust && causedByEthereal)
-		{
-			foreach (var generatedCard in generatedCards)
+			var cardNode = localHand?.GetCard(card);
+			if (cardNode is not null)
 			{
-				generatedCard.GiveSingleTurnRetain();
+				localHand!.Remove(card);
+				cardNode.QueueFreeSafely();
 			}
+
+			card.RemoveFromCurrentPile();
 		}
 
-		await CardPileCmd.AddGeneratedCardsToCombat(generatedCards, PileType.Hand, Owner);
+		// Use the ordinary pile command for cards that were already in combat. In particular,
+		// do not deserialize or use AddGeneratedCardsToCombat here: neither operation should
+		// count as generating a card or trigger AfterCardGeneratedForCombat.
+		await CardPileCmd.Add(cardsToUnpack, PileType.Hand);
+
+		_combatStoredCards.Clear();
+		_combatStoredCards.AddRange(handCards);
+		StoredCards = handCards.Select(card => card.ToSerializable()).ToList();
 	}
+
+#if STS2_Stable
+	protected override PileType GetResultPileTypeForCardPlay()
+	{
+		var result = base.GetResultPileTypeForCardPlay();
+		return result == PileType.Discard ? PileType.Hand : result;
+	}
+#elif STS2_Beta
+	protected override CardLocation GetResultLocationForCardPlay()
+	{
+		var result = base.GetResultLocationForCardPlay();
+		if (result.pileType == PileType.Discard)
+			result.pileType = PileType.Hand;
+
+		return result;
+	}
+#endif
 
 	protected override void OnUpgrade()
 	{
 		EnergyCost.UpgradeBy(-1);
+		AddKeyword(CardKeyword.Innate);
 	}
 
 	protected override void DeepCloneFields()
 	{
 		base.DeepCloneFields();
 		_storedCards = _storedCards.ToList();
-	}
-
-	protected override void AddExtraArgsToDescription(LocString description)
-	{
-		var cardTitleSeparator = new LocString("cards", "FBE_CARD_PACKAGING_BOX_CARD.separator")
-			.GetFormattedText();
-		var storedCardTitles = _storedCards
-			.Select(card => card.Id is { } id ? "[gold]" + SaveUtil.CardOrDeprecated(id).Title + "[/gold]" : null)
-			.OfType<string>();
-		description.Add("StoredCardTitles", string.Join(cardTitleSeparator, storedCardTitles));
-		description.Add("HasStoredCards", _storedCards.Any(card => card.Id is not null) ? 1m : 0m);
-		description.Add("InRun", RunState is not null);
+		// A clone must never share the original box's live card objects.
+		_combatStoredCards = [];
 	}
 }

@@ -2,6 +2,7 @@ using System.Reflection;
 using FBE.Scripts.Cards;
 using FBE.Scripts.Config;
 using FBE.Scripts.Relics;
+using FBE.Scripts.Rewards;
 using FBECore.Scripts.HoverTips;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Helpers;
@@ -48,6 +49,7 @@ public class Entry
 		// RitsuLib 注册器
 		var assembly = Assembly.GetExecutingAssembly();
 		AssociateRuntimeAssemblyWithMod(assembly);
+		StarterDeckBundleReward.Register();
 		RegisterCardCarouselPreviews();
 
 		RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Log);

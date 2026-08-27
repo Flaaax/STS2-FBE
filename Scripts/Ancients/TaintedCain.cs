@@ -39,6 +39,7 @@ public class TaintedCain : ModAncientEventTemplate
 	[
 		CreateModRelicOption<DarkBum>(),
 		CreateModRelicOption<AnarchistCookbook>(),
+		CreateModRelicOption<BrokenModem>(),
 	];
 
 	private IReadOnlyList<EventOption> Pool2 =>

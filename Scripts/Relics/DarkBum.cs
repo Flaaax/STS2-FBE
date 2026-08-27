@@ -208,6 +208,7 @@ class DarkBum : FBERelicModel
 		PlayPetRelicTriggerFx();
 
 		await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
+		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
 	}
 
 	private void PlayPetRelicTriggerFx()

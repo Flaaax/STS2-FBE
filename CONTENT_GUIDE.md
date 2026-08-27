@@ -40,6 +40,7 @@ public sealed class ExampleRelic : FBERelicModel
 - 可以使用已经从 RitsuLib 源码确认的模板能力：`AssetProfile`、`RegisteredKeywordIds`、`AdditionalHoverTips` 和 `IncludeEnergyHoverTip`。不要为了使用模板而强行引入不需要的便利功能。
 - 遗物的费用、稀有度、触发时机、战斗逻辑、存档状态等核心行为，优先按照对应游戏版本的原版 `RelicModel` API 实现。
 - 只有多个 FBE 遗物确实出现稳定、项目专属的重复逻辑时，才考虑扩充 `FBERelicModel`；不要另建一次性封装。
+- 遗物的本地化需要flavor项。至少填上一些占位内容并保留此键。
 
 ## 卡牌
 
