@@ -3,7 +3,7 @@
 	"name": "Flaaax Expansion",
 	"author": "Flaaax",
 	"description": "Flaaax's Content Mod for SLS2",
-	"version": "2.3.4",
+	"version": "2.3.5",
 	"has_pck": true,
 	"has_dll": true,
 	"dependencies": [

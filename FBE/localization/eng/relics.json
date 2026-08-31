@@ -38,5 +38,8 @@
   "FBE_RELIC_PACKAGING_BOX.flavor": "Pack it up, then unpack it.",
   "FBE_RELIC_CLICKER.title": "Clicker",
   "FBE_RELIC_CLICKER.description": "At the start of combat, add [blue]{Cards}[/blue] random [gold]Form[/gold] cards to your [gold]Hand[/gold]. They gain [gold]Ethereal[/gold] and cost {energyPrefix:energyIcons(1)} less.",
-  "FBE_RELIC_CLICKER.flavor": "Want a Form? Transform yourself."
+  "FBE_RELIC_CLICKER.flavor": "Want a Form? Transform yourself.",
+  "FBE_RELIC_EDENS_BLESSING.title": "Eden's Blessing",
+  "FBE_RELIC_EDENS_BLESSING.description": "Upon pickup, add a random [gold]Colorless[/gold] card to your [gold]Deck[/gold].",
+  "FBE_RELIC_EDENS_BLESSING.flavor": "The garden was never truly closed."
 }

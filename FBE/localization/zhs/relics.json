@@ -39,5 +39,8 @@
 	"FBE_RELIC_PACKAGING_BOX.flavor": "打包再拆包",
 	"FBE_RELIC_CLICKER.title": "遥控器",
 	"FBE_RELIC_CLICKER.description": "战斗开始时，将[blue]{Cards}[/blue]张随机[gold]形态[/gold]牌加入你的[gold]手牌[/gold]。它们带有[gold]虚无[/gold]且耗能减少{energyPrefix:energyIcons(1)}。",
-	"FBE_RELIC_CLICKER.flavor": "想要哪个形态自己变"
+	"FBE_RELIC_CLICKER.flavor": "想要哪个形态自己变",
+	"FBE_RELIC_EDENS_BLESSING.title": "伊甸的祝福",
+	"FBE_RELIC_EDENS_BLESSING.description": "拾起时，将一张随机[gold]无色牌[/gold]加入你的[gold]牌组[/gold]。",
+	"FBE_RELIC_EDENS_BLESSING.flavor": "花园从未真正关闭。"
 }

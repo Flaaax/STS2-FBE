@@ -14,6 +14,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -65,12 +66,15 @@ class DarkBum : FBERelicModel
 		}
 
 		UsedThisTurn = false;
+		Status = RelicStatus.Active;
+		RefreshCardKeywordVisuals();
 		return Task.CompletedTask;
 	}
 
 	public override Task AfterCombatEnd(CombatRoom _)
 	{
 		UsedThisTurn = false;
+		Status = RelicStatus.Normal;
 		return Task.CompletedTask;
 	}
 
@@ -145,17 +149,30 @@ class DarkBum : FBERelicModel
 		if (CombatManager.Instance.IsInProgress)
 		{
 			await SummonPet();
+			Status = RelicStatus.Active;
+			RefreshCardKeywordVisuals();
 		}
 	}
 
 	public override async Task BeforeCombatStart()
 	{
 		await SummonPet();
+		Status = RelicStatus.Active;
+		RefreshCardKeywordVisuals();
 	}
 
 	private async Task SummonPet()
 	{
 		await PlayerCmd.AddPet<DarkBumMonster>(Owner);
+	}
+
+	/// <summary>
+	/// 在本回合的首次打牌前，为持有者的所有战斗卡牌显示消耗提示。
+	/// 这是战斗中的临时词条，不会覆盖卡牌本身已有的消耗词条。
+	/// </summary>
+	public override bool TryModifyKeywordsInCombat(CardModel card, ISet<CardKeyword> keywords)
+	{
+		return card.Owner == Owner && !UsedThisTurn && keywords.Add(CardKeyword.Exhaust);
 	}
 
 #if STS2_Beta
@@ -200,6 +217,8 @@ class DarkBum : FBERelicModel
 		}
 
 		UsedThisTurn = true;
+		Status = RelicStatus.Normal;
+		RefreshCardKeywordVisuals();
 
 		Flash();
 
@@ -227,5 +246,21 @@ class DarkBum : FBERelicModel
 		}
 
 		AudioHelper.Play("res://FBE/audio/thumbs up.wav", 0.8f);
+	}
+
+	/// <summary>
+	/// 临时词条由全局钩子动态计算，切换本回合状态时主动刷新可见卡牌的文本。
+	/// </summary>
+	private void RefreshCardKeywordVisuals()
+	{
+		if (!CombatManager.Instance.IsInProgress || Owner.PlayerCombatState is null)
+		{
+			return;
+		}
+
+		foreach (var card in Owner.PlayerCombatState.AllCards)
+		{
+			NCard.FindOnTable(card)?.UpdateVisuals(card.Pile!.Type, CardPreviewMode.Normal);
+		}
 	}
 }

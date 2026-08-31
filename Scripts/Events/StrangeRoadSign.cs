@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Exceptions;
 using MegaCrit.Sts2.Core.Runs;
 
 namespace FBE.Scripts.Events;
@@ -168,7 +169,7 @@ public sealed class StrangeRoadSign : FBEEventModel
 
 		var remainingCandidates = pools
 			.SelectMany(pool => pool.GetUnlockedCards(owner.UnlockState, owner.RunState.CardMultiplayerConstraint))
-			.Where(IsBlockCard)
+			.Where(IsCanonicalBlockCard)
 			.Concat(manuallyIncludedCards)
 			.DistinctBy(card => card.Id)
 			.OrderBy(card => card.Id)
@@ -195,5 +196,18 @@ public sealed class StrangeRoadSign : FBEEventModel
 		return card.Tags.Contains(CardTag.Defend) ||
 		       card.HoverTips.Any(tip => tip.Id == BlockHoverTipId) ||
 		       card.DynamicVars.Values.Any(variable => variable is BlockVar);
+	}
+
+	private bool IsCanonicalBlockCard(CardModel card)
+	{
+		try
+		{
+			return IsBlockCard(card);
+		}
+		catch (CanonicalModelException exception)
+		{
+			Entry.Log.Warn($"Skipping card {card.Id} while generating StrangeRoadSign block rewards: {exception.Message}");
+			return false;
+		}
 	}
 }
