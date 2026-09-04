@@ -204,9 +204,9 @@ public sealed class StrangeRoadSign : FBEEventModel
 		{
 			return IsBlockCard(card);
 		}
-		catch (CanonicalModelException exception)
+		catch (Exception exception)
 		{
-			Entry.Log.Warn($"Skipping card {card.Id} while generating StrangeRoadSign block rewards: {exception.Message}");
+			Entry.Log.Warn($"Skipping card {card.Id} while generating StrangeRoadSign block rewards: {exception}");
 			return false;
 		}
 	}

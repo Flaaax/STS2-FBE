@@ -3,13 +3,13 @@
 	"name": "Flaaax Expansion",
 	"author": "Flaaax",
 	"description": "Flaaax's Content Mod for SLS2",
-	"version": "2.3.5",
+	"version": "2.3.6",
 	"has_pck": true,
 	"has_dll": true,
 	"dependencies": [
 		{
 			"id": "FBECore",
-			"min_version": "0.1.5"
+			"min_version": "0.1.8"
 		},
 		{
 			"id": "STS2-RitsuLib",

@@ -1,4 +1,6 @@
 {
+	"FBE_CARD_POLISH_THE_JADE.title": "Polish the Jade",
+	"FBE_CARD_POLISH_THE_JADE.description": "Draw {Cards:diff()} [gold]Offclass[/gold] cards.",
   "FBE_CARD_YEARS.title": "Years",
   "FBE_CARD_YEARS.description": "At the start of your turn, if this is in your [gold]Hand[/gold], end your turn and gain an extra turn.",
   "FBE_CARD_INDUSTRY.title": "Industry!!!",
@@ -44,6 +46,10 @@
   "FBE_CARD_SCRUTINY.description": "[gold]While in Hand[/gold], whenever you draw a card, copy this card into your [gold]Draw Pile[/gold].",
   "FBE_CARD_GRASP.title": "Grasp",
   "FBE_CARD_GRASP.description": "[gold]While in Hand[/gold], whenever you play a card, lose {energyPrefix:energyIcons(1)}.",
+  "FBE_CARD_SWORD_OIL.title": "Sword Oil",
+  "FBE_CARD_SWORD_OIL.description": "[gold]Forge[/gold] {Forge:diff()}.",
+  "FBE_CARD_SWISS_ARMY_KNIFE.title": "Swiss Army Knife",
+  "FBE_CARD_SWISS_ARMY_KNIFE.description": "Add {Shivs:diff()} [gold]Shiv[/gold] to your [gold]Hand[/gold].\nApply {PoisonPower:diff()} [gold]Poison[/gold].\nDiscard {Discard:diff()} card.\nGain {Block:diff()} Block.\nGain {DexterityPower:diff()} temporary [gold]Dexterity[/gold].",
   "FBE_CARD_THE_D6_CHOICE_CARD.title": "Change",
   "FBE_CARD_THE_D6_CHOICE_CARD.description": "Change [gold]{property}[/gold] to a value from {MinRange} to {MaxRange}.\nCurrent: [blue]{value}[/blue]",
   "FBE_CARD_THE_D6_CHOICE_CARD.handSelectionPrompt": "Choose a card in your Hand to modify",

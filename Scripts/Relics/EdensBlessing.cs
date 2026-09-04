@@ -19,7 +19,7 @@ public sealed class EdensBlessing : FBERelicModel
 	public override async Task AfterObtained()
 	{
 		var options = CardCreationOptions.ForNonCombatWithUniformOdds(
-			[ModelDb.CardPool<ColorlessCardPool>()]);
+			[ModelDb.CardPool<ColorlessCardPool>()], static card => card.Rarity == CardRarity.Rare);
 		var card = CardFactory.CreateForReward(Owner, 1, options).First().Card;
 		CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(card, PileType.Deck));
 	}

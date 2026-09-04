@@ -26,7 +26,7 @@
 	"FBE_RELIC_DARK_BUM.flavor": "他想要你的命",
 	"FBE_RELIC_DICE_BAG.title": "骰子袋",
 	"FBE_RELIC_DICE_BAG.description": "拾起时，将一张[gold]二十面骰[/gold]加入你的[gold]牌组[/gold]。",
-	"FBE_RELIC_DICE_BAG.flavor": "命运尽在掌中。",
+	"FBE_RELIC_DICE_BAG.flavor": "重置你的命运",
 	"FBE_RELIC_ANARCHIST_COOKBOOK.title": "无政府主义者食谱",
 	"FBE_RELIC_ANARCHIST_COOKBOOK.description": "战斗开始时，获得一层[gold]乱战[/gold]，然后将一张[gold]乱战[/gold]加入你的手牌。",
 	"FBE_RELIC_ANARCHIST_COOKBOOK.flavor": "俗话说：不要让人猜到你的下一步行动",
@@ -41,6 +41,6 @@
 	"FBE_RELIC_CLICKER.description": "战斗开始时，将[blue]{Cards}[/blue]张随机[gold]形态[/gold]牌加入你的[gold]手牌[/gold]。它们带有[gold]虚无[/gold]且耗能减少{energyPrefix:energyIcons(1)}。",
 	"FBE_RELIC_CLICKER.flavor": "想要哪个形态自己变",
 	"FBE_RELIC_EDENS_BLESSING.title": "伊甸的祝福",
-	"FBE_RELIC_EDENS_BLESSING.description": "拾起时，将一张随机[gold]无色牌[/gold]加入你的[gold]牌组[/gold]。",
-	"FBE_RELIC_EDENS_BLESSING.flavor": "花园从未真正关闭。"
+	"FBE_RELIC_EDENS_BLESSING.description": "拾起时，将一张随机[gold]稀有无色牌[/gold]加入你的[gold]牌组[/gold]。",
+	"FBE_RELIC_EDENS_BLESSING.flavor": "你的未来更加光明"
 }

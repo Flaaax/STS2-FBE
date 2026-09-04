@@ -75,6 +75,13 @@ public class TheD6Base
 				i => card.EnergyCost.SetThisCombat(i)));
 		}
 
+		if ((!card.HasStarCostX) && card.BaseStarCost != 0)
+		{
+			ret.Add(("star_cost", new LocString("cards", Id + ".modifier.star_cost").GetFormattedText(),
+				card.CurrentStarCost,
+				card.SetStarCostThisCombat));
+		}
+
 		foreach (var dynVar in card.DynamicVars.Values.Where(dynVar => dynVar is not StringVar))
 		{
 			var name = dynVar.Name;
