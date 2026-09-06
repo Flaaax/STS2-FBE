@@ -44,7 +44,7 @@ public class Entry
 		_harmony = new Harmony("STS2.FBE");
 		_harmony.PatchAll();
 
-		FBEConfig.RegisterSettingsPage();
+		FBEConfig.RegisterDataStore();
 
 		// RitsuLib 注册器
 		var assembly = Assembly.GetExecutingAssembly();
@@ -55,6 +55,7 @@ public class Entry
 		RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Log);
 		// 自动注册内容
 		ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
+		FBEConfig.ScheduleContentBlacklistInitialization(assembly);
 
 #if STS2_Stable
 		RegisterSavedPropertyModels();

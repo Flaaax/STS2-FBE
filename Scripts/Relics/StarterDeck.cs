@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Rooms;
 
 namespace FBE.Scripts.Relics;
 
-[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(SharedRelicPool))]
+[STS2RitsuLib.Interop.AutoRegistration.RegisterRelic(typeof(EventRelicPool))]
 class StarterDeck : FBERelicModel
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;

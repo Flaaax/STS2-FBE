@@ -1,7 +1,19 @@
 {
   "FBE_SETTINGS_MOD_DISPLAY_NAME.title": "FBE",
   "FBE_SETTINGS_PAGE.title": "FBE Settings",
-  "FBE_SETTINGS_PLACEHOLDER_SECTION.title": "Placeholder Settings",
-  "FBE_SETTINGS_ENABLE_PLACEHOLDER_OPTION.title": "Enable Placeholder Option",
-  "FBE_SETTINGS_PLACEHOLDER_VALUE.title": "Placeholder Value"
+  "FBE_SETTINGS_CONTENT_ACTIONS.title": "Bulk Content Actions",
+  "FBE_SETTINGS_CONTENT_ACTIONS.description": "These actions save immediately and update the FBECore blacklist.",
+  "FBE_SETTINGS_CONTENT_ACTIONS_ENABLE_ALL.title": "Enable All",
+  "FBE_SETTINGS_CONTENT_ACTIONS_ENABLE_ALL.button": "Enable All",
+  "FBE_SETTINGS_CONTENT_ACTIONS_DISABLE_ALL.title": "Disable All",
+  "FBE_SETTINGS_CONTENT_ACTIONS_DISABLE_ALL.button": "Disable All",
+  "FBE_SETTINGS_CONTENT_ACTIONS_RESTORE_DEFAULTS.title": "Restore Defaults",
+  "FBE_SETTINGS_CONTENT_ACTIONS_RESTORE_DEFAULTS.button": "Restore All Enabled",
+  "FBE_SETTINGS_CONTENT_SECTION.description": "Disabled content will not appear naturally. In multiplayer, the host's settings apply.",
+  "FBE_SETTINGS_CONTENT_KIND_CARDS.title": "Cards",
+  "FBE_SETTINGS_CONTENT_KIND_RELICS.title": "Relics",
+  "FBE_SETTINGS_CONTENT_KIND_POTIONS.title": "Potions",
+  "FBE_SETTINGS_CONTENT_KIND_EVENTS.title": "Events",
+  "FBE_SETTINGS_CONTENT_KIND_ANCIENTS.title": "Ancients",
+  "FBE_SETTINGS_CONTENT_KIND_ENCOUNTERS.title": "Encounters"
 }
