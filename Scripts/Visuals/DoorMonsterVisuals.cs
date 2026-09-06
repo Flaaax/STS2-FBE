@@ -8,6 +8,7 @@ namespace FBE.Scripts.Visuals;
 /// </summary>
 public partial class DoorMonsterVisuals : NCreatureVisuals
 {
+	public Node2D VisualRoot { get; } = new();
 	public AnimatedSprite2D Sprite { get; } = new();
 
 	private const string IdleAnimationName = "idle";
@@ -73,12 +74,10 @@ public partial class DoorMonsterVisuals : NCreatureVisuals
 
 	private void EnsureCreatureVisualNodes()
 	{
-		var visuals = new Node2D
-		{
-			Name = "Visuals",
-			UniqueNameInOwner = true,
-			TextureFilter = TextureFilterEnum.Nearest
-		};
+		var visuals = VisualRoot;
+		visuals.Name = "Visuals";
+		visuals.UniqueNameInOwner = true;
+		visuals.TextureFilter = TextureFilterEnum.Nearest;
 		AddOwnedChild(visuals);
 
 		Sprite.Name = "AnimatedSprite2D";

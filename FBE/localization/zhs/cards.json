@@ -45,7 +45,7 @@
 	"FBE_CARD_HUNGER.title": "饥饿",
 	"FBE_CARD_HUNGER.description": "[gold]在手时[/gold]，你的所有牌获得[gold]消耗[/gold]。",
 	"FBE_CARD_SCRUTINY.title": "细看",
-	"FBE_CARD_SCRUTINY.description": "[gold]在手时[/gold]，每当你抽牌，就将这张牌复制到你的[gold]抽牌堆[/gold]。",
+	"FBE_CARD_SCRUTINY.description": "[gold]在手时[/gold]，每当你在回合内抽牌，就将这张牌复制到你的[gold]抽牌堆[/gold]。",
 	"FBE_CARD_GRASP.title": "紧握",
 	"FBE_CARD_GRASP.description": "[gold]在手时[/gold]，你每打出一张牌就失去{energyPrefix:energyIcons(1)}。",
 	"FBE_CARD_SWORD_OIL.title": "剑油",

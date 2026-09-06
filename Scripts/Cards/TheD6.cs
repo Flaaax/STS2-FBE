@@ -75,7 +75,7 @@ public class TheD6Base
 				i => card.EnergyCost.SetThisCombat(i)));
 		}
 
-		if ((!card.HasStarCostX) && card.BaseStarCost != 0)
+		if ((!card.HasStarCostX) && card.BaseStarCost != -1)
 		{
 			ret.Add(("star_cost", new LocString("cards", Id + ".modifier.star_cost").GetFormattedText(),
 				card.CurrentStarCost,

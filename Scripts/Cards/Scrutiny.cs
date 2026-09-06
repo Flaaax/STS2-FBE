@@ -27,7 +27,7 @@ public sealed class Scrutiny() : FBECardModel(1, CardType.Status, CardRarity.Sta
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
         if (fromHandDraw || Pile?.Type != PileType.Hand || card.Owner != Owner ||
-            card.Owner.Creature.CombatState!.CurrentSide != card.Owner.Creature.Side)
+            Owner.Creature.CombatState?.CurrentSide != Owner.Creature.Side)
         {
             return;
         }

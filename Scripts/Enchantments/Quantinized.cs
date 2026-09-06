@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace FBE.Scripts.Enchantments;
 
@@ -13,7 +14,10 @@ namespace FBE.Scripts.Enchantments;
 public class Quantinized : FBEEnchantmentModel
 {
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Transform)];
-	private CardPoolModel? _pool;
+
+	// 卡牌和附魔会在联机同步时重新创建，不能保存运行时卡池对象引用。
+	[SavedProperty]
+	public ModelId? QuantinizedOriginPoolId { get; private set; }
 
 	public override bool CanEnchant(CardModel card)
 	{
@@ -23,17 +27,27 @@ public class Quantinized : FBEEnchantmentModel
 
 	protected override void OnEnchant()
 	{
-		_pool = Card.Type != CardType.Quest &&
-		        Card.Rarity is not (CardRarity.Event or CardRarity.Ancient or CardRarity.Token)
+		// 反序列化会先恢复 SavedProperty，再调用 OnEnchant，不能覆盖已恢复的来源卡池。
+		if (QuantinizedOriginPoolId is not null)
+		{
+			return;
+		}
+
+		QuantinizedOriginPoolId = (Card.Type != CardType.Quest &&
+		                           Card.Rarity is not (CardRarity.Event or CardRarity.Ancient or CardRarity.Token)
 			? Card.Pool
-			: ModelDb.CardPool<ColorlessCardPool>();
+			: ModelDb.CardPool<ColorlessCardPool>()).Id;
 	}
 
 	private CardModel GetTransformTarget()
 	{
-		var otherPools = ModelDb.AllCharacterCardPools.Except([_pool!]);
+		var originPoolId = QuantinizedOriginPoolId ??
+		                   throw new InvalidOperationException("Quantinized card has no origin card pool.");
+		var originPool = ModelDb.GetByIdOrNull<CardPoolModel>(originPoolId) ??
+		                 throw new InvalidOperationException($"Quantinized card pool {originPoolId} no longer exists.");
+		var otherPools = ModelDb.AllCharacterCardPools.Except([originPool]);
 		var rng = Card.Owner.RunState.Rng.CombatCardSelection;
-		var targetPool = rng.NextFloat() <= 0.75 ? _pool : rng.NextItem(otherPools);
+		var targetPool = rng.NextFloat() <= 0.75 ? originPool : rng.NextItem(otherPools);
 
 		var options = targetPool?.GetUnlockedCards(Card.Owner.UnlockState, Card.RunState!.CardMultiplayerConstraint)
 			.Where(c => c.Id != Card.Id && c.IsRemovable && c.IsTransformable && c.Rarity != CardRarity.Basic) ?? [];
@@ -72,7 +86,7 @@ public class Quantinized : FBEEnchantmentModel
 				var e = CardCmd.Enchant<Quantinized>(cardAdded, 1m);
 				if (e is not null)
 				{
-					e._pool = this._pool;
+					e.QuantinizedOriginPoolId = QuantinizedOriginPoolId;
 				}
 			}
 		}

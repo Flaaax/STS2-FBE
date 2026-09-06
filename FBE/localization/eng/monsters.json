@@ -7,5 +7,15 @@
   "FBE_MONSTER_DOOR_MONSTER.moves.EMPOWER.title": "Empower",
   "FBE_MONSTER_DOOR_MONSTER.moves.WHISPER.title": "Whisper",
   "FBE_MONSTER_DOOR_MONSTER.moves.WHISPER.banter": "Not a chance.",
-  "FBE_MONSTER_DOOR_MONSTER.moves.EYES_OPEN.title": "Open Eyes"
+  "FBE_MONSTER_DOOR_MONSTER.moves.EYES_OPEN.title": "Open Eyes",
+  "FBE_MONSTER_GUILE.name": "Guile",
+  "FBE_MONSTER_GUILE.moves.SUMMON_AND_GUARD.title": "Sonic Boom",
+  "FBE_MONSTER_GUILE.moves.EMPOWER_AND_GUARD.title": "Charge Up",
+  "FBE_MONSTER_GUILE.moves.EMPOWER_AND_SUMMON.title": "Charged Sonic Boom",
+  "FBE_MONSTER_GUILE.moves.EMPOWER_AND_GUARD_AGAIN.title": "Charge Up",
+  "FBE_MONSTER_GUILE_SONIC_BOOM.moves.SONIC_BOOM_ATTACK.title": "Sonic Assault",
+  "FBE_MONSTER_GUILE.moves.STANDING_ATTACK.title": "Standing Attack",
+  "FBE_MONSTER_GUILE.moves.SOMERSAULT.title": "Somersault Kick",
+  "FBE_MONSTER_GUILE_SONIC_BOOM.name": "Guile's Sonic Boom",
+  "FBE_MONSTER_GUILE_SONIC_BOOM.moves.HOVER.title": "Hover"
 }

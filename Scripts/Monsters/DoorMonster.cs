@@ -132,7 +132,24 @@ public class DoorMonster : ModMonsterTemplate
 
 	private async Task EyesOpenMove(IReadOnlyList<Creature> targets)
 	{
-		await DamageCmd.Attack(EyesOpenDamage).WithHitCount(EyesOpenRepeat).FromMonster(this)
+		var visuals = NCombatRoom.Instance?.GetCreatureNode(Creature)?.Visuals as DoorMonsterVisuals;
+		if (visuals == null)
+		{
+			await ExecuteEyesOpenAttack();
+			return;
+		}
+
+		await SlowAttackLunge.PlayAsync(
+			visuals.VisualRoot,
+			Vector2.Right * SlowAttackLunge.DefaultRetreatDistance,
+			Vector2.Left * SlowAttackLunge.DefaultLungeDistance,
+			ExecuteEyesOpenAttack);
+	}
+
+	private Task ExecuteEyesOpenAttack()
+	{
+		return DamageCmd.Attack(EyesOpenDamage).WithHitCount(EyesOpenRepeat).FromMonster(this)
+			.WithNoAttackerAnim()
 			.OnlyPlayAnimOnce()
 			.Execute(null);
 	}

@@ -43,7 +43,7 @@
   "FBE_CARD_HUNGER.title": "Hunger",
   "FBE_CARD_HUNGER.description": "[gold]While in Hand[/gold], all your cards gain [gold]Exhaust[/gold].",
   "FBE_CARD_SCRUTINY.title": "Scrutiny",
-  "FBE_CARD_SCRUTINY.description": "[gold]While in Hand[/gold], whenever you draw a card, copy this card into your [gold]Draw Pile[/gold].",
+  "FBE_CARD_SCRUTINY.description": "[gold]While in Hand[/gold], whenever you draw a card during your turn, copy this card into your [gold]Draw Pile[/gold].",
   "FBE_CARD_GRASP.title": "Grasp",
   "FBE_CARD_GRASP.description": "[gold]While in Hand[/gold], whenever you play a card, lose {energyPrefix:energyIcons(1)}.",
   "FBE_CARD_SWORD_OIL.title": "Sword Oil",

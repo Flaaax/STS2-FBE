@@ -7,5 +7,15 @@
 	"FBE_MONSTER_DOOR_MONSTER.moves.EMPOWER.title": "强化",
 	"FBE_MONSTER_DOOR_MONSTER.moves.WHISPER.title": "低语",
 	"FBE_MONSTER_DOOR_MONSTER.moves.WHISPER.banter": "门都没有",
-	"FBE_MONSTER_DOOR_MONSTER.moves.EYES_OPEN.title": "睁眼"
+	"FBE_MONSTER_DOOR_MONSTER.moves.EYES_OPEN.title": "睁眼",
+	"FBE_MONSTER_GUILE.name": "古烈",
+	"FBE_MONSTER_GUILE.moves.SUMMON_AND_GUARD.title": "音速手刀",
+	"FBE_MONSTER_GUILE.moves.EMPOWER_AND_GUARD.title": "蓄力防御",
+	"FBE_MONSTER_GUILE.moves.EMPOWER_AND_SUMMON.title": "蓄力手刀",
+	"FBE_MONSTER_GUILE.moves.EMPOWER_AND_GUARD_AGAIN.title": "蓄力防御",
+	"FBE_MONSTER_GUILE_SONIC_BOOM.moves.SONIC_BOOM_ATTACK.title": "波动突袭",
+	"FBE_MONSTER_GUILE.moves.STANDING_ATTACK.title": "站姿攻击",
+	"FBE_MONSTER_GUILE.moves.SOMERSAULT.title": "倒挂金钩",
+	"FBE_MONSTER_GUILE_SONIC_BOOM.name": "古烈的波动",
+	"FBE_MONSTER_GUILE_SONIC_BOOM.moves.HOVER.title": "悬浮"
 }
