@@ -1,11 +1,16 @@
 using System.Reflection;
 using FBECore.Scripts.ContentBlacklist;
+using FBECore.Scripts.SettingsPreview;
+using Godot;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using STS2RitsuLib;
 using STS2RitsuLib.Data;
 using STS2RitsuLib.Settings;
+using STS2RitsuLib.Ui.Shell;
+using STS2RitsuLib.Ui.Shell.Theme;
 using STS2RitsuLib.Utils.Persistence;
 
 namespace FBE.Scripts.Config;
@@ -34,6 +39,7 @@ public static class FBEConfig
 	private static bool _contentBlacklistInitializationScheduled;
 	private static bool _blacklistInitialized;
 	private static bool _settingsPageRegistered;
+	private static bool _entryActionsReflectionFailureLogged;
 	private static long _blacklistRevision;
 
 	/// <summary>
@@ -181,11 +187,17 @@ public static class FBEConfig
 
 					foreach (var option in group.OrderBy(static option => option.Content.ContentId, StringComparer.Ordinal))
 					{
-						section.AddToggle(
-							option.SettingId,
-							ModSettingsText.LocString(option.LocalizationTable, option.LocalizationKey,
-								option.FallbackTitle),
-							CreateContentBinding(option));
+						var label = ModSettingsText.LocString(option.LocalizationTable, option.LocalizationKey,
+							option.FallbackTitle);
+						if (option.Kind is ContentBlacklistKind.Card or ContentBlacklistKind.Relic or ContentBlacklistKind.Potion)
+						{
+							section.AddCustom(option.SettingId, label,
+								host => CreateContentPreviewToggleRow(option, label, host));
+						}
+						else
+						{
+							section.AddToggle(option.SettingId, label, CreateContentBinding(option));
+						}
 					}
 				});
 			}
@@ -198,7 +210,9 @@ public static class FBEConfig
 	{
 		List<ContentOption> options = [];
 		// 事件池内容由事件或专用逻辑显式发放，通用自然生成过滤不会可靠覆盖它们。
-		AddModels(ModelDb.AllCards.Where(static card => card.Pool is not EventCardPool), ContentBlacklistKind.Card, contentAssembly, options,
+		AddModels(ModelDb.AllCards.Where(static card =>
+			card.Pool is not EventCardPool and not TokenCardPool &&
+			card.Type is not CardType.Status), ContentBlacklistKind.Card, contentAssembly, options,
 			static model => ("cards", $"{model.Id.Entry}.title"));
 		AddModels(ModelDb.AllRelics.Where(static relic => relic.Pool is not EventRelicPool), ContentBlacklistKind.Relic, contentAssembly, options,
 			static model => ("relics", $"{model.Id.Entry}.title"));
@@ -230,7 +244,115 @@ public static class FBEConfig
 		{
 			var content = new ContentBlacklistContent(kind, model.Id.Entry);
 			var (table, key) = localization(model);
-			destination.Add(new ContentOption(content, table, key, model.Id.Entry));
+			destination.Add(new ContentOption(content, table, key, model.Id.Entry, model));
+		}
+	}
+
+	/// <summary>
+	/// 创建与 RitsuLib 标准设置行一致的内容开关，并仅将右侧开关作为预览的悬浮目标。
+	/// </summary>
+	private static Control CreateContentPreviewToggleRow(
+		ContentOption option,
+		ModSettingsText labelText,
+		IModSettingsUiActionHost host)
+	{
+		var binding = CreateContentBinding(option);
+		var line = new MarginContainer
+		{
+			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+			MouseFilter = Control.MouseFilterEnum.Ignore,
+		};
+		line.AddThemeConstantOverride("margin_left", 8);
+		line.AddThemeConstantOverride("margin_top", 4);
+		line.AddThemeConstantOverride("margin_right", 8);
+		line.AddThemeConstantOverride("margin_bottom", 4);
+
+		var surface = new PanelContainer
+		{
+			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+			MouseFilter = Control.MouseFilterEnum.Ignore,
+		};
+		surface.AddThemeStyleboxOverride("panel", RitsuShellChromeStyles.CreateSurfaceStyle());
+		line.AddChild(surface);
+
+		var row = new HBoxContainer
+		{
+			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+			MouseFilter = Control.MouseFilterEnum.Ignore,
+		};
+		row.AddThemeConstantOverride("separation", 20);
+		surface.AddChild(row);
+
+		var label = new Label
+		{
+			Text = labelText.Resolve(),
+			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+			VerticalAlignment = VerticalAlignment.Center,
+			AutowrapMode = TextServer.AutowrapMode.Off,
+			TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis,
+			MouseFilter = Control.MouseFilterEnum.Ignore,
+		};
+		label.AddThemeFontOverride("font", RitsuShellTheme.Current.Font.Body);
+		label.AddThemeFontSizeOverride("font_size", RitsuShellTheme.Current.Metric.FontSize.SettingLineTitle);
+		label.AddThemeColorOverride("font_color", RitsuShellTheme.Current.Text.LabelPrimary);
+		row.AddChild(label);
+
+		var toggle = new ModSettingsToggleControl(binding.Read(), value =>
+		{
+			binding.Write(value);
+			host.MarkDirty(binding);
+			host.RequestRefresh();
+		});
+		row.AddChild(toggle);
+		var actions = CreateDefaultEntryActionsControl(host, binding);
+		if (actions is not null)
+			row.AddChild(actions);
+
+		ContentSettingsPreview.Attach(
+			toggle,
+			() => option.Model,
+			new ContentSettingsPreviewOptions
+			{
+				DiagnosticKey = $"{Entry.ModId}:{option.Content.ContentId}",
+			});
+		return line;
+	}
+
+	/// <summary>
+	/// 自定义行不能直接使用 RitsuLib 的内部标准行工厂；反射复用其操作按钮，以保持复制/粘贴菜单与普通开关一致。
+	/// </summary>
+	private static Control? CreateDefaultEntryActionsControl(
+		IModSettingsUiActionHost host,
+		ModSettingsValueBinding<FBEConfigData, bool> binding)
+	{
+		try
+		{
+			var method = typeof(ModSettingsUiFactory)
+				.GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
+				.FirstOrDefault(candidate =>
+					candidate.Name == "CreateEntryActionsButton" &&
+					candidate.IsGenericMethodDefinition &&
+					candidate.GetGenericArguments().Length == 1 &&
+					candidate.GetParameters().Length == 3);
+			if (method is null)
+				throw new MissingMethodException(typeof(ModSettingsUiFactory).FullName, "CreateEntryActionsButton");
+
+			return method.MakeGenericMethod(typeof(bool)).Invoke(null,
+			[
+				host,
+				binding,
+				ModSettingsMenuCapabilities.All,
+			]) as Control;
+		}
+		catch (Exception exception)
+		{
+			if (!_entryActionsReflectionFailureLogged)
+			{
+				_entryActionsReflectionFailureLogged = true;
+				Entry.Log.Warn($"[ContentBlacklist] Could not create the standard settings action button; preview toggle rows will omit it. {exception}");
+			}
+
+			return null;
 		}
 	}
 
@@ -357,7 +479,8 @@ public static class FBEConfig
 		ContentBlacklistContent Content,
 		string LocalizationTable,
 		string LocalizationKey,
-		string FallbackTitle)
+		string FallbackTitle,
+		AbstractModel Model)
 	{
 		public ContentBlacklistKind Kind => Content.Kind;
 		public string StorageKey => $"{Kind}:{Content.ContentId}";
