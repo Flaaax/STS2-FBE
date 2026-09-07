@@ -41,6 +41,7 @@ public static class FBEConfig
 	private static bool _settingsPageRegistered;
 	private static bool _entryActionsReflectionFailureLogged;
 	private static long _blacklistRevision;
+	private static MethodInfo? _registerRefreshMethod;
 
 	/// <summary>
 	/// 注册配置存储。必须早于读取配置或创建设置绑定。
@@ -303,6 +304,7 @@ public static class FBEConfig
 			host.MarkDirty(binding);
 			host.RequestRefresh();
 		});
+		RegisterCustomToggleRefresh(toggle, binding, host);
 		row.AddChild(toggle);
 		var actions = CreateDefaultEntryActionsControl(host, binding);
 		if (actions is not null)
@@ -316,6 +318,36 @@ public static class FBEConfig
 				DiagnosticKey = $"{Entry.ModId}:{option.Content.ContentId}",
 			});
 		return line;
+	}
+
+	/// <summary>
+	/// 为自定义预览开关注册 UI 刷新回调。批量操作通过 <see cref="IModSettingsUiActionHost.RequestRefreshAfterDataModelBatchChange"/>
+	/// 触发完整刷新，但自定义行不会自动像标准开关那样重新读取绑定值，必须显式注册。
+	/// </summary>
+	private static void RegisterCustomToggleRefresh(
+		ModSettingsToggleControl toggle,
+		ModSettingsValueBinding<FBEConfigData, bool> binding,
+		IModSettingsUiActionHost host)
+	{
+		try
+		{
+			_registerRefreshMethod ??= host.GetType().GetMethod(
+				"RegisterRefresh",
+				BindingFlags.Instance | BindingFlags.Public,
+				null,
+				[typeof(Action)],
+				null);
+
+			_registerRefreshMethod?.Invoke(host, [() =>
+			{
+				if (GodotObject.IsInstanceValid(toggle) && toggle.IsInsideTree())
+					toggle.SetValue(binding.Read());
+			}]);
+		}
+		catch (Exception exception)
+		{
+			Entry.Log.Warn($"[ContentBlacklist] Could not register custom toggle refresh callback: {exception.Message}");
+		}
 	}
 
 	/// <summary>
