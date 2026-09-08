@@ -7,7 +7,7 @@
 - `Entry.Init()` 已调用 `ModTypeDiscoveryHub.RegisterModAssembly`，用于发现 RitsuLib 内容注册注解；新增内容仍必须在具体模型类上添加对应的注册注解。
 - RitsuLib 默认把公开 Entry 规范化为 `MODID_CATEGORY_TYPENAME`。例如 FBE 的 `ExampleCard` 默认为 `FBE_CARD_EXAMPLE_CARD`，`ExampleRelic` 默认为 `FBE_RELIC_EXAMPLE_RELIC`；本地化键必须以实际公开 Entry 为词干。
 - 已经发布的内容不要仅因重命名 C# 类型而改变 Entry。需要稳定命名时，在注册注解上使用 `StableEntryStem`；除非兼容既有完整 ID，不要使用 `FullPublicEntry`，两者不能同时设置。
-- 游戏内容文本使用原生本地化表。FBE 当前的目录约定为 `FBE/localization/zhs/<table>.json` 与 `FBE/localization/eng/<table>.json`，新增内容应同时提供中英文键。不要删除本地化文件中的注释。
+- 游戏内容文本使用原生本地化表。FBE 当前的目录约定为 `FBE/localization/zhs/<table>.json` 与 `FBE/localization/eng/<table>.json`，新增内容应同时提供中英文键。不要删除本地化文件中的注释，除非用户直接要求你这么做。
 - 新增内容的英文名称应保持简短，优先使用能准确表达概念的短名称，不要把完整中文名逐词扩写成冗长英文。
 - 自定义资源放在 `FBE/images/`、`FBE/audio/` 等 PCK 资源目录中，代码使用 `res://FBE/...` 路径。只填写实际需要覆盖的资源，未覆盖部分保留原版行为。
 - 如果不确定某项 RitsuLib API 是否存在、在两个目标版本间是否兼容，先检查项目实际引用的包版本、本地 RitsuLib 源码及 `STS2 source/` 的 `0.107.1`、`0.111.0` 分支；无法确认时退回原版模型能力，并用 `STS2_Stable` / `STS2_Beta` 隔离 ABI 差异。

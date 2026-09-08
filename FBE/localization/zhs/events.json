@@ -7,25 +7,6 @@
 	"FBE_EVENT_ECHOES_OF_TIME.pages.INITIAL.options.STOP_THINKING.description": "从你的[gold]牌组[/gold]中移除[blue]{CardDeleteCount}[/blue]张牌。",
 	"FBE_EVENT_ECHOES_OF_TIME.pages.TRY_TO_RECALL_CHOSEN.description": "你闭紧眼睛，任由意识下沉。\n记忆的浪潮汹涌地[purple]摧残[/purple]你的心智，像某种[red][sine]古老的诅咒[/sine][/red]在蔓延。\n\n同时，一股[sine][gold]神秘的力量[/gold][/sine]流过你的意识，你感到塔中沉眠已久的[blue]灵魂[/blue]正在涌入。",
 	"FBE_EVENT_ECHOES_OF_TIME.pages.STOP_THINKING_CHOSEN.description": "你摇了摇头，把纷乱的念头抛在脑后。\n脑海渐渐平静，祠堂中潜伏的暗影慢慢退去。\n\n只要继续前行，这些问题终有一天会得到[gold]答案[/gold][sine]…或许吧。[/sine]",
-	// 此事件不会进入正式版，无需翻译
-	//  "FBE_EVENT_TEST_EVENT.title": "与戈多相遇",
-	//  // INITIAL是初始页面。这是初始页面的描述
-	//  "FBE_EVENT_TEST_EVENT.pages.INITIAL.description": "岔路口的长椅上空无一人，只有风掠过草丛。\n\n[sine]然后你看见了他。[/sine]\n\n那个小小的、蓝蓝的剪影静静坐着，像在等一封永远不会寄到的信，又像在等某个永远「快好了」的构建结束。\n\n[gold]戈多[/gold]抬起眼睛——如果那算是眼睛——语气平淡得近乎温柔：\n\n「[sine]时间还早……也还很长。你愿意先付一点代价，换一点……打发等待的东西吗？[/sine]」",
-	//  // 这是选项的标题。这个TAKE_DAMAGE是从你的函数生成的id名字。（从TakeDamage生成）
-	//  "FBE_EVENT_TEST_EVENT.pages.INITIAL.options.TAKE_DAMAGE.title": "用疼痛记住这一刻",
-	//  // 选项的描述。
-	//  "FBE_EVENT_TEST_EVENT.pages.INITIAL.options.TAKE_DAMAGE.description": "受到[red]{Damage}[/red]点伤害。",
-	//  "FBE_EVENT_TEST_EVENT.pages.INITIAL.options.LOSE_GOLD.title": "留下过路费",
-	//  "FBE_EVENT_TEST_EVENT.pages.INITIAL.options.LOSE_GOLD.description": "失去[gold]{Gold}[/gold]枚金币。",
-	//  // 这是第二页。CHOOSE_TYPE是我们自己设置的。
-	//  "FBE_EVENT_TEST_EVENT.pages.CHOOSE_TYPE.description": "戈多从长椅底下摸出一个布包，又像是摸出了整个宇宙的耐心。\n\n「[sine]可以喝点什么……也可以领几张牌。反正，[/sine]」他顿了顿，「[sine]我们哪儿也不去。[/sine]」",
-	//  "FBE_EVENT_TEST_EVENT.pages.CHOOSE_TYPE.options.CHOOSE_POTIONS.title": "接过一瓶药水",
-	//  "FBE_EVENT_TEST_EVENT.pages.CHOOSE_TYPE.options.CHOOSE_POTIONS.description": "领取药水奖励，然后与这次等待道别。",
-	//  "FBE_EVENT_TEST_EVENT.pages.CHOOSE_TYPE.options.CHOOSE_CARDS.title": "领张牌再走",
-	//  "FBE_EVENT_TEST_EVENT.pages.CHOOSE_TYPE.options.CHOOSE_CARDS.description": "领取卡牌奖励，然后与这次等待道别。",
-	//  // 结束页。POTIONS_CHOSEN也是我们设置的。
-	//  "FBE_EVENT_TEST_EVENT.pages.POTIONS_CHOSEN.description": "液体在瓶里轻轻晃荡，像远处引擎空转的节奏。\n\n[gold]戈多[/gold]把空瓶口朝你举了举，像在敬酒，又像在敬时间本身。\n\n[sine]……好了。剩下的，你自己慢慢等吧。[/sine]",
-	//  "FBE_EVENT_TEST_EVENT.pages.CARDS_CHOSEN.description": "纸牌边缘划过指缝，留下一点脆响——至少比沉默更热闹。\n\n[gold]戈多[/gold]望着你把牌收好，点点头。\n\n[sine]带走它们。路还长，别让自己……等得太安静。[/sine]",
 	  "FBE_EVENT_STRANGE_ROAD_SIGN.title": "奇怪的路标",
 	  "FBE_EVENT_STRANGE_ROAD_SIGN.pages.INITIAL.description": "你突然遇见了一个[purple]奇怪的路标[/purple]。\n\n它写着两个不同的方向：[red][sine]攻哈[/sine][/red]和[blue][sine]防哈[/sine][/blue]。\n\n这都是什么意思？是谁把它插在这的？",
 	  "FBE_EVENT_STRANGE_ROAD_SIGN.pages.INITIAL.options.GO_ATTACK.title": "攻哈",
@@ -39,8 +20,6 @@
 	  "FBE_EVENT_STRANGE_ROAD_SIGN.pages.REMOVE_SIGN_CHOSEN.description": "你拔出了[purple]路标[/purple]。有人在这里埋了[gold]钱[/gold]！\n\n但是，你觉得自己可能办了件[red]坏事[/red]。",
 	  "FBE_EVENT_STRANGE_ROAD_SIGN.pages.GO_ATTACK.selectionScreenPrompt": "选择一张牌加入你的卡组。",
 	  "FBE_EVENT_STRANGE_ROAD_SIGN.pages.GO_DEFEND.selectionScreenPrompt": "选择一张牌加入你的卡组。",
-	//
-	//
 	"FBE_EVENT_DEVIL_ROOM.title": "恶魔房",
 	"FBE_EVENT_DEVIL_ROOM.pages.INITIAL.description": "[sine]随着一声可怕的音效，一道黑色的房门矗立在你眼前。[/sine]",
 	"FBE_EVENT_DEVIL_ROOM.pages.INITIAL.options.ENTER.title": "进入",
@@ -51,11 +30,9 @@
 	"FBE_EVENT_DEVIL_ROOM.pages.ENTER.description": "房间中的货物静静陈列着。每一份[gold]馈赠[/gold]都标着不同的[red]代价[/red]。",
 	"FBE_EVENT_DEVIL_ROOM.pages.PURCHASE.description": "你似乎还能继续[red]交易[/red]。",
 	"FBE_EVENT_DEVIL_ROOM.pages.SOLD_OUT.description": "你一口气把所有的[gold]商品[/gold]都买光了。",
-	//
 	"FBE_EVENT_DEVIL_ROOM.costs.damage": "受到[red]{damage}[/red]点伤害，",
 	"FBE_EVENT_DEVIL_ROOM.costs.maxHealth": "失去[red]{maxHealth}[/red]点最大生命，",
 	"FBE_EVENT_DEVIL_ROOM.costs.curse": "被随机[purple]诅咒[/purple]，",
-	//
 	"FBE_EVENT_DEVIL_ROOM.goods.CardDelete": "从你的[gold]牌组[/gold]中移除[blue]1[/blue]张牌。",
 	"FBE_EVENT_DEVIL_ROOM.goods.CardReward": "获得一组卡牌奖励。",
 	"FBE_EVENT_DEVIL_ROOM.goods.CardUpgrade": "[gold]升级[/gold]你[gold]牌组[/gold]中的一张牌。",
@@ -63,7 +40,6 @@
 	"FBE_EVENT_DEVIL_ROOM.goods.RareCard": "获得一组[gold]稀有[/gold]卡牌奖励。",
 	"FBE_EVENT_DEVIL_ROOM.goods.Relic2": "获得[blue]2[/blue]件随机[gold]遗物[/gold]。",
 	"FBE_EVENT_DEVIL_ROOM.goods.CardTransform": "选择[blue]1[/blue]张牌进行[gold]变化[/gold]。",
-	//
 	"FBE_EVENT_DEVIL_ROOM.titles.CardDelete": "卡牌移除",
 	"FBE_EVENT_DEVIL_ROOM.titles.CardReward": "卡牌奖励",
 	"FBE_EVENT_DEVIL_ROOM.titles.CardUpgrade": "卡牌升级",
@@ -71,9 +47,7 @@
 	"FBE_EVENT_DEVIL_ROOM.titles.RareCard": "稀有卡牌奖励",
 	"FBE_EVENT_DEVIL_ROOM.titles.Relic2": "许多遗物",
 	"FBE_EVENT_DEVIL_ROOM.titles.CardTransform": "变化",
-	//
 	"FBE_EVENT_DEVIL_ROOM.pages.ENTER.options.GOODS.description": "{cost}{reward}",
-	//
 	"FBE_EVENT_DEVIL_ROOM.pages.ENTER.options.SOLD_OUT.title": "售罄",
 	"FBE_EVENT_DEVIL_ROOM.pages.ENTER.options.SOLD_OUT.description": "此货架已售罄。",
 	"FBE_EVENT_DEVIL_ROOM.pages.ENTER.options.LEAVE_ROOM.title": "离开",
