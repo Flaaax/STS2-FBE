@@ -18,7 +18,8 @@ internal static class NeowPositiveRelicPoolPatch
 	// 在这里添加需要混入涅奥正面选项池的遗物。
 	private static readonly IReadOnlyList<Func<RelicModel>> NeowPositiveRelicPool =
 	[
-		static () => ModelDb.Relic<EdensBlessing>()
+		static () => ModelDb.Relic<EdensBlessing>(),
+		static () => ModelDb.Relic<PlanC>()
 	];
 
 	private static readonly MethodInfo? PositiveOptionsGetter = typeof(Neow).GetProperty(

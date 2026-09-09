@@ -66,84 +66,10 @@ public class Years() : FBECardModel(-1, CardType.Curse, CardRarity.Curse, Target
 		else
 		{
 			await Cmd.Wait(0.25f);
-			await MakeFakeExtraTurn(choiceContext);
+			await FakePersonalTurn.Run(choiceContext, Owner);
 		}
 		
 		await Cmd.Wait(0.25f);
-	}
-
-	/// <summary>
-	/// Simulates the owner ending and starting a new personal turn without ending the current side turn.
-	/// Side-turn hooks are intentionally excluded: in multiplayer, replaying them would also affect the other players
-	/// and would no longer be equivalent to giving only this card's owner another chance to act.
-	/// </summary>
-	private async Task MakeFakeExtraTurn(PlayerChoiceContext choiceContext)
-	{
-		var combatState = Owner.Creature.CombatState!;
-		var playerState = Owner.PlayerCombatState;
-
-		await playerState!.OrbQueue.BeforeTurnEnd(choiceContext);
-		if (CombatManager.Instance.IsOverOrEnding)
-			return;
-
-		var hand = PileType.Hand.GetPile(Owner);
-		var turnEndCards = hand.Cards.Where(card => card.HasTurnEndInHandEffect).ToList();
-		var etherealCards = hand.Cards
-			.Where(card => !card.HasTurnEndInHandEffect &&
-			               card.Keywords.Contains(CardKeyword.Ethereal) &&
-			               Hook.ShouldEtherealTrigger(combatState, card))
-			.ToList();
-
-		foreach (var card in etherealCards)
-			await CardCmd.Exhaust(choiceContext, card, causedByEthereal: true);
-
-		foreach (var card in turnEndCards)
-			await card.OnTurnEndInHandWrapper(choiceContext);
-
-		if (CombatManager.Instance.IsOverOrEnding)
-			return;
-
-		await Hook.BeforeFlush(combatState, Owner);
-
-		var cardsToFlush = new List<CardModel>();
-		var cardsToRetain = new List<CardModel>();
-		var shouldFlush = Hook.ShouldFlush(combatState, Owner);
-		foreach (var card in hand.Cards)
-		{
-			if (!shouldFlush || card.ShouldRetainThisTurn)
-				cardsToRetain.Add(card);
-			else
-				cardsToFlush.Add(card);
-		}
-
-		if (cardsToFlush.Count > 0)
-			await CardPileCmd.Add(cardsToFlush, PileType.Discard);
-
-		await Hook.AfterFlush(combatState, Owner, choiceContext, cardsToFlush, cardsToRetain);
-		playerState.EndOfTurnCleanup();
-
-		Owner.Creature.BeforeTurnStart(CombatSide.Player);
-		await Owner.Creature.AfterTurnStart(CombatSide.Player);
-		await Hook.AfterBlockCleared(combatState, Owner.Creature);
-
-		if (Hook.ShouldPlayerResetEnergy(combatState, Owner))
-		{
-			SfxCmd.Play("event:/sfx/ui/gain_energy");
-			playerState.ResetEnergy();
-		}
-		else
-		{
-			playerState.AddMaxEnergyToCurrent();
-		}
-
-		await Hook.AfterEnergyReset(combatState, Owner);
-		await Hook.BeforeHandDraw(combatState, Owner, choiceContext);
-		var handDraw = Hook.ModifyHandDraw(combatState, Owner, 5m, out var modifiers);
-		await Hook.AfterModifyingHandDraw(combatState, modifiers);
-		await CardPileCmd.Draw(choiceContext, handDraw, Owner, fromHandDraw: true);
-		await Hook.AfterPlayerTurnStart(combatState, choiceContext, Owner);
-		if (!CombatManager.Instance.IsOverOrEnding)
-			await playerState.OrbQueue.AfterTurnStart(choiceContext);
 	}
 
 	public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

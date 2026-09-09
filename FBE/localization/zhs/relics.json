@@ -42,5 +42,13 @@
 	"FBE_RELIC_CLICKER.flavor": "想要哪个形态自己变",
 	"FBE_RELIC_EDENS_BLESSING.title": "伊甸的祝福",
 	"FBE_RELIC_EDENS_BLESSING.description": "拾起时，将一张随机[gold]稀有无色牌[/gold]加入你的[gold]牌组[/gold]。",
-	"FBE_RELIC_EDENS_BLESSING.flavor": "你的未来更加光明"
+	"FBE_RELIC_EDENS_BLESSING.flavor": "你的未来更加光明",
+	"FBE_RELIC_PLAN_C.title": "C计划",
+	"FBE_RELIC_PLAN_C.description": "每场战斗中首次受到未被格挡的伤害后，你的下个回合由[gold]瓦库[/gold]接管。接管结束后，获得一个额外的个人回合。",
+	"FBE_RELIC_PLAN_C.flavor": "一切尽在掌控之中。",
+	"FBE_RELIC_PLAN_C.vakuu_approval": "[red][shake]这样才对[/shake][/red]",
+	"FBE_RELIC_PLAN_C.vakuu_warning": "[red][shake]这样就好[/shake][/red]",
+	"FBE_RELIC_PLAN_C.vakuu_takeover_1": "[red][shake]真拿你没办法[/shake][/red]",
+	"FBE_RELIC_PLAN_C.vakuu_takeover_2": "[red][shake]坐下来看好了！[/shake][/red]",
+	"FBE_RELIC_PLAN_C.vakuu_takeover_3": "[red][shake]让我打两把[/shake][/red]"
 }

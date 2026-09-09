@@ -41,5 +41,13 @@
   "FBE_RELIC_CLICKER.flavor": "Want a Form? Transform yourself.",
   "FBE_RELIC_EDENS_BLESSING.title": "Eden's Blessing",
   "FBE_RELIC_EDENS_BLESSING.description": "Upon pickup, add a random [gold]Rare Colorless[/gold] card to your [gold]Deck[/gold].",
-  "FBE_RELIC_EDENS_BLESSING.flavor": "The garden was never truly closed."
+  "FBE_RELIC_EDENS_BLESSING.flavor": "The garden was never truly closed.",
+  "FBE_RELIC_PLAN_C.title": "Plan C",
+  "FBE_RELIC_PLAN_C.description": "The first time you take unblocked damage each combat, Vakuu takes over your next turn. Afterward, take an extra personal turn.",
+  "FBE_RELIC_PLAN_C.flavor": "Everything is under control.",
+  "FBE_RELIC_PLAN_C.vakuu_approval": "[red][shake]That's Better[/shake][/red]",
+  "FBE_RELIC_PLAN_C.vakuu_warning": "[red][shake]That's Enough[/shake][/red]",
+  "FBE_RELIC_PLAN_C.vakuu_takeover_1": "[red][shake]What am I going to do with you?[/shake][/red]",
+  "FBE_RELIC_PLAN_C.vakuu_takeover_2": "[red][shake]Sit back and watch![/shake][/red]",
+  "FBE_RELIC_PLAN_C.vakuu_takeover_3": "[red][shake]Let me play a couple.[/shake][/red]"
 }

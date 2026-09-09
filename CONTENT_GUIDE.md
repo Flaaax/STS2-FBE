@@ -42,6 +42,7 @@ public sealed class ExampleRelic : FBERelicModel
 - 遗物的费用、稀有度、触发时机、战斗逻辑、存档状态等核心行为，优先按照对应游戏版本的原版 `RelicModel` API 实现。
 - 只有多个 FBE 遗物确实出现稳定、项目专属的重复逻辑时，才考虑扩充 `FBERelicModel`；不要另建一次性封装。
 - 遗物的本地化需要flavor项。至少填上一些占位内容并保留此键。
+- 如果用户让你把一个遗物注册到Neow选项，阅读`NeowPositiveRelicPoolPatch.cs`以得知详情。
 
 ## 卡牌
 
