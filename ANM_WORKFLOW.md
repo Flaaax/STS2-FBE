@@ -16,6 +16,7 @@ FBE/animations/<敌人>/<动作>/
 
 - PNG 必须是透明背景、统一画布尺寸、nearest 采样的 RGBA 图像。
 - `timeline.json` 必须遵循 `FBE.BakedAnmTimeline/v1`，包含 FPS、画布、原点、可见范围、图层顺序及每一 tick 引用的 PNG 路径。
+- 单次战斗动作若需在特定帧结算效果，可额外写入 `events`；每项记录原始 ANM2 事件名和其在导出时间线中的零基 tick。事件位置必须由 ANM2 的 `Trigger` 推导，不得按预览视频估计。
 - 所有动画固定按其 ANM2 的原生 FPS 运行；Isaac 资源通常为 30 FPS。
 - 原始 `.anm2`、原始 spritesheet 和 Python 转换脚本不放进 FBE 发布包；它们保留在 `Project_Isaac` 作为可复现的制作来源。
 

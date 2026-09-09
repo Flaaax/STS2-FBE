@@ -1,28 +1,28 @@
 {
-	"schema": "FBE.BakedAnmTimeline/v1",
-	"fps": 30,
-	"frameCount": 6,
-	"canvasWidth": 160,
-	"canvasHeight": 160,
-	"originX": 80.0,
-	"originY": 88.0,
-	"bounds": {
-		"x": 41,
-		"y": 6,
-		"width": 77,
-		"height": 94
-	},
-	"layers": [
-		{
-			"layerId": 0,
-			"frames": [
-				"res://FBE/animations/Dogma/dogma_tv_idle/layer_00_000.png",
-				"res://FBE/animations/Dogma/dogma_tv_idle/layer_00_001.png",
-				"res://FBE/animations/Dogma/dogma_tv_idle/layer_00_002.png",
-				"res://FBE/animations/Dogma/dogma_tv_idle/layer_00_003.png",
-				"res://FBE/animations/Dogma/dogma_tv_idle/layer_00_004.png",
-				"res://FBE/animations/Dogma/dogma_tv_idle/layer_00_005.png"
-			]
-		}
-	]
+  "schema": "FBE.BakedAnmTimeline/v1",
+  "fps": 30,
+  "frameCount": 6,
+  "canvasWidth": 160,
+  "canvasHeight": 160,
+  "originX": 80.0,
+  "originY": 88.0,
+  "bounds": {
+    "x": 41,
+    "y": 6,
+    "width": 77,
+    "height": 94
+  },
+  "layers": [
+    {
+      "layerId": 0,
+      "frames": [
+        "res://FBE/animations/Dogma/dogma_tv_idle/layer_00_000.png",
+        "res://FBE/animations/Dogma/dogma_tv_idle/layer_00_001.png",
+        "res://FBE/animations/Dogma/dogma_tv_idle/layer_00_002.png",
+        "res://FBE/animations/Dogma/dogma_tv_idle/layer_00_003.png",
+        "res://FBE/animations/Dogma/dogma_tv_idle/layer_00_004.png",
+        "res://FBE/animations/Dogma/dogma_tv_idle/layer_00_005.png"
+      ]
+    }
+  ]
 }

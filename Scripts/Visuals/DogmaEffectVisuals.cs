@@ -39,6 +39,14 @@ public abstract partial class DogmaEffectVisuals : BakedAnmVisuals
 		base._Ready();
 	}
 
+	/// <summary>命中时立刻触发一次短失真；只修改材质参数，不等待或影响战斗命令。</summary>
+	public void TriggerHitDistortion()
+	{
+		_glitchRemaining = _random.RandfRange(0.1f, 0.3f);
+		foreach (var material in LayerMaterials)
+			material.SetShaderParameter("glitch_strength", ActiveGlitchStrength);
+	}
+
 	protected override ShaderMaterial? CreateLayerMaterial(int layerIndex)
 	{
 		var shader = GD.Load<Shader>(ShaderPath);
@@ -82,6 +90,11 @@ public abstract partial class DogmaEffectVisuals : BakedAnmVisuals
 			AdvanceEyeTick();
 		}
 
+		ApplyLayerEffectParameters();
+	}
+
+	private void ApplyLayerEffectParameters()
+	{
 		var glitchStrength = _glitchRemaining > 0f ? ActiveGlitchStrength : 0f;
 		var eyeLit = _eyeLit ? 1f : 0f;
 		foreach (var material in LayerMaterials)

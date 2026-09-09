@@ -16,19 +16,32 @@ public abstract partial class BakedAnmVisuals : NCreatureVisuals
 	private readonly List<Sprite2D> _layerSprites = [];
 	private readonly List<Texture2D[]> _layerFrames = [];
 	private readonly List<ShaderMaterial> _layerMaterials = [];
+	private readonly Dictionary<string, (BakedAnmTimeline Timeline, List<Texture2D[]> Frames)> _timelineCache = [];
 	private double _elapsed;
 	private int _frameIndex;
+	private bool _isPlayingOneShot;
+	private TaskCompletionSource<bool>? _oneShotCompletion;
 
 	protected abstract string TimelinePath { get; }
 	protected virtual float VisualScale => 1f;
 	/// <summary>只偏移动画贴图，不影响遭遇站位、碰撞范围或战斗 UI。</summary>
 	protected virtual Vector2 SpriteOffset => Vector2.Zero;
+	/// <summary>意图锚点的额外偏移，使用战斗场景坐标。</summary>
+	protected virtual Vector2 IntentOffset => Vector2.Zero;
 	protected IReadOnlyList<ShaderMaterial> LayerMaterials => _layerMaterials;
 
 	public override void _Ready()
 	{
 		LoadAndCreateVisuals();
 		base._Ready();
+	}
+
+	public override void _ExitTree()
+	{
+		// 战斗结束或怪物被移除时，不能让等待单次动作的战斗命令永久悬挂。
+		_oneShotCompletion?.TrySetResult(false);
+		_oneShotCompletion = null;
+		base._ExitTree();
 	}
 
 	public override void _Process(double delta)
@@ -42,6 +55,14 @@ public abstract partial class BakedAnmVisuals : NCreatureVisuals
 		while (_elapsed >= frameDuration)
 		{
 			_elapsed -= frameDuration;
+			if (_isPlayingOneShot && _frameIndex >= _timeline.FrameCount - 1)
+			{
+				RestoreIdleTimeline();
+				_oneShotCompletion?.TrySetResult(true);
+				_oneShotCompletion = null;
+				break;
+			}
+
 			_frameIndex = (_frameIndex + 1) % _timeline.FrameCount;
 			ApplyFrame(_frameIndex);
 		}
@@ -60,17 +81,24 @@ public abstract partial class BakedAnmVisuals : NCreatureVisuals
 	{
 	}
 
+	/// <summary>播放同图层结构的单次时间线，结束后自动回到默认 Idle。</summary>
+	protected Task PlayOneShotAndReturnAsync(string timelinePath)
+	{
+		if (!TryActivateTimeline(timelinePath))
+			return Task.CompletedTask;
+
+		_oneShotCompletion?.TrySetResult(false);
+		_isPlayingOneShot = true;
+		_oneShotCompletion = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+		return _oneShotCompletion.Task;
+	}
+
 	private void LoadAndCreateVisuals()
 	{
-		var json = FileAccess.GetFileAsString(TimelinePath);
-		_timeline = JsonSerializer.Deserialize<BakedAnmTimeline>(json,
-			new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-		if (_timeline is not { Schema: BakedAnmTimeline.SchemaName } ||
-			_timeline.Fps <= 0 || _timeline.FrameCount <= 0 || _timeline.Layers.Length == 0)
-		{
-			GD.PushError($"[FBE][BakedAnm] Invalid timeline: {TimelinePath}");
+		if (!TryLoadTimeline(TimelinePath, out var timeline, out var frames))
 			return;
-		}
+		_timeline = timeline;
+		_layerFrames.AddRange(frames);
 
 		var visualRoot = new Node2D
 		{
@@ -83,19 +111,7 @@ public abstract partial class BakedAnmVisuals : NCreatureVisuals
 
 		for (var layerIndex = 0; layerIndex < _timeline.Layers.Length; layerIndex++)
 		{
-			var layer = _timeline.Layers[layerIndex];
-			if (layer.Frames.Length != _timeline.FrameCount)
-			{
-				GD.PushError($"[FBE][BakedAnm] Layer {layerIndex} has an invalid frame count: {TimelinePath}");
-				continue;
-			}
-
-			var textures = layer.Frames.Select(path => GD.Load<Texture2D>(path)).ToArray();
-			if (textures.Any(texture => texture == null))
-			{
-				GD.PushError($"[FBE][BakedAnm] Missing frame texture in: {TimelinePath}");
-				continue;
-			}
+			var textures = _layerFrames[layerIndex];
 
 			var sprite = new Sprite2D
 			{
@@ -114,7 +130,6 @@ public abstract partial class BakedAnmVisuals : NCreatureVisuals
 			visualRoot.AddChild(sprite);
 			sprite.Owner = this;
 			_layerSprites.Add(sprite);
-			_layerFrames.Add(textures.Select(texture => texture!).ToArray());
 		}
 
 		var bounds = _timeline.Bounds;
@@ -131,7 +146,7 @@ public abstract partial class BakedAnmVisuals : NCreatureVisuals
 		{
 			Name = "IntentPos",
 			UniqueNameInOwner = true,
-			Position = new Vector2(boundsPosition.X + boundsSize.X / 2f, boundsPosition.Y - IntentGap)
+			Position = new Vector2(boundsPosition.X + boundsSize.X / 2f, boundsPosition.Y - IntentGap) + IntentOffset
 		});
 		AddOwnedChild(new Marker2D
 		{
@@ -145,6 +160,80 @@ public abstract partial class BakedAnmVisuals : NCreatureVisuals
 			UniqueNameInOwner = true,
 			Position = boundsPosition + new Vector2(12f, 20f)
 		});
+	}
+
+	private bool TryActivateTimeline(string timelinePath)
+	{
+		if (!TryLoadTimeline(timelinePath, out var timeline, out var frames) || frames.Count != _layerSprites.Count)
+		{
+			GD.PushError($"[FBE][BakedAnm] Timeline layer structure does not match Idle: {timelinePath}");
+			return false;
+		}
+
+		_timeline = timeline;
+		_layerFrames.Clear();
+		_layerFrames.AddRange(frames);
+		_frameIndex = 0;
+		_elapsed = 0;
+		ApplyFrame(0);
+		return true;
+	}
+
+	private void RestoreIdleTimeline()
+	{
+		_isPlayingOneShot = false;
+		if (!TryActivateTimeline(TimelinePath))
+			return;
+	}
+
+	private bool TryLoadTimeline(string timelinePath, out BakedAnmTimeline timeline, out List<Texture2D[]> frames)
+	{
+		if (_timelineCache.TryGetValue(timelinePath, out var cached))
+		{
+			timeline = cached.Timeline;
+			frames = cached.Frames;
+			return true;
+		}
+
+		var json = FileAccess.GetFileAsString(timelinePath);
+		var loadedTimeline = JsonSerializer.Deserialize<BakedAnmTimeline>(json,
+			new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+		if (loadedTimeline is not { Schema: BakedAnmTimeline.SchemaName } ||
+			loadedTimeline.Fps <= 0 || loadedTimeline.FrameCount <= 0 || loadedTimeline.Layers.Length == 0)
+		{
+			GD.PushError($"[FBE][BakedAnm] Invalid timeline: {timelinePath}");
+			timeline = null!;
+			frames = null!;
+			return false;
+		}
+
+		var loadedFrames = new List<Texture2D[]>(loadedTimeline.Layers.Length);
+		for (var layerIndex = 0; layerIndex < loadedTimeline.Layers.Length; layerIndex++)
+		{
+			var layer = loadedTimeline.Layers[layerIndex];
+			if (layer.Frames.Length != loadedTimeline.FrameCount)
+			{
+				GD.PushError($"[FBE][BakedAnm] Layer {layerIndex} has an invalid frame count: {timelinePath}");
+				timeline = null!;
+				frames = null!;
+				return false;
+			}
+
+			var textures = layer.Frames.Select(path => GD.Load<Texture2D>(path)).ToArray();
+			if (textures.Any(texture => texture == null))
+			{
+				GD.PushError($"[FBE][BakedAnm] Missing frame texture in: {timelinePath}");
+				timeline = null!;
+				frames = null!;
+				return false;
+			}
+			loadedFrames.Add(textures.Select(texture => texture!).ToArray());
+		}
+
+		timeline = loadedTimeline;
+		frames = loadedFrames;
+		_timelineCache.Add(timelinePath, (timeline, frames));
+		return true;
 	}
 
 	private void ApplyFrame(int frameIndex)

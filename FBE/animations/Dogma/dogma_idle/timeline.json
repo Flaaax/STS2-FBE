@@ -1,59 +1,59 @@
 {
-	"schema": "FBE.BakedAnmTimeline/v1",
-	"fps": 30,
-	"frameCount": 16,
-	"canvasWidth": 160,
-	"canvasHeight": 160,
-	"originX": 80.0,
-	"originY": 88.0,
-	"bounds": {
-		"x": 62,
-		"y": 40,
-		"width": 36,
-		"height": 50
-	},
-	"layers": [
-		{
-			"layerId": 0,
-			"frames": [
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_000.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_001.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_002.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_003.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_004.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_005.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_006.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_007.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_008.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_009.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_010.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_011.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_012.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_013.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_014.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_00_015.png"
-			]
-		},
-		{
-			"layerId": 1,
-			"frames": [
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_000.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_001.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_002.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_003.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_004.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_005.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_006.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_007.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_008.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_009.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_010.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_011.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_012.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_013.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_014.png",
-				"res://FBE/animations/Dogma/dogma_idle/layer_01_015.png"
-			]
-		}
-	]
+  "schema": "FBE.BakedAnmTimeline/v1",
+  "fps": 30,
+  "frameCount": 16,
+  "canvasWidth": 160,
+  "canvasHeight": 160,
+  "originX": 80.0,
+  "originY": 88.0,
+  "bounds": {
+    "x": 62,
+    "y": 40,
+    "width": 36,
+    "height": 50
+  },
+  "layers": [
+    {
+      "layerId": 0,
+      "frames": [
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_000.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_001.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_002.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_003.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_004.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_005.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_006.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_007.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_008.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_009.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_010.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_011.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_012.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_013.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_014.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_00_015.png"
+      ]
+    },
+    {
+      "layerId": 1,
+      "frames": [
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_000.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_001.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_002.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_003.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_004.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_005.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_006.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_007.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_008.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_009.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_010.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_011.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_012.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_013.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_014.png",
+        "res://FBE/animations/Dogma/dogma_idle/layer_01_015.png"
+      ]
+    }
+  ]
 }

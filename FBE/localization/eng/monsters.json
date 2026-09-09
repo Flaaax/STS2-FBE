@@ -20,6 +20,9 @@
 	"FBE_MONSTER_GUILE_SONIC_BOOM.moves.HOVER.title": "Hover",
 	"FBE_MONSTER_DOGMA.name": "Dogma",
 	"FBE_MONSTER_DOGMA.moves.ATTACK.title": "Attack",
+	"FBE_MONSTER_DOGMA.moves.GODHEAD_ATTACK.title": "Godhead Attack",
 	"FBE_MONSTER_DOGMA_TV.name": "Dogma's Television",
-	"FBE_MONSTER_DOGMA_TV.moves.ATTACK.title": "Attack"
+	"FBE_MONSTER_DOGMA_TV.moves.ATTACK.title": "Attack",
+	"FBE_MONSTER_DOGMA_TV.moves.NO_SIGNAL.title": "Corrupt",
+	"FBE_MONSTER_DOGMA_TV.moves.EMPOWER_DOGMA.title": "Empower"
 }

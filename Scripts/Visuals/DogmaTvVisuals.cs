@@ -10,4 +10,18 @@ public sealed partial class DogmaTvVisuals : DogmaEffectVisuals
 	protected override float GlitchDurationMin => 0.5f;
 	protected override float GlitchDurationMax => 1.1f;
 	protected override float ActiveGlitchStrength => 160f / 255f;
+
+	/// <summary>将死亡动画转交给独立节点，使电视实体移除后最后一帧仍留在房间内。</summary>
+	public void SpawnDeathRemnant()
+	{
+		var creatureNode = GetParent();
+		var container = creatureNode?.GetParent();
+		if (creatureNode == null || container == null)
+			return;
+
+		var remnant = new DogmaTvDeathRemnant { GlobalPosition = GlobalPosition };
+		container.AddChild(remnant);
+		container.MoveChild(remnant, creatureNode.GetIndex());
+		Visible = false;
+	}
 }

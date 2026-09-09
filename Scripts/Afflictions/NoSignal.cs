@@ -1,5 +1,8 @@
 using Godot;
 using MegaCrit.Sts2.Core.Assets;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -17,6 +20,14 @@ public sealed class NoSignal : ModAfflictionTemplate
 	public override AfflictionAssetProfile AssetProfile => new(
 		OverlayScenePath: OverlayScenePath
 	);
+
+	/// <summary>被侵蚀的牌结算完成后立即恢复；坏猫仍可按自身回合规则提前清理未打出的牌。</summary>
+	public override Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	{
+		if (cardPlay.Card == Card)
+			CardCmd.ClearAffliction(Card);
+		return Task.CompletedTask;
+	}
 
 	/// <summary>
 	/// Places the overlay in the vanilla cache for the current combat. This is needed because the

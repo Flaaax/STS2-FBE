@@ -20,6 +20,9 @@
 	"FBE_MONSTER_GUILE_SONIC_BOOM.moves.HOVER.title": "悬浮",
 	"FBE_MONSTER_DOGMA.name": "教条",
 	"FBE_MONSTER_DOGMA.moves.ATTACK.title": "攻击",
+	"FBE_MONSTER_DOGMA.moves.GODHEAD_ATTACK.title": "神体攻击",
 	"FBE_MONSTER_DOGMA_TV.name": "教条的电视",
-	"FBE_MONSTER_DOGMA_TV.moves.ATTACK.title": "攻击"
+	"FBE_MONSTER_DOGMA_TV.moves.ATTACK.title": "攻击",
+	"FBE_MONSTER_DOGMA_TV.moves.NO_SIGNAL.title": "侵蚀",
+	"FBE_MONSTER_DOGMA_TV.moves.EMPOWER_DOGMA.title": "强化"
 }

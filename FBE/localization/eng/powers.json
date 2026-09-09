@@ -16,5 +16,11 @@
   "FBE_POWER_UNREAL_ENGINE_POWER.title": "Unreal Engine",
   "FBE_POWER_UNREAL_ENGINE_POWER.smartDescription": "All your cards gain [gold]Ethereal[/gold].\nGain {Amount:energyIcons()} at the start of each turn.",
   "FBE_POWER_STATIC_DISCHARGE_POWER.title": "Static Discharge",
-  "FBE_POWER_STATIC_DISCHARGE_POWER.smartDescription": "Whenever you are attacked, [gold]Channel[/gold] {Amount} [gold]Lightning[/gold]."
+  "FBE_POWER_STATIC_DISCHARGE_POWER.smartDescription": "Whenever you are attacked, [gold]Channel[/gold] {Amount} [gold]Lightning[/gold].",
+	"FBE_POWER_SIGNAL_SOURCE_POWER.title": "Signal Source",
+	"FBE_POWER_SIGNAL_SOURCE_POWER.smartDescription": "[gold]Dogma[/gold] cannot die. When the television dies, [gold]Dogma[/gold] dies immediately.",
+	"FBE_POWER_DOGMA_POWER.title": "Dogma",
+	"FBE_POWER_DOGMA_POWER.smartDescription": "Currently has no effect.",
+	"FBE_POWER_DOGMA_STRENGTH_POWER.title": "Dogma Strength",
+	"FBE_POWER_DOGMA_STRENGTH_POWER.smartDescription": "At the end of Dogma's turn, it gains [blue]{Amount}[/blue] [gold]Strength[/gold]."
 }
