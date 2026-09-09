@@ -1,3 +1,4 @@
 {
-  "FBE_ENCOUNTER_DOOR_MONSTER_ENCOUNTER.loss": "{character} was defeated by Guile."
+	"FBE_ENCOUNTER_DOOR_MONSTER_ENCOUNTER.loss": "{character} was defeated by Guile.",
+	"FBE_ENCOUNTER_DOGMA_ENCOUNTER.loss": "{character} was consumed by Dogma."
 }

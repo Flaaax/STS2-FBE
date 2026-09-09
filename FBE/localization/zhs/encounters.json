@@ -1,4 +1,5 @@
 {
 	"FBE_ENCOUNTER_DOOR_MONSTER_ENCOUNTER.loss": "{character}死于刻意的游戏设计",
-	"FBE_ENCOUNTER_GUILE_ENCOUNTER.loss": "{character}被波升古烈击败了"
+	"FBE_ENCOUNTER_GUILE_ENCOUNTER.loss": "{character}被波升古烈击败了",
+	"FBE_ENCOUNTER_DOGMA_ENCOUNTER.loss": "{character}被教条吞没了"
 }

@@ -17,5 +17,9 @@
   "FBE_MONSTER_GUILE.moves.STANDING_ATTACK.title": "Standing Attack",
   "FBE_MONSTER_GUILE.moves.SOMERSAULT.title": "Somersault Kick",
   "FBE_MONSTER_GUILE_SONIC_BOOM.name": "Guile's Sonic Boom",
-  "FBE_MONSTER_GUILE_SONIC_BOOM.moves.HOVER.title": "Hover"
+	"FBE_MONSTER_GUILE_SONIC_BOOM.moves.HOVER.title": "Hover",
+	"FBE_MONSTER_DOGMA.name": "Dogma",
+	"FBE_MONSTER_DOGMA.moves.ATTACK.title": "Attack",
+	"FBE_MONSTER_DOGMA_TV.name": "Dogma's Television",
+	"FBE_MONSTER_DOGMA_TV.moves.ATTACK.title": "Attack"
 }

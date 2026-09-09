@@ -17,5 +17,9 @@
 	"FBE_MONSTER_GUILE.moves.STANDING_ATTACK.title": "站姿攻击",
 	"FBE_MONSTER_GUILE.moves.SOMERSAULT.title": "倒挂金钩",
 	"FBE_MONSTER_GUILE_SONIC_BOOM.name": "古烈的波动",
-	"FBE_MONSTER_GUILE_SONIC_BOOM.moves.HOVER.title": "悬浮"
+	"FBE_MONSTER_GUILE_SONIC_BOOM.moves.HOVER.title": "悬浮",
+	"FBE_MONSTER_DOGMA.name": "教条",
+	"FBE_MONSTER_DOGMA.moves.ATTACK.title": "攻击",
+	"FBE_MONSTER_DOGMA_TV.name": "教条的电视",
+	"FBE_MONSTER_DOGMA_TV.moves.ATTACK.title": "攻击"
 }

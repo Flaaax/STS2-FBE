@@ -13,6 +13,7 @@ icon.svg.import
 export_credentials.cfg
 *.translation
 *.tmp
+*.m4a
 
 dist/
 /bin/
