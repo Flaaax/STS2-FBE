@@ -18,9 +18,9 @@
 	"FBE_POWER_STATIC_DISCHARGE_POWER.title": "静电释放",
 	"FBE_POWER_STATIC_DISCHARGE_POWER.smartDescription": "每当你被攻击时，[gold]生成[/gold]{Amount}个[gold]闪电[/gold]充能球。",
 	"FBE_POWER_SIGNAL_SOURCE_POWER.title": "信号源",
-	"FBE_POWER_SIGNAL_SOURCE_POWER.smartDescription": "[gold]教条[/gold]无法被你杀死。\n[gold]教条的电视[/gold]死亡时，[gold]教条[/gold]立刻死亡。",
+	"FBE_POWER_SIGNAL_SOURCE_POWER.smartDescription": "[gold]教条的电视[/gold]代替[gold]教条[/gold]承担伤害。\n[gold]教条[/gold]免疫即死效果。\n[gold]教条的电视[/gold]死亡时，[gold]教条[/gold]立刻死亡。",
 	"FBE_POWER_DOGMA_POWER.title": "教条",
 	"FBE_POWER_DOGMA_POWER.smartDescription": "目前没有效果。",
 	"FBE_POWER_DOGMA_STRENGTH_POWER.title": "教条力量",
-	"FBE_POWER_DOGMA_STRENGTH_POWER.smartDescription": "教条回合结束时，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。"
+	"FBE_POWER_DOGMA_STRENGTH_POWER.smartDescription": "回合结束时，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。"
 }

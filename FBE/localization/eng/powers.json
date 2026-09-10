@@ -18,7 +18,7 @@
   "FBE_POWER_STATIC_DISCHARGE_POWER.title": "Static Discharge",
   "FBE_POWER_STATIC_DISCHARGE_POWER.smartDescription": "Whenever you are attacked, [gold]Channel[/gold] {Amount} [gold]Lightning[/gold].",
 	"FBE_POWER_SIGNAL_SOURCE_POWER.title": "Signal Source",
-	"FBE_POWER_SIGNAL_SOURCE_POWER.smartDescription": "[gold]Dogma[/gold] cannot die. When the television dies, [gold]Dogma[/gold] dies immediately.",
+	"FBE_POWER_SIGNAL_SOURCE_POWER.smartDescription": "When [gold]Dogma[/gold] takes damage, it loses [gold]Block[/gold] first, then its television takes the remaining damage. [gold]Dogma[/gold] cannot be killed directly. When the television dies, [gold]Dogma[/gold] dies immediately.",
 	"FBE_POWER_DOGMA_POWER.title": "Dogma",
 	"FBE_POWER_DOGMA_POWER.smartDescription": "Currently has no effect.",
 	"FBE_POWER_DOGMA_STRENGTH_POWER.title": "Dogma Strength",

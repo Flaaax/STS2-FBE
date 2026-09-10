@@ -20,6 +20,11 @@ public sealed class DogmaEncounter : ModEncounterTemplate
 
 	public override IReadOnlyList<string> Slots => [TvSlot, DogmaSlot];
 	public override string? CustomEncounterScenePath => "res://FBE/scenes/encounters/dogma_encounter.tscn";
+	protected override bool UseActCombatBackground => false;
+	public override string? CustomBackgroundScenePath =>
+		"res://FBE/scenes/backgrounds/dogma/dogma_background.tscn";
+	public override string? CustomBackgroundLayersDirectoryPath =>
+		"res://FBE/scenes/backgrounds/dogma/layers";
 	// 使用原版 Boss 地图节点的 PNG 兜底分支，而非不存在的 Spine .tres。
 	public override string? CustomBossNodePath => "res://FBE/images/map/placeholder/fbe_encounter_dogma_encounter_icon";
 	public override string? CustomRunHistoryIconPath => "res://FBE/images/ui/run_history/fbe_encounter_dogma_encounter.png";

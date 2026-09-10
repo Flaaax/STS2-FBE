@@ -2,6 +2,7 @@ using FBE.Scripts.Afflictions;
 using FBE.Scripts.MonsterMoves.Intents;
 using FBE.Scripts.Powers;
 using FBE.Scripts.Visuals;
+using FBECore.Audio;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -24,6 +25,7 @@ namespace FBE.Scripts.Monsters;
 public sealed class DogmaTv : ModMonsterTemplate
 {
 	private const float DeathAnimationSeconds = 16f / 30f;
+	private const string NoSignalSoundPath = "res://FBE/audio/Dogma/ClickerStatic.wav";
 	public override int MinInitialHp => 250;
 	public override int MaxInitialHp => 250;
 	public override bool HasDeathSfx => false;
@@ -72,6 +74,7 @@ public sealed class DogmaTv : ModMonsterTemplate
 	private async Task NoSignalMove(IReadOnlyList<Creature> targets)
 	{
 		NoSignal.CacheOverlayForCombat();
+		FbeAudio.PlayOneShot(NoSignalSoundPath);
 		foreach (var player in CombatState.Players)
 		{
 			var state = player.PlayerCombatState;

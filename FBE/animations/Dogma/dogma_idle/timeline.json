@@ -12,6 +12,8 @@
     "width": 36,
     "height": 50
   },
+  "events": [],
+  "soundEvents": [],
   "layers": [
     {
       "layerId": 0,

@@ -25,6 +25,8 @@ public abstract partial class DogmaEffectVisuals : BakedAnmVisuals
 
 	/// <summary>对应原 shader 的 Colorize.r；电视与本体采用不同强度。</summary>
 	protected abstract float ActiveGlitchStrength { get; }
+	/// <summary>供独立 Dogma 特效节点共享的 30 FPS 随机相位。</summary>
+	protected int EffectFrame => _effectFrame;
 
 	public override void _Ready()
 	{

@@ -1,7 +1,9 @@
 using Godot;
 using MegaCrit.Sts2.Core.Assets;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -21,10 +23,11 @@ public sealed class NoSignal : ModAfflictionTemplate
 		OverlayScenePath: OverlayScenePath
 	);
 
-	/// <summary>被侵蚀的牌结算完成后立即恢复；坏猫仍可按自身回合规则提前清理未打出的牌。</summary>
-	public override Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	/// <summary>侵蚀持续至该牌所属玩家的回合结束；打出卡牌不会提前恢复。</summary>
+	public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side,
+		IEnumerable<Creature> participants)
 	{
-		if (cardPlay.Card == Card)
+		if (side == CombatSide.Player && participants.Contains(Card.Owner.Creature))
 			CardCmd.ClearAffliction(Card);
 		return Task.CompletedTask;
 	}

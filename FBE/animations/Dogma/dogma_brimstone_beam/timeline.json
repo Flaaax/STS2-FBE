@@ -1,0 +1,27 @@
+{
+  "schema": "FBE.BakedAnmTimeline/v1",
+  "fps": 30,
+  "frameCount": 4,
+  "canvasWidth": 672,
+  "canvasHeight": 32,
+  "originX": 672,
+  "originY": 16.0,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "width": 662,
+    "height": 32
+  },
+  "soundEvents": [],
+  "layers": [
+    {
+      "layerId": 0,
+      "frames": [
+        "res://FBE/animations/Dogma/dogma_brimstone_beam/layer_00_000.png",
+        "res://FBE/animations/Dogma/dogma_brimstone_beam/layer_00_001.png",
+        "res://FBE/animations/Dogma/dogma_brimstone_beam/layer_00_002.png",
+        "res://FBE/animations/Dogma/dogma_brimstone_beam/layer_00_003.png"
+      ]
+    }
+  ]
+}
